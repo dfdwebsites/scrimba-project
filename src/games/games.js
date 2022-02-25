@@ -24,9 +24,9 @@ return (
             <Link to="/games/Mario">Super Mario</Link>
         </div>
         <section>
-            <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
-            <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
-            <GameLink to="quiz" url="./img/rpg.png" name="Quiz-Game" detail={quizDetail}/>
+            <GameLink to="rpg" url="../img/rpg.png" name="RPG" detail={rpgDetail}/>
+            <GameLink to="snake" url="../img/snake.png" name="Snake Game" detail={snakeDetail}/>
+            <GameLink to="quiz" url="../img/rpg.png" name="Quiz-Game" detail={quizDetail}/>
         </section>
     </main>
     ) 
