@@ -384,8 +384,6 @@ class SnakeGame extends React.Component {
         style={{
           width: this.state.width,
           height: this.state.height,
-          maxWidth: 550.5,
-          maxHeight: 367,
           borderWidth: this.state.width / 50,
         }}>
         {this.state.snake.map((snakePart, index) => {
