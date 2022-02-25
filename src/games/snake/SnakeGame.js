@@ -37,7 +37,7 @@ class SnakeGame extends React.Component {
 
   initGame() {
     // Game size initialization
-    let percentageWidth = this.props.percentageWidth || 50
+    let percentageWidth = this.props.percentageWidth || 40
     let width =
       document.getElementById('GameBoard').parentElement.offsetWidth *
       (percentageWidth / 100)
@@ -375,9 +375,9 @@ class SnakeGame extends React.Component {
 
     return (
       <>
-      <div className='snake-header' style={{ fontSize:this.state.width<400? this.state.width / 25 : this.state.width / 30 }}>
+      <div className='snake-header' style={{ fontSize:this.state.width / 30 }}>
         <h2>Snake Game</h2>
-        <p style={{ fontSize:this.state.width<400? this.state.width / 20 : this.state.width / 30 }}>Use Arrow keys or W A S D or use the buttons bellow to move the snake</p>
+        <p style={{fontSize:this.state.width / 25 }}>Use Arrow keys or W A S D or use the buttons bellow to move the snake</p>
       </div>
       <div
         id='GameBoard'
