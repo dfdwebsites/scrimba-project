@@ -375,9 +375,9 @@ class SnakeGame extends React.Component {
 
     return (
       <>
-      <div className='snake-header' style={{ fontSize:this.state.width<400? this.state.width / 15 : this.state.width / 20 }}>
+      <div className='snake-header' style={{ fontSize:this.state.width<400? this.state.width / 15 : this.state.width / 30 }}>
         <h2>Snake Game</h2>
-        <p style={{ fontSize:this.state.width<400? this.state.width / 17 : this.state.width / 23 }}>Use Arrow keys or W A S D or use the buttons bellow to move the snake</p>
+        <p style={{ fontSize:this.state.width<400? this.state.width / 17 : this.state.width / 30 }}>Use Arrow keys or W A S D or use the buttons bellow to move the snake</p>
       </div>
       <div
         id='GameBoard'
