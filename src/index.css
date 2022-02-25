@@ -201,7 +201,7 @@ nav .active{
 #GameBoard {
   box-sizing:unset;
 	position: relative;
-	margin:3rem  auto;
+	margin: 0 auto;
 	border-style: solid;
 }
 
