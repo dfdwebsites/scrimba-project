@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {Routes,Route} from 'react-router-dom'
+import Navbar from "./Navbar"
+import Css from "./css"
+import JavaScript from './js'
+import Games from './games/games'
+import Home from "./home"
+import RpgGame from './games/rpg/Rpg'
+import SnakeGame from './games/snake/SnakeGame'
+import RetroSnake from './games/snake/RetroSnake'
+import SnakePage from './games/snake/SnakePage'
+
 
 function App() {
   return (
-    <div className="App">
+    <>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Navbar />
       </header>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="css" element={<Css />}/>
+        <Route path="js" element={<JavaScript />}/>
+        <Route path="games" element={<Games />}/>
+          <Route path="games/rpg" element={<RpgGame />}/> 
+          <Route path="games/snake" element={<SnakePage />}/> 
+            <Route path="games/snake/snake" element={<SnakeGame />}/> 
+            <Route path="games/snake/retro" element={<RetroSnake />}/> 
+        
+      
+      </Routes>
+     
+    </>
+    
   );
 }
 

@@ -1,13 +1,291 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  margin:0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+img{
+  max-width: 100%;
+}
+
+button{
+  cursor: pointer;
+}
+
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+:root{
+
+  --color-accent:#47F4F4;
+  --color-white:#E7E7E7;
+  --color-dark:#313131;
+
+}
+/* NavBAR */
+nav{
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+  background-color: var(--color-dark)
+}
+
+.nav-logo{
+  width:4rem;
+}
+ul{
+  display: flex;
+  gap:.5rem
+}
+nav a{
+  font-size: 1.5rem;
+  padding: .5rem;
+  color: var(--color-white)
+  
+}
+
+
+nav a:not(.active):hover,
+nav a:not(.active):focus{
+  color: var(--color-accent)
+}
+
+nav .active{
+  color:red
+}
+/* Games page */
+.game-item{
+  display: flex;
+  padding: 1rem;
+  margin-bottom:1rem;
+}
+ 
+.game-img{
+  max-width: 50%;
+}
+.game-details{ 
+  background-color: var(--color-white);
+  padding: 1rem;
+}
+.game-title{
+  text-align: center;
+  margin-bottom: .5em;
+}
+.game-description{
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+.game-btn{
+  display: block;
+  width: max-content;
+  margin-inline: auto;
+  margin-top: 1rem;
+  padding: .3em 1em;
+  background-color: var(--color-dark);
+  border-radius: 5px;
+  color: var(--color-white);
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.game-btn:hover,
+.game-btn:focus{
+  color: var(--color-accent);
+  transform: scale(0.95);
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+.rpg{
+  font-family: 'MedievalSharp', cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height:80vh ;
+  background-color: var(--color-dark);
+  margin: 20px;
+}
+.rpg-start-btn{
+  font-family: inherit;
+  font-size: 1.5rem;
+  background-color: #fcc02a;
+  border: 2px solid #963404;
+  padding:.5em 1.5em;
+  animation: flashing 2s infinite;
+}
+@keyframes flashing {
+  0%,25%{
+    opacity: 1;
+  }
+ 
+  50%{opacity: 0;}
+ 
+  100%{
+    opacity: 1;
+  }
+}
+.rpg-start-btn:hover{
+  animation: none;
+  font-weight: bold;
+}
+.rpg-intro{
+  font-size: 3rem;
+  color:var(--color-white)
+}
+
+.char-box{
+  display: flex;
+  flex-direction: column;
+  background-color: darkblue;
+  color:var(--color-white)
+}
+.char-box img{
+  width: 200px;
+  margin-inline: 1rem;
+}
+.char-box h3{
+  margin-block: 1rem;
+  font-size: 2rem;
+  text-align: center;
+}
+.char-box p {
+  margin:.5rem 0 .5rem .5rem ;
+}
+.all-attacks{
+  display: flex;
+  gap:.5rem;
+  background-color: rgb(9, 9, 61);
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+  
+  
+}
+.attack{
+  width:2.5rem;
+  height: 2.5rem;
+  background-color: #963404;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+.rpg-attack-btn{
+  font-family: inherit;
+  font-size: 1.5rem;
+  background-color: #fcc02a;
+  border: 2px solid #963404;
+  padding:.5em 1.5em;
+  margin-left:3rem;
+  margin-block: 1rem ;
+  
+}
+
+/* snake-page */
+.snake-page-options{
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:2rem;
+}
+.snake-page-options a{
+  background-color: black;
+  color:white;
+  font-size: 3rem;
+  padding:.5em 1.5em ;
+}
+
+/* snake */
+#GameBoard {
+  box-sizing:unset;
+	position: relative;
+	margin:3rem  auto;
+	border-style: solid;
+}
+
+#GameBoard .Block {
+  box-sizing:unset;
+	position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+#GameBoard #GameOver {
+	text-align: center;
+	height: 100%;
+	flex-direction: column;
+	display: flex;
+	justify-content: space-around;
+}
+
+#GameBoard #Score {
+	position: relative;
+	top: 105%;
+	text-align: center;
+	font-weight: bold;
+}
+
+#GameBoard #GameOverText {
+	color: #ca0000;
+	font-weight: bold;
+	text-decoration-line: underline;
+}
+
+#GameBoard #PressSpaceText {
+	color: #2e7ecb;
+	font-weight: bold;
+  cursor: pointer;
+}
+.controler{
+  position: relative;
+  top:110%;
+  width: 100%;
+  display: grid;
+  grid-template: repeat(3, 50px)/repeat(3, 50px);
+  justify-content: center;
+  
+}
+.controler button{
+  border: 1px solid black;
+  color: black;
+  text-shadow: 0px 0px 5px #FFFFFF;
+  font-size: 2rem;
+}
+.upButton{
+  grid-column: 2;
+}
+.leftButton{
+  grid-column: 1;
+}
+.rightButton{
+  grid-column: 3;
+}
+.downButton{
+  grid-column: 2;
+}
+.snake-header{
+  text-align: center;
+}
+
+/* retro snake  page */
+.board{
+  margin-top: 1rem;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  outline: 1px solid black;
+}
+
+.grid{
+  width: 30px;
+  height: 30px;
+  background-color: rgb(27, 70, 23);
+}
+.snake{
+  background-color: black;
+}
+.apple{
+  background-color: red;
 }
