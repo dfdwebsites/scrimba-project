@@ -174,12 +174,12 @@ nav .active{
 .js-main{
   --text: 'JavaScript';
   position: relative;
-  margin-top: 5rem;
+  margin-top: 5.5rem;
 }
 .games-main{
   --text:"games";
   position: relative;
-  margin-top: 5rem;
+  margin-top: 5.5rem;
  
 }
 span.page-title{
