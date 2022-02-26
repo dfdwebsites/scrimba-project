@@ -18,14 +18,14 @@ function App() {
       <Navbar />
       </header>
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="css" element={<Css />}/>
-        <Route path="js" element={<JavaScript />}/>
-        <Route path="games" element={<Games />}/>
-          <Route path="games/rpg" element={<RpgGame />}/> 
-          <Route path="games/snake" element={<SnakePage />}/> 
-            <Route path="games/snake/snake" element={<SnakeGame />}/> 
-            <Route path="games/snake/retro" element={<RetroSnake />}/> 
+        <Route path="/scrimba-project" element={<Home />}/>
+        <Route path="/scrimba-project/css" element={<Css />}/>
+        <Route path="/scrimba-project/js" element={<JavaScript />}/>
+        <Route path="/scrimba-project/games" element={<Games />}/>
+          <Route path="/scrimba-project/games/rpg" element={<RpgGame />}/> 
+          <Route path="/scrimba-project/games/snake" element={<SnakePage />}/> 
+            <Route path="/scrimba-project/games/snake/snake" element={<SnakeGame />}/> 
+            <Route path="/scrimba-project/games/snake/retro" element={<RetroSnake />}/> 
         
       
       </Routes>
