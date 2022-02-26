@@ -486,7 +486,13 @@ p.game-btn{
   grid-column: 2;
 }
 .snake-header{
+  margin-top: 5.5rem;
   text-align: center;
+}
+@media (min-width:550px) {
+  .snake-header{
+    margin-top: 0rem;
+  }
 }
 
 /* retro snake  page */
