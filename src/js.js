@@ -3,5 +3,7 @@ import React from 'react'
 
 export default function JavaScript(){
 
-return <h1>JavaScript</h1>
+return <section className='js-main'>
+    <span className='page-title'></span>
+    </section>
 }

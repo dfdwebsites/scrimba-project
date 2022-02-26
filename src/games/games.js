@@ -14,7 +14,16 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
 return (
     <main className='games-main'>
 
-        <h1>Games</h1>
+        <span className='page-title'></span>
+        <p className='games-main-p'>In many modules through the course we were creating small games in order to 
+            learn  </p>
+        <p className='games-second-p'>specific commands /properties/values while creating an example.Srimba's amazing workspace made each challenge , challenging in the same time
+            very important since all the teachers aggreed in the same principle that "You 
+            learn code by practicing".</p>
+        
+        <p className='games-second-p'>Here is a small list of the games we created in the course. <br /> You can navigate below or check
+            them in details further in the page
+        </p>
         <div className='games-nav'>
             <Link to="/games/cardgames">Card Games</Link>
             <Link to="/games/snake">Snake</Link>
@@ -23,7 +32,7 @@ return (
             <Link to="/games/quiz">Quiz-Game</Link>
             <Link to="/games/Mario">Super Mario</Link>
         </div>
-        <section>
+        <section className='all-game-items'>
             <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
             <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
             <GameLink to="quiz" url="./img/rpg.png" name="Quiz-Game" detail={quizDetail}/>
