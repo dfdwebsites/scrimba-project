@@ -4,13 +4,11 @@ import {Link} from 'react-router-dom'
 function GameLink(props){
 
     return (
-        <div className='game-item'>
+        <div className={`game-item game-item-${props.to}`}>
             <h2 className='game-title'>{props.name}</h2>
             <img className='game-img' src={props.url} />
             <p className='game-description'>{props.detail}</p>
-            <Link to={`/games/${props.to}`}>
-                <p className="game-btn">Check out the game</p>
-            </Link>
+            <Link className="game-btn" to={`/games/${props.to}`}>Check out the game</Link>
         </div>
     )
 }

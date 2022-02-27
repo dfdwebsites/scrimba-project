@@ -16,21 +16,19 @@ return (
 
         <span className='page-title'></span>
         <p className='games-main-p'>In many modules through the course we were creating small games in order to 
-            learn  </p>
-        <p className='games-second-p'>specific commands /properties/values while creating an example.Srimba's amazing workspace made each challenge , challenging in the same time
+            learn specific commands /properties /values while creating an example. Srimba's amazing workspace made each challenge , challenging in the same time
             very important since all the teachers aggreed in the same principle that "You 
-            learn code by practicing".</p>
-        
-        <p className='games-second-p'>Here is a small list of the games we created in the course. <br /> You can navigate below or check
+            learn code by practicing".</p> 
+        <p className='games-main-p second'>Here is a small list of the games we created in the course. You can navigate below or check
             them in details further in the page
         </p>
         <div className='games-nav'>
-            <Link to="/games/cardgames">Card Games</Link>
-            <Link to="/games/snake">Snake</Link>
-            <Link to="/games/rpg">RPG</Link>
-            <Link to="/games/pacman">PacMan</Link>
-            <Link to="/games/quiz">Quiz-Game</Link>
-            <Link to="/games/Mario">Super Mario</Link>
+            <Link className='game-item-cards' to="/games/cardgames">Card Games</Link>
+            <Link className='game-item-snake' to="/games/snake">Snake</Link>
+            <Link className='game-item-rpg' to="/games/rpg">RPG</Link>
+            <Link className='game-item-pacman' to="/games/pacman">PacMan</Link>
+            <Link className='game-item-quiz' to="/games/quiz">Quiz-Game</Link>
+            <Link className='game-item-mario' to="/games/Mario">Super Mario</Link>
         </div>
         <section className='all-game-items'>
             <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
