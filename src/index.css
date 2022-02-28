@@ -38,6 +38,7 @@ body{
   left: 0;
   right: 0;
   display: flex;
+  height: 90px;
   flex-direction: column;
   padding: 1.5rem;
   z-index: 990;
@@ -171,69 +172,46 @@ nav .active{
 }
 /* all pages generic */
 
-.js-main{
-  --text: 'JavaScript';
+/*************************/
+/*******  CSS PAGE *******/
+/*************************/
+.section-hero{
+  margin-top: 90px;
+  width:100%;
+  height:200px;
+  background-size:cover ;
+  background-position: top left;
   position: relative;
-  margin-top: 5.5rem;
+  overflow: hidden;
 }
-.games-main{
-  --text:"games";
-  position: relative;
-  margin-top: 5.5rem;
- 
-}
-span.page-title{
+.page-title{
   z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  /* align-items: center; */
-  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.7rem;
+  width:500px;
+  color: var(--color-white);
+  background-color: var(--first-color);
+  box-shadow:0 2px 4px -1px rgb(0 0 0 / 30%), 
+  0 4px 5px 0 rgb(0 0 0 / 24%), 0px 3px 10px var(--second-color);
+  transform: translatex(-8rem) translatey(0) rotate(-45deg) translateX(-4rem);
 }
-span.page-title::before{
-  content: var(--text);
-  position: absolute;
-  width: 150%;
-  background: var(--first-color);
-  transform: translatex(-25vw) rotate(-45deg) translateY(1vw) translateX(-13vw);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  padding: 15px;
-  font-weight: 600;
-  color: #fff;
-  box-shadow: 0px 3px 20px var(--second-color);
+
+.css-page{
+  background-image: url("../public/img/css-title.png");
 }
-@media (min-width:500px) {
-  span.page-title::before{
-    transform: translatex(-25vw) rotate(-45deg) translateY(-1vw) translateX(-13vw);
-  }
+
+.js-page{
+  background-image: url("../public/img/js-title.png");
 }
-@media (min-width:590px) {
-  span.page-title::before{
-    transform: translatex(-25vw) rotate(-45deg) translateY(-2vw) translateX(-13vw);
-  }
+.games-page{
+  background-image: url("../public/img/games-title.png");
+  background-position: bottom left;
 }
-@media (min-width:680px) {
-  span.page-title::before{
-    transform: translatex(-25vw) rotate(-45deg) translateY(-3vw) translateX(-13vw);
-  }
-}
-@media (min-width:790px) {
-  span.page-title::before{
-    transform: translatex(-25vw) rotate(-45deg) translateY(-4vw) translateX(-13vw);
-  }
-}
-@media (min-width:880px) {
-  span.page-title::before{
-    transform: translatex(-25vw) rotate(-45deg) translateY(-5vw) translateX(-13vw);
-  }
-}
+
 /* Games page */
 .games-main{
   background-color: var(--color-dark);
@@ -242,18 +220,20 @@ span.page-title::before{
   flex-direction: column;
   align-items: center;
 }
+.games-main-title{
+  color: var(--color-white);
+  margin-block: 1rem;
+  font-weight: 400;
+  font-size: 1.7rem;
+}
 .games-main-p{
-  
+  margin-top: 1rem;
   z-index: 2;
   color: white;
   line-height: 1.5;
   font-size: 1.15rem;
   width: 80%;
-  margin-top: 15vh;
   margin-inline: auto;
-}
-.second{
-  margin-top: 1rem;
 }
 .games-nav{
   z-index: 1;
@@ -267,6 +247,12 @@ span.page-title::before{
 .games-nav a{
   font-size: .9rem;
   position: relative;
+  width: min-content;
+}
+@media (min-width:475px) {
+  .games-nav a{
+    width:max-content;
+  }
 }
 .games-nav a::before{
   content: "";
@@ -290,25 +276,48 @@ span.page-title::before{
   flex-direction: column;
 }
 .game-item-rpg{
-  --item-color:red;
+  --item-color:#FD2155;
 }
 .game-item-snake{
-  --item-color:blue;
-}
-.game-item-quiz{
   --item-color:green;
 }
+.game-item-quiz{
+  --item-color:#FFA500;
+}
+.super-mario-name:first-child,
+.super-mario-name:nth-child(9){
+  color:#009CDA;
+}
+.super-mario-name:nth-child(2),
+.super-mario-name:nth-child(5),
+.super-mario-name:nth-child(8){
+  color:#FCD000;
+}
+.super-mario-name:nth-child(3),
+.super-mario-name:nth-child(6){
+  color:#E71E07;
+}
+.super-mario-name:nth-child(4),
+.super-mario-name:nth-child(7),
+.super-mario-name:last-child{
+  color:#42B032;
+}
+
+
 .games-nav a{
   color: var(--item-color)
 }
 .games-nav a::before{
   background-color: var(--item-color);
 }
+.game-item-mario::before{
+  background: linear-gradient(to right, #009CDA , #42B032 ,#FFA500 ,#E71E07 );
+}
 .game-item{
   border-top:3px solid var(--item-color) ;
   display: flex;
   flex-direction: column;
-  margin-bottom:1rem;
+  margin-block:1rem;
   background-color: var(--color-dark);
   padding: 1rem;
   -webkit-box-shadow: 0 2px 4px -1px rgb(0 0 0 / 30%),
@@ -346,21 +355,22 @@ p.game-description{
   align-self: center;
   display: block;
   z-index: 1;
+  font-weight: bold;
   position: relative;
   margin-bottom: .5rem;
   padding: .4em 1.1em;
   background-color: var(--color-dark);
   border-radius: 5px;
-  border: solid 1px var(--color-white);
+  border: solid 1px var(--item-color);
   color: var(--color-white);
   cursor: pointer;
   letter-spacing: 1px;
 }
 .game-btn:hover,
 .game-btn:focus{
-  color: var(--color-accent);
+  color: var(--item-color);
   transform: scale(0.95);
-  box-shadow:inset 0 0 5px 3px rgba(226, 226, 226, 0.342);
+  box-shadow:inset 0 0 5px 3px rgba(0, 0, 0, 0.342);
 }
 .rpg{
   font-family: 'MedievalSharp', cursive;
@@ -534,14 +544,11 @@ p.game-description{
   grid-column: 2;
 }
 .snake-header{
-  margin-top: 5.5rem;
+  margin-top: 90px;
   text-align: center;
 }
 @media (min-width:550px) {
-  .games-main{
-    margin-top: 0;
-  }
-  .js-main{
+  .section-hero{
     margin-top: 0;
   }
   .snake-header{
@@ -574,12 +581,13 @@ p.game-description{
 @media (min-width:950px) {
  .games-main-p{
    width:70%;
-   margin:0;
-   margin-left:auto;
    margin-top: 5vh;
  }
  .games-nav{
    width:100%;
    
  }
+}
+.mario-main{
+  margin-top: 90px;
 }
