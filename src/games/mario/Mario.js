@@ -1,4 +1,4 @@
-import kaboom  from "https://unpkg.com/kaboom/dist/kaboom.mjs";
+import kaboom  from "kaboom"
 import React from "react"
 
 const Mario = () => {
@@ -8,7 +8,9 @@ const Mario = () => {
 	// just make sure this is only run once on mount so your game state is not messed up
 	React.useEffect(() => {
 
-
+		
+			
+		 
 		
 		const k = kaboom({
 			// if you don't want to import to the global namespace
@@ -21,7 +23,7 @@ const Mario = () => {
 			
 		})
 
-		
+			k.focus()
 		function Animations() {
 			k.layers([
 				"bg",
