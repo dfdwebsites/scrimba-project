@@ -23,7 +23,7 @@ const Mario = () => {
 			
 		})
 
-			k.focus()
+			
 		function Animations() {
 			k.layers([
 				"bg",
@@ -103,7 +103,7 @@ const Mario = () => {
 				k.area({ width: 20, height: 20, offset: k.vec2(0, 6) }),
 				k.body()
 			])
-			const title = k.add([
+			 k.add([
 				k.text("dev mode ",{
 					size:20
 				}),

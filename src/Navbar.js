@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
-import {Link, NavLink} from 'react-router-dom'
-/* import {logo} from "./logo.png" */
+import { NavLink} from 'react-router-dom'
 
 
 
@@ -18,7 +17,7 @@ function Navbar(){
 
     return(
             <div id="nav" className="navbar-container clicked">
-                    <img className="nav-logo" src="./img/logo.png"/>
+                    <img className="nav-logo" src="./img/logo.png" alt="logo"/>
                      < div onClick={clickNav} id="navBtn" className="nav-toggle">
                          <span className="hamburgerLine line1"></span>
                          <span className="hamburgerLine line2"></span>

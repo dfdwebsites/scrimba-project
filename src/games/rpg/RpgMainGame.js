@@ -9,12 +9,12 @@ export default function RpgMainGame(){
         attack:3,
         img:"../img/wizard.png"
     }
-    const monster={
+   /*  const monster={
         name:"Orc",
         hp:10,
         attack:1,
         img:""
-    }
+    } */
 
     function rollTheDice(a){
         const allDice = new Array(a).fill(0).map(item=> {
@@ -34,7 +34,7 @@ export default function RpgMainGame(){
         <div>
             <div className='char-box'>
                 <h3>{hero.name}</h3>
-                <img src={hero.img} />
+                <img src={hero.img} alt=" of the creature" />
                 <p>health: {hero.hp}</p>
                 <div className='all-attacks'>
                  { rollTheDice(hero.attack)}

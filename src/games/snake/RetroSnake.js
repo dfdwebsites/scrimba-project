@@ -22,6 +22,9 @@ function RetroSnake(){
             box.push(cell)
         }
         function update(){
+            if (gameOver){
+                console.log("you loose")
+            }
             snake.forEach(cell=>{
                 box[cell].classList.add("snake")   
             })
