@@ -16,150 +16,13 @@ const Mario = () => {
 			// if you don't want to import to the global namespace
 			global: false,
 			debug: true,
-			scale:1.6,
-			fullscreen:true,
-			canvas: canvasRef.current,
-			background: [ 0, 0, 0, 1],
-			
+			background: [134, 135, 247],
+			width: 500,
+			height: 340,
+			scale: 2,
+			fullscreen:false,
+			canvas: canvasRef.current,		
 		})
-
-			
-		function Animations() {
-			k.layers([
-				"bg",
-				"game",
-				"ui",
-			], "game")
-			const level1= [
-				'= =  = =                                                   ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                                          ',
-				'=                                       +-     =           ',
-				'=                                       ()     =           ',
-				'==========================================     ============'
-			]
-		k.addLevel(level1, {
-				
-				width:16,
-				height:16,
-				pos: k.vec2(0, 0),
-				"=": ()=>[
-					k.sprite("floor"),
-					k.origin("center"),
-					k.area(),
-					k.solid()
-				],
-				"-": ()=>[
-					k.sprite("pipe", {frame:1}),
-					k.origin("center"),
-					k.scale(1),
-					k.area(),
-					k.solid(),
-				],
-				"+": ()=>[
-					k.sprite("pipe",{frame:0}),
-					k.origin("center"),
-					k.scale(1),
-					k.area(),
-					k.solid()
-				],
-				"(": ()=>[
-					k.sprite("pipe",{frame:2}),
-					k.origin("center"),
-					k.scale(1),
-					k.area(),
-					k.solid()
-				],
-				")": ()=>[
-					k.sprite("pipe",{frame:3}),
-					k.origin("center"),
-					k.scale(1),
-					k.area(),
-					k.solid()
-				] 
-			})
-			let MOVE_SPEED = 200
-			let JUMP_FORCE = 500
-			const player = k.add([
-				k.sprite('mario', {
-					frame: 0,
-				}),
-				k.pos(k.width() * 0.2, k.height() * 0.2),
-				k.origin('center'),
-				k.scale(1),
-				big(),
-				{isBig:false,
-				isJumping:false},
-				k.area({ width: 20, height: 20, offset: k.vec2(0, 6) }),
-				k.body()
-			])
-			 k.add([
-				k.text("dev mode ",{
-					size:20
-				}),
-				k.color(0, 0, 255),
-				k.pos(0,-100),
-				k.layer('ui')
-			])
-		
-			// basic key press logic to change animations
-			k.onKeyDown('left', () => {
-				player.move(-MOVE_SPEED,0)
-			})
-		
-			k.onKeyDown('right', () => {
-				player.move(MOVE_SPEED,0)
-				
-			})
-			k.onKeyPress('left', () => {
-				player.flipX(true)
-				player.isBig? player.play("bigRun"):player.play("smallRun")
-			})
-		
-			k.onKeyPress('right', () => {
-				player.flipX(false)
-				player.isBig? player.play("bigRun"):player.play('smallRun')
-			})
-			k.onKeyPress('space', ()=>{
-				if(player.isGrounded()){
-					player.isBig? player.play('bigJump') : player.play('smallJump')
-					player.jump(JUMP_FORCE)
-					player.isJumping = true
-				}
-			})
-			k.onKeyRelease('left', () => {
-				player.isBig? player.play('bigMario') :player.play('smallMario')
-			})
-		
-			k.onKeyRelease('right', () => {
-				player.isBig? player.play('bigMario') :player.play('smallMario')
-			})
-			k.onKeyPress('b', () => {
-				player.biggify(2)
-			})
-			k.onKeyPress("r",()=>{
-				k.go('animations')
-			})
-			player.onUpdate(() => {
-				k.camPos(player.pos.x+150, k.height()/5 )
-				if(player.isGrounded()) {
-				  player.isJumping = false
-				}
-			  })
-
-			
-		}
-		
 		k.loadSprite("items", "../img/items.png",{
 			sliceX:7,
 			sliceY:6
@@ -173,12 +36,12 @@ const Mario = () => {
 			sliceX:26,
 			sliceY:1,
 			anims:{
-				smallMario:{from:0, to:0},
-				bigMario:{from:8, to:8},
-				smallJump:{from:5, to:5},
-				bigJump:{from:13, to:13},
-				smallRun:{from:1, to:3, loop:true, speed:25},
-				bigRun:{from:9, to:11, loop:true, speed:25}
+				smallMario:0,
+				bigMario:8,
+				smallJump:5,
+				bigJump:13,
+				Running:{from:1, to:3, loop:true, speed:25},
+				RunningBig:{from:9, to:11, loop:true, speed:25}
 			}
 		})
 
@@ -196,50 +59,541 @@ const Mario = () => {
 				y:124,
 				width:16,
 				height:16
+			},
+			"surpise":{
+				width:52,
+				height:16,
+				x:372,
+				y:160,
+				sliceX:3,
+				anims:{
+					idle:{from:0, to :2, loop:true, speed:4}
+				}
+			},
+			"unboxed": {
+				x:373,
+				y:65,
+				width:16,
+				height:16
+			},
+			"coin":{
+				x:426,
+				y:162,
+				height:16,
+				width:36,
+				sliceX:3,
+				anims:{
+					coin:{from:0, to :2, loop:true, speed:20}
+				}
+			},
+			"evil-mushroom":{
+				x:957,
+				y:187,
+				width:54,
+				height:16,
+				
+				sliceX:3,
+				anims:{
+					evilMushroom:{from:1, to:2,loop:true, speed:2},
+				}
+			},
+			"mushroom":{
+				x:71,
+				y:43,
+				height:16,
+				width:16,
+			},
+			"hill":{
+				x:98,
+				y:160,
+				width:82,
+				height:35
+			},
+			"cloud":{
+				x:96,
+				y:198,
+				width:64,
+				height:24
+			},
+			"shrubbery":{
+				x:51,
+				y:253,
+				width:32,
+				height:16
 			}
 
-
 		} )
-		function big() {
-			let timer = 0
 			
+	 	const levelConf = {
+				
+			width:16,
+			height:16,
+			pos: k.vec2(0, 0),
+			"=": ()=>[
+				k.sprite("floor"),
+				k.origin("bot"),
+				k.area(),
+				k.solid()
+			],
+			"-": ()=>[
+				k.sprite("pipe", {frame:1}),
+				k.origin("bot"),
+				k.scale(1),
+				k.area(),
+				k.solid(),
+			],
+			"+": ()=>[
+				k.sprite("pipe",{frame:0}),
+				k.origin("bot"),
+				k.scale(1),
+				k.area(),
+				k.solid()
+			],
+			"(": ()=>[
+				k.sprite("pipe",{frame:2}),
+				k.origin("bot"),
+				k.scale(1),
+				k.area(),
+				k.solid()
+			],
+			")": ()=>[
+				k.sprite("pipe",{frame:3}),
+				k.origin("bot"),
+				k.scale(1),
+				k.area(),
+				k.solid()
+			] ,
+			"?": ()=>[
+				k.sprite("surpise", {anim:"idle"}),
+				k.area(),
+				k.origin("bot"),
+				
+				k.solid(),
+				"coin-surpise",
+				"box"
+			],
+			"#": ()=>[
+				k.sprite("surpise", {anim:"idle"}),
+				k.area(),
+				k.origin("bot"),
+				
+				k.solid(),
+				"mushroom-surpise",
+				"box"
+			],
+			"!": ()=>[
+				k.sprite("unboxed"),
+				k.area(),
+				k.solid(),
+				bump(4,6),
+				k.origin("bot"),
+				"unboxed"
+			],
+			"$":()=>[
+				k.sprite("coin",{anim:"coin"}),
+				k.area(),
+				bump(32,8),
+				k.cleanup(),
+    			k.lifespan(0.4, { fade: 0.01 }),
+				k.origin("bot"),
+				"coin"
+			],
+			"@":()=>[
+				k.sprite("mushroom"),
+				k.area(),
+				k.body(),
+				k.origin("bot"),
+				"mushroom"
+				
+			],
+			"^": ()=>[
+				k.sprite("evil-mushroom",{anim:"evilMushroom"}),
+				k.origin("bot"),
+				k.area(),
+				k.body(),
+				evilMushroom(),
+				patrol(),
+				k.solid(),
+				"evil-mushroom",
+				"danger"
+			]
+		}
+
+
+	k.scene("game", ({ levelId, score } = { levelId: 0, score: 0 }) => {
+			k.layers([
+				"bg",
+				"game",
+				"ui",
+			], "game")
+			const LEVELS =[ 
+				[
+				'= =  = =                                                      ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                     #??                                     ',
+				'=                                                             ',
+				'=                                                             ',
+				'=                                          +-     =           ',
+				'=                               ^       ^  ()     =           ',
+				'=============================================     ============',
+				'=============================================     ============',
+				'=============================================     ============'
+			]
+		]
+			const level = k.addLevel(LEVELS[levelId ?? 0], levelConf)
 		
-			return {
-				update() {
-					if (this.isBig) {
-						timer -= k.dt()
-						if (timer <= 0) {
-							this.smallify()
+		
+		let MOVE_SPEED = 200
+		let JUMP_FORCE = 500
+		const FALL_DEATH = 2400
+
+			
+			k.onUpdate("block", (b) => {
+				
+				b.solid = b.pos.dist(player.pos) <= 64
+			})
+
+			k.add([
+				k.sprite("cloud"),
+				k.pos(210, 50),
+				k.layer("bg")
+			  ]);
+			
+			  k.add([
+				k.sprite("hill"),
+				k.pos(132, 304),
+				k.layer("bg"),
+				k.origin("bot")
+			  ])
+			
+			  k.add([
+				k.sprite("shrubbery"),
+				k.pos(300, 304),
+				k.layer("bg"),
+				k.origin("bot")
+			  ])
+			
+
+
+
+
+
+
+
+			const player = k.add([
+				k.sprite('mario'),
+				k.pos(k.width() * 0.2, k.height() * 0.2),
+				k.origin('bot'),
+				k.scale(1),
+				mario(),
+				k.area({ width: 16, height: 16, }),
+				k.body()
+			])
+			 k.add([
+				k.text("dev mode ",{
+					size:20
+				}),
+				k.color(255, 255, 255),
+				k.pos(k.width()/5,k.height()/30),
+				k.layer('ui')
+			])
+		
+			// basic key press logic to change animations
+			k.onKeyDown('left', () => {
+				player.flipX(true)
+				if(k.toScreen(player.pos).x > 20){
+					player.move(-MOVE_SPEED,0)
+				}
+			})
+		
+			k.onKeyDown('right', () => {
+				player.flipX(false)
+				player.move(MOVE_SPEED,0)
+				
+			})
+			k.onKeyPress('space', ()=>{
+				if(player.isGrounded()){
+					player.jump(JUMP_FORCE)
+
+				}
+			})
+			k.onKeyPress('b', () => {
+				player.bigger()
+			})
+			k.onKeyPress("r",()=>{
+				k.go('game')
+			})
+
+			//general game rules
+			player.onUpdate(() => {
+				var currCam = k.camPos();
+    			if (currCam.x < player.pos.x) {
+      				k.camPos(player.pos.x, currCam.y);
+   				 }
+				if (player.pos.y >= FALL_DEATH) {
+					k.go("lose")
+				}
+			  })
+
+			
+		  player.onHeadbutt((obj) => {
+			  if (obj.is("box")){
+				if (obj.is('coin-surpise')) {
+					let coin = level.spawn('$', obj.gridPos.sub(0, 1))
+					coin.play("coin")
+					coin.bump(8)
+					score++	 
+				  }
+				if (obj.is('mushroom-surpise')){
+					let mushroom = level.spawn("@", obj.gridPos.sub(0,1))
+					mushroom.jump(200)
+					k.onUpdate("mushroom",(c)=>{
+						c.move(30,0)
+					})
+					mushroom.pushOut("evil-mushroom")
+				  }
+				let pos = obj.gridPos;
+				k.destroy(obj);
+				let box = level.spawn("!", pos);
+				box.bump();
+				}
+			})
+			
+			player.onGround((obj) =>{
+				if (obj.is('evil-mushroom')){
+					player.jump(300)
+					obj.squash()
+				}
+			})	
+			player.onCollide("danger", (e,col) => {
+				// if it's not from the top, die
+				if (!col.isBottom()) {
+					player.smaller()
+				}
+			})
+			player.onCollide("coin",(c)=>{
+				k.destroy(c)
+			})
+			player.onCollide("mushroom",(m)=>{
+				k.destroy(m)
+				player.bigger()
+			})
+			
+		})
+		
+		
+	
+
+		k.scene("lose", () =>{
+			k.add([
+				k.text("GAME OVER",{
+					size:52
+				}),
+				k.pos(k.width()/4,k.height()/4)
+			])
+			k.onKeyPress(() => k.go("game"))
+		})
+
+
+
+		k.go('game')
+	
+		function patrol(distance=100 , speed = 10, dir=-1){
+			return{
+				id:"patrol",
+				require:["area", "pos"],
+				startingPos: k.vec2(0,0),
+				add(){
+					this.startingPos = this.pos;
+					this.on("collide", (obj, side) => {
+						if (side === "left" || side === "right") {
+						dir = dir*(-1)
+						}
+					})
+   			 	},
+				update(){
+					if(Math.abs(this.pos.x-this.startingPos.x) >= distance){
+						dir = dir*(-1)
+					}
+					this.move(speed*dir,0)
+				}	
+				
+
+			}
+		}
+
+		function evilMushroom(){
+			return{
+				id:"evilMushroomId",
+				require:["area","pos","sprite","patrol"],
+				isAlive:true,
+				update(){
+
+				},
+				squash(){
+					this.isAlive = false
+					this.frame=0
+					this.unuse("patrol")
+					this.stop()
+					this.area.width = 16
+					this.area.height = -1
+					this.use(k.lifespan(0.5, { fade: 0.1 }))
+				}
+			}
+		}
+		function bump(offset=8, speed=2, stopAtOrigin = true){
+			return{
+				id:"bump",
+				require: ["pos"],
+				bumpOffset: offset,
+				speed: speed,
+				bumped: false,
+				origPos: 0,
+   				direction: -1
+			,
+				update(){
+					if (this.bumped) {
+						this.pos.y = this.pos.y + this.direction * this.speed;
+						if (this.pos.y < this.origPos - this.bumpOffset) {
+							this.direction = 1;
+						}
+						if (stopAtOrigin && this.pos.y >= this.origPos) {
+							this.bumped = false;
+							this.pos.y = this.origPos;
+							this.direction = -1;
+						}
+					}
+			  },
+			  bump() {
+				this.bumped = true;
+				this.origPos = this.pos.y;
+			  }
+			};
+		}
+		function mario(){
+			return{
+				id:"mario",
+				require:["area","sprite","body"],
+				smallAnimation: "Running",
+				bigAnimation: "RunningBig",
+				smallStopFrame: 0,
+				bigStopFrame: 8,
+				smallJumpFrame: 5,
+				bigJumpFrame: 13,
+				isBig: false,
+				isAlive: true,
+				hp:1,
+				update(){
+					if(!this.isGrounded()){
+						this.jumping()
+					}
+					else{
+						if(k.isKeyDown("left") || k.isKeyDown("right")){
+							this.running()
+						}
+						else{
+							this.standing()
 						}
 					}
 				},
-				isBig() {
-					return this.isBig
+				bigger() {
+					this.isBig = true;
+					this.area.width = 24;
+					this.area.height = 32;
+					this.hp ++
 				},
-				smallify() {
-					timer = 0
-					this.play("smallMario")
-					this.isBig = false
+				smaller() {
+					this.isBig = false;
+					this.area.width = 0;
+					this.area.height = 0;
+					
+					k.wait(1.5, () => {
+					this.area.width = 16;
+					this.area.height = 16
+						this.hp --
+						if (this.hp <= 0 ){
+							k.go("lose")
+						}
+					})
 				},
-				biggify(time) {
-				
-					this.play("bigMario")	
-					timer = time
-					this.isBig = true
+				standing() {
+					this.stop();
+					this.frame = this.isBig ? this.bigStopFrame : this.smallStopFrame;
 				},
+				jumping() {
+					this.stop();
+					this.frame = this.isBig ? this.bigJumpFrame : this.smallJumpFrame;
+				},
+				running() {
+					const animation = this.isBig ? this.bigAnimation : this.smallAnimation;
+					if (this.curAnim() !== animation) {
+						this.play(animation);
+					}
+				}
+
+
+
+
+
 			}
 		}
-	
-		
-		k.scene('animations', Animations)
 
-		k.go('animations')
-	
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	},[])
 		
-		return <div style={{margin:0, height:"90vh",overflow:"hidden"}}>
-			<canvas ref={canvasRef}></canvas>
+		return <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center", margin:"0", overflow:"hidden"}}>
+			<canvas className="mario-board"ref={canvasRef}></canvas>
 			</div>
 
 }

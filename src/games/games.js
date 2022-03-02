@@ -11,6 +11,11 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
  handle with API calls and we had all the tools with js and css to make it GREAT`
  const snakeDetail =` Classic game from Nokia phones brings a nostagic touch giving use the 
  ability to understand the basic js functions arrays and SetIntenals`
+ const marioDetail=`SUPER MARIO!!!! What else can we say about it, jokes aside although there isnt a specific
+ course teaching you how to create a Mario game, with the Knowledge you are getting from the course you can
+ research and use diferent things on the internet, witch is the most important skill you can get.
+ Since everyone teaching here on Scrimba have the same principle to search and try on your own you are getting this skill.
+ In this case I am using a new library called "Kaboom.js"`
 return (
     <main>
 
@@ -49,6 +54,41 @@ return (
                 <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
                 <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
                 <GameLink to="quiz" url="./img/rpg.png" name="Quiz-Game" detail={quizDetail}/>
+                <div className='game-item game-item-superMario'>
+                    <h2 className='game-title'>  
+                        <span className='super-mario-name'>S</span>
+                        <span className='super-mario-name'>u</span>
+                        <span className='super-mario-name'>p</span>
+                        <span className='super-mario-name'>e</span>
+                        <span className='super-mario-name'>r </span> 
+                        <span className='super-mario-name'>M</span>
+                        <span className='super-mario-name'>a</span>
+                        <span className='super-mario-name'>r</span>
+                        <span className='super-mario-name'>i</span>
+                        <span className='super-mario-name'>o</span>
+                    </h2>
+                    <img className='game-img' src="./img/mario-img.png" alt="of the creation" />
+                    <p className='game-description'>{marioDetail}</p>
+                    <Link className="game-btn" to={`/games/mario`}>
+                        <span className='super-mario-link'>C</span>
+                        <span className='super-mario-link'>h</span>
+                        <span className='super-mario-link'>e</span>
+                        <span className='super-mario-link'>c</span>
+                        <span className='super-mario-link'>k </span>
+                        <span className='super-mario-link'>o</span>
+                        <span className='super-mario-link'>u</span>
+                        <span className='super-mario-link'>t </span>
+                        <span className='super-mario-link'>t</span>
+                        <span className='super-mario-link'>h</span>
+                        <span className='super-mario-link'>e </span>
+                        <span className='super-mario-link'>g</span>
+                        <span className='super-mario-link'>a</span>
+                        <span className='super-mario-link'>m</span>
+                        <span className='super-mario-link'>e</span>
+                      
+                    </Link>
+                 </div>
+                
             </section>
         </div>
     </main>
