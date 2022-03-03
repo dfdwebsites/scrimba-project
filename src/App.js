@@ -10,6 +10,7 @@ import SnakeGame from './games/snake/SnakeGame'
 import RetroSnake from './games/snake/RetroSnake'
 import SnakePage from './games/snake/SnakePage'
 import Mario from './games/mario/Mario'
+import PacMan from './games/pacman/PacMan'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="games/snake/snake" element={<SnakeGame />}/> 
             <Route path="games/snake/retro" element={<RetroSnake />}/> 
           <Route path="games/mario" element={<Mario />}/> 
+          <Route path="games/pacman" element={<PacMan />}/> 
         
       
       </Routes>

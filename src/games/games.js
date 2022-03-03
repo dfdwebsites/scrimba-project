@@ -5,17 +5,37 @@ import GameLink from './GameLink'
 
 export default function Games(){
 const rpgDetail=`A fun game the used advanced js functions to build like map(),
- reduce() also a big step to understant about Constractor functions and Classes `
+ reduce() also a big step to understant about Constractor functions and Classes and an introduction
+ for how to use a "data-base" that you get all the info from.
+ As all the other games its not about creating a full animated game but learning
+ functions and methods you have to use to create even this state. And as always 
+ you can always push your self and make it GREAT. This module is the replace of the
+ create Pac-Man game witch it was a little bit more coplicated than this `
  const quizDetail=`An amazing quiz game with a very nice API that you can scale it a LOT.
- this game was actually a challenge but with the previous lessons we learn how we can 
- handle with API calls and we had all the tools with js and css to make it GREAT`
+ By that time you had learn  the basics of the amazing React library that will open a whole new world
+ to you. This game was the final challenge of the React module but with the previous lessons we learn how we can 
+ handle with API calls and we had all the tools with js and css to make it GREAT.
+ Later in the course you will see more advanced tools in the React world that will make you go back and 
+ upgrade your game and you know what.. DO IT! Practice makes perfect, this is the whole reason I am 
+ making this website anyway ;)
+ `
  const snakeDetail =` Classic game from Nokia phones brings a nostagic touch giving use the 
- ability to understand the basic js functions arrays and SetIntenals`
+ ability to understand the basic js functions, arrays and SetIntenals. Nice challenges for you
+ to upgrade the game using event listeners for key press and even for buttons if you create ones for
+ a mobile aproach.It will seem very dificult to understand at first since its gonna be your first
+ impressions on JS but then you will realise that there are a lot of ways that you can achive the same result and by the end of 
+ the hole course i promise you that you wont be able to decide what way to use since you will be 
+ able to create it with at least more than 3 ways.`
  const marioDetail=`SUPER MARIO!!!! What else can we say about it, jokes aside although there isnt a specific
  course teaching you how to create a Mario game, with the Knowledge you are getting from the course you can
  research and use diferent things on the internet, witch is the most important skill you can get.
  Since everyone teaching here on Scrimba have the same principle to search and try on your own you are getting this skill.
  In this case I am using a new library called "Kaboom.js"`
+ const pacManDetail=`Lorem ipsum dolor sit amet consectetur adipiscing elit duis vulputate urna, odio aliquam 
+ curae gravida suscipit laoreet tempus penatibus senectus iaculis, tristique felis ultrices ullamcorper sollicitudin
+  magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
+   justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
+   penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
 return (
     <main>
 
@@ -88,6 +108,7 @@ return (
                       
                     </Link>
                  </div>
+                <GameLink to="pacman" url="./img/rpg.png" name="Pac-Man" detail={pacManDetail}/>
                 
             </section>
         </div>
