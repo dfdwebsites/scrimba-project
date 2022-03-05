@@ -30,7 +30,13 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 /* NavBAR */
-
+#canvas1{
+  position: absolute;
+  top:0;
+  left:0;
+  background: var(--color-dark);
+  z-index: -1;
+}
 .navbar-container{
   background-color: var(--color-dark);
   position: fixed;
@@ -231,7 +237,7 @@ nav .active{
 }
 /* Games page */
 .games-main{
-  background-color: var(--color-dark);
+  /* background-color: var(--color-dark); */
   padding:1rem;
   display: flex;
   flex-direction: column;

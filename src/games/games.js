@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import GameLink from './GameLink'
+import Canvas from '../Canvas'
 
 
 export default function Games(){
@@ -38,7 +39,7 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
    penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
 return (
     <main>
-
+        <Canvas />
         <div className='section-hero games-page'>
             <h2 className='page-title'>GAMES</h2>
         </div>
