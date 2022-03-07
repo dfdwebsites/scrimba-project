@@ -14,9 +14,10 @@ function Navbar(){
          navBar.classList.remove("clicked")
     },[click])
    
-
+    let path = window.location.pathname
+    console.log(path)
     return(
-            <div id="nav" className="navbar-container clicked">
+            <div id="nav" className={`navbar-container clicked ${path==="/scrimba-project/"? "homepage": ""}`}>
                     <img className="nav-logo" src="./img/logo.png" alt="logo"/>
                      < div onClick={clickNav} id="navBtn" className="nav-toggle">
                          <span className="hamburgerLine line1"></span>

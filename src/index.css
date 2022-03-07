@@ -66,7 +66,7 @@ nav{
   opacity: 1;
 }
 .nav-toggle{
-  background-color: #31313185 ;
+  /* background-color: #31313185 ; */
   box-sizing: content-box;
   cursor: pointer;
   padding: 0.5rem;
@@ -150,7 +150,9 @@ nav .active{
   color:red
 }
 
-
+.navbar-container.homepage{
+  background-color: transparent;
+}
 @media (min-width:550px){
   .nav-toggle{
     display: none;
@@ -161,6 +163,7 @@ nav .active{
     align-items: center;
   }
   nav{
+    background-color: transparent;
     transform: translateY(0);
     opacity: 1;
     position: relative;
