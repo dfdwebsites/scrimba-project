@@ -3,7 +3,7 @@ import { NavLink} from 'react-router-dom'
 
 
 
-function Navbar(){
+function Navbar(props,ref){
     const [click,setClick]= React.useState(false)
        function clickNav(){
            setClick(prev=> !prev)
@@ -17,7 +17,7 @@ function Navbar(){
     let path = window.location.pathname
     console.log(path)
     return(
-            <div id="nav" className={`navbar-container clicked ${path==="/scrimba-project/"? "homepage": ""}`}>
+            <div ref={ref} id="nav" className={`navbar-container clicked ${path==="/scrimba-project/"? "homepage": ""}`}>
                     <img className="nav-logo" src="./img/logo.png" alt="logo"/>
                      < div onClick={clickNav} id="navBtn" className="nav-toggle">
                          <span className="hamburgerLine line1"></span>
@@ -36,4 +36,4 @@ function Navbar(){
         
     )
 }
-export default Navbar
+export default React.forwardRef(Navbar)

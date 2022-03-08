@@ -1,6 +1,5 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom'
-import Navbar from "./Navbar"
 import Css from "./css"
 import JavaScript from './js'
 import Games from './games/games'
@@ -16,9 +15,6 @@ import PacMan from './games/pacman/PacMan'
 function App() {
   return (
     <>
-      <header className="App-header">
-      <Navbar />
-      </header>
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="css" element={<Css />}/>

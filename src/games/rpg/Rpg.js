@@ -1,5 +1,6 @@
 import React from "react";
 import RpgMainGame from "./RpgMainGame";
+import Navbar from "../../Navbar";
 
 
 
@@ -21,10 +22,15 @@ export default function RpgGame(){
     
     console.log(intro)
     return (
+        <>
+        <header className="App-header">
+            <Navbar />
+        </header>
         <div className="rpg">
           {startGame ? intro?<p className="rpg-intro">{words}{loading()}</p>:<RpgMainGame />:
           <button className="rpg-start-btn" onClick={()=>setStartGame(prev=>!prev)}>
               Start Game</button> }
         </div>
+        </>
     )
 }

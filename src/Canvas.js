@@ -19,11 +19,12 @@ function Canvas(){
             y:null,
             radius:(canvas.height/95) * (canvas.width/95)/2
         }
-        function getMousePos(event) {
-            mouse.x= event.x
-            mouse.y = event.y
-
-        }
+        function getMousePos(evt) {
+            let rect = canvas.getBoundingClientRect();
+            mouse.x= (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width
+            mouse.y=(evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+            }
+        
         function removeMousePos(){
             mouse.x=undefined
             mouse.y=undefined
@@ -69,19 +70,13 @@ function Canvas(){
                 let dx = mouse.x - this.x
                 let dy = mouse.y - this.y
                 let distance = Math.sqrt(dx*dx + dy*dy)
-                if (distance < mouse.radius + this.size){
-                    if(mouse.x < this.x && this.x < canvas.width - this.size * 100){
-                        this.x += 5
-                    }
-                    if (mouse.x > this.x && this.x > this.size * 100){
-                        this.x -= 5
-                    }
-                    if(mouse.y < this.y && this.y < canvas.height - this.size * 100){
-                        this.y += 5
-                    }
-                    if (mouse.y > this.y && this.y >this.size * 100){
-                        this.y -= 5
-                    }
+                if (mouse.x!==undefined && distance < canvas.width/7) {
+                    ctx.strokeStyle = 'rgba(31,31,31,.4)'
+                    ctx.lineWidth = 1
+                    ctx.beginPath()
+                    ctx.moveTo(mouse.x, mouse.y)
+                    ctx.lineTo(this.x, this.y)
+                    ctx.stroke()
                 }
                 //move particle
                 this.x += this.directionX
@@ -93,7 +88,7 @@ function Canvas(){
 
         function init(){
             particalsArray = []
-            let numberOfParticles = /* (canvas.height * canvas.width) / 40000 */ 100
+            let numberOfParticles = Math.floor((canvas.height * canvas.width) / 100000 )
             for ( let i = 0; i < numberOfParticles; i++){
                 let size = (Math.random()* 5) +1
                 let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2)
@@ -120,7 +115,7 @@ function Canvas(){
             for(let a = 0; a < particalsArray.length; a++){
                 for(let b = a; b < particalsArray.length; b++) {
                     let distance = (( particalsArray[a].x - particalsArray[b].x) * (particalsArray[a].x - particalsArray[b].x )) + (( particalsArray[a].y - particalsArray[b].y) * (particalsArray[a].y - particalsArray[b].y ))
-                    if (distance < (canvas.width/10) * (canvas.height/25)) {
+                    if (distance < canvas.width/15) {
                         ctx.strokeStyle = 'rgba(31,31,31,.4)'
                         ctx.lineWidth = 1
                         ctx.beginPath()

@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import GameLink from './GameLink'
 import Canvas from '../Canvas'
+import Navbar from '../Navbar'
 
 
 export default function Games(){
@@ -37,7 +38,10 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
   magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
    justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
    penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
-return (
+return (<>
+    <header className="App-header">
+    <Navbar />
+    </header>
     <main>
         <Canvas />
         <div className='section-hero games-page'>
@@ -114,6 +118,7 @@ return (
             </section>
         </div>
     </main>
-    ) 
+   </> 
+   ) 
     
 }

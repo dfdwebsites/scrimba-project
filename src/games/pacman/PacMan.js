@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import kaboom from "kaboom";
+import Navbar from "../../Navbar";
 
 function PacMan(){
 
@@ -122,6 +123,11 @@ function PacMan(){
     
     })
 
-    return <canvas style={{marginLeft:"5rem"}}ref={pacManCanvasRef}></canvas>
+    return<>
+    <header className="App-header">
+    <Navbar />
+    </header>
+     <canvas style={{marginLeft:"5rem"}}ref={pacManCanvasRef}></canvas>
+    </>
 }
 export default PacMan
