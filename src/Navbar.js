@@ -15,7 +15,6 @@ function Navbar(props,ref){
     },[click])
    
     let path = window.location.pathname
-    console.log(path)
     return(
             <div ref={ref} id="nav" className={`navbar-container clicked ${path==="/scrimba-project/"? "homepage": ""}`}>
                     <img className="nav-logo" src="./img/logo.png" alt="logo"/>

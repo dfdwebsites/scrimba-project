@@ -514,21 +514,19 @@ const Mario = () => {
 					this.isBig = true;
 					this.area.width = 24;
 					this.area.height = 32;
-					this.hp ++
 				},
 				smaller() {
-					this.isBig = false;
-					this.area.width = 0;
-					this.area.height = 0;
-					
-					k.wait(1.5, () => {
 					this.area.width = 16;
 					this.area.height = 16
-						this.hp --
-						if (this.hp <= 0 ){
-							k.go("lose")
-						}
-					})
+					
+					if (this.isBig){
+						this.area.width = 16;
+						this.area.height = 16
+						k.wait(1, ()=>{
+							
+							this.isBig = false; 
+						})}
+					else k.go("lose")
 				},
 				standing() {
 					this.stop();
@@ -588,7 +586,9 @@ const Mario = () => {
 
 
 
-
+		return ()=>{
+		
+		}
 
 
 	},[])

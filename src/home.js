@@ -7,29 +7,35 @@ import { gsap } from "gsap"
 export default function Home(){
     const imgRef = useRef();
     const navbarRef = useRef()
+    const hasPlayed = sessionStorage.getItem("hasMyAnimationPlayed")
     
     React.useLayoutEffect(()=>{
-        gsap.to(imgRef.current,{
-            left:"50%",
-            delay:3,
-            duration:1,
-        })
-        gsap.to(imgRef.current,{
-            opacity:0,
-            delay:5,
-            duration:1,
-        })
-        gsap.from(navbarRef.current, {
-            y:-100,
-            delay:5
-        })
-        gsap.from((".hero-title"), {
-            opacity:0,
-            delay:6
-        })
+        if (!hasPlayed){
+            gsap.to(imgRef.current,{
+                left:"50%",
+                delay:3,
+                duration:1,
+            })
+            gsap.to(imgRef.current,{
+                opacity:0,
+                delay:5,
+                duration:1,
+            })
+            gsap.from(navbarRef.current, {
+                y:-100,
+                delay:5
+            })
+            gsap.from((".hero-title"), {
+                opacity:0,
+                delay:6,
+                onComplete: function() {
+                    sessionStorage.setItem("hasMyAnimationPlayed", true);
+                  }
+            })
+        }
         
-    })
-  
+    },)
+
 return (
     <>
         <header className="App-header">
