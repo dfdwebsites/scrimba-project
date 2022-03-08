@@ -10,6 +10,7 @@ export default function Home(){
     const hasPlayed = sessionStorage.getItem("hasMyAnimationPlayed")
     
     React.useLayoutEffect(()=>{
+       
         if (!hasPlayed){
             gsap.to(imgRef.current,{
                 left:"50%",
@@ -32,15 +33,26 @@ export default function Home(){
                     sessionStorage.setItem("hasMyAnimationPlayed", true);
                   }
             })
+
         }
         
-    },)
+        function getColorBackground(){
+            if (window.scrollY > 700){
+                navbarRef.current.classList.add("getcolor")
+            }
+            else navbarRef.current.classList.remove("getcolor")
+        }
+       window.addEventListener("scroll",getColorBackground)     
 
+       return ()=>{
+           window.removeEventListener("scroll",getColorBackground)
+       }
+    },)
 return (
     <>
-        <header className="App-header">
+       
         <Navbar ref={navbarRef} />
-        </header>
+        
         <main>
         <img ref={imgRef} className='logo-anim' src="./img/logo.png" alt='logo of DRD'/>
         <Matrix />

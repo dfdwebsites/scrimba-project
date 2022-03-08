@@ -138,7 +138,6 @@ function Canvas(){
             window.removeEventListener("mouseout" , removeMousePos)
             window.removeEventListener("resize" , changeWindonSize)
             window.cancelAnimationFrame(animate)
-            console.log("clear")
         }
     },[])
 

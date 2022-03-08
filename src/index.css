@@ -166,7 +166,7 @@ nav .active{
     display: none;
   }
   .navbar-container{
-    position: relative;
+    position: fixed;
     flex-direction: row;
     align-items: center;
   }
@@ -186,6 +186,9 @@ nav .active{
     padding: 0;
   }
   .nav-logo{align-self: center;}
+}
+.navbar-container.getcolor{
+  background-color: var(--color-dark);
 }
 /* all pages generic */
 
@@ -269,6 +272,7 @@ nav .active{
 }
 .home-content{
   margin-top: 100vh;
+  height: 100vh;
 }
 /* Games page */
 .games-main{
@@ -717,14 +721,6 @@ p.game-description{
 .snake-header{
   margin-top: 90px;
   text-align: center;
-}
-@media (min-width:550px) {
-  .section-hero{
-    margin-top: 0;
-  }
-  .snake-header{
-    margin-top: 0rem;
-  }
 }
 
 /* retro snake  page */
