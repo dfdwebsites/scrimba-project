@@ -17,6 +17,9 @@ ul{
 a{
   text-decoration: none;
 }
+p{
+  line-height: 1.6;
+}
 :root{
 
   --color-accent:#62BAEA;
@@ -273,7 +276,33 @@ nav .active{
 }
 .home-content{
   margin-top: 100vh;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+.home-content h2{
+  text-align: center;
+  margin-block: 1em;
+}
+.home-content p {
+  margin-bottom: 1rem;
+}
+.img-details {
+  font-size: .7rem;
+  font-style: italic;
+}
+.img-link{
+  margin-bottom: 1rem;
+}
+.link-to-css{
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.link-to-css:hover,
+.link-to-css:focus{
+  color:red;
 }
 /* CSS PAGE */
 .css-content{
