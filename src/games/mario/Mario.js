@@ -1,3 +1,4 @@
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers"
 import kaboom  from "kaboom"
 import React from "react"
 import Navbar from "../../Navbar"
@@ -40,6 +41,7 @@ const Mario = () => {
 				smallMario:0,
 				bigMario:8,
 				smallJump:5,
+				ducking:14,
 				bigJump:13,
 				Running:{from:1, to:3, loop:true, speed:25},
 				RunningBig:{from:9, to:11, loop:true, speed:25}
@@ -331,6 +333,12 @@ const Mario = () => {
 
 				}
 			})
+			k.onKeyDown("down", ()=>{
+				player.ducker()
+			})
+			k.onKeyRelease("down", ()=>{
+				player.standUp()
+			})
 			k.onKeyPress('b', () => {
 				player.bigger()
 			})
@@ -349,7 +357,7 @@ const Mario = () => {
 				}
 			  })
 
-			
+			console.log(player.isDucking)
 		  player.onHeadbutt((obj) => {
 			  if (obj.is("box")){
 				if (obj.is('coin-surpise')) {
@@ -492,10 +500,12 @@ const Mario = () => {
 				bigAnimation: "RunningBig",
 				smallStopFrame: 0,
 				bigStopFrame: 8,
+				ducking:14,
 				smallJumpFrame: 5,
 				bigJumpFrame: 13,
 				isBig: false,
 				isAlive: true,
+				isDucking: false,
 				hp:1,
 				update(){
 					if(!this.isGrounded()){
@@ -530,7 +540,19 @@ const Mario = () => {
 				},
 				standing() {
 					this.stop();
-					this.frame = this.isBig ? this.bigStopFrame : this.smallStopFrame;
+					this.frame = this.isBig ? this.isDucking? this.ducking: this.bigStopFrame : this.smallStopFrame;
+				},
+				ducker(){
+					if(this.isBig){
+						this.isDucking = true
+						this.area.height = 16
+					}
+				},
+				standUp(){
+					if(this.isBig){
+					this.isDucking = false
+					this.area.height = 32
+					}
 				},
 				jumping() {
 					this.stop();

@@ -278,6 +278,8 @@ nav .active{
   margin-top: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   background-color: var(--color-dark);
   color: var(--color-white);
@@ -288,6 +290,7 @@ nav .active{
 }
 .home-content p {
   margin-bottom: 1rem;
+  max-width: 600px;
 }
 .img-details {
   font-size: .7rem;
@@ -295,6 +298,10 @@ nav .active{
 }
 .img-link{
   margin-bottom: 1rem;
+}
+.home-content img{
+  width: 100%;
+  max-width: 600px;
 }
 .link-to-css{
   font-weight: 700;

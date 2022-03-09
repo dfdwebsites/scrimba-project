@@ -6,6 +6,9 @@ import Navbar from '../Navbar'
 
 
 export default function Games(){
+    React.useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
 const rpgDetail=`A fun game the used advanced js functions to build like map(),
  reduce() also a big step to understant about Constractor functions and Classes and an introduction
  for how to use a "data-base" that you get all the info from.

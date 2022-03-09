@@ -3,6 +3,9 @@ import Navbar from './Navbar'
 
 
 export default function JavaScript(){
+    React.useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
 
 return <>
     <header className="App-header">

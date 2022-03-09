@@ -11,7 +11,7 @@ export default function Home(){
     const hasPlayed = sessionStorage.getItem("hasMyAnimationPlayed")
     
     React.useLayoutEffect(()=>{
-       
+        window.scrollTo(0,0)
         if (!hasPlayed){
             gsap.to(imgRef.current,{
                 left:"50%",
