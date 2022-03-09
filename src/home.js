@@ -33,16 +33,17 @@ export default function Home(){
                     sessionStorage.setItem("hasMyAnimationPlayed", true);
                   }
             })
-
         }
-        
+       
         function getColorBackground(){
-            if (window.scrollY > 700){
+            if (window.scrollY > window.innerHeight- (window.innerHeight * 0.2)){
                 navbarRef.current.classList.add("getcolor")
             }
             else navbarRef.current.classList.remove("getcolor")
         }
-       window.addEventListener("scroll",getColorBackground)     
+        window.addEventListener("scroll",getColorBackground)   
+        
+         
 
        return ()=>{
            window.removeEventListener("scroll",getColorBackground)

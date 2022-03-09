@@ -13,7 +13,14 @@ import PacMan from './games/pacman/PacMan'
 
 
 function App() {
-  return (
+  const [loading,setLoading] = React.useState(true)
+  React.useEffect(()=>{
+    window.onload=()=>{
+      setLoading(false)
+    }
+  })
+
+  return !loading&& (
     <>
       <Routes>
         <Route path="/" element={<Home />}/>

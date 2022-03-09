@@ -17,7 +17,7 @@ function Navbar(props,ref){
     let path = window.location.pathname
     return(
             <div ref={ref} id="nav" className={`navbar-container clicked ${path==="/scrimba-project/"? "homepage": ""}`}>
-                    <img className="nav-logo" src="./img/logo.png" alt="logo"/>
+                    <img className="nav-logo" src={window.location.origin + '/scrimba-project/img/logo.png'} alt="logo"/>
                      < div onClick={clickNav} id="navBtn" className="nav-toggle">
                          <span className="hamburgerLine line1"></span>
                          <span className="hamburgerLine line2"></span>
