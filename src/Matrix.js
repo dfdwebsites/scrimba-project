@@ -84,6 +84,7 @@ function Matrix(){
         requestAnimationFrame(animate)
     }
     animate(0)
+   
     window.addEventListener("resize", function(){
         matrixCanvas.width = window.innerWidth
         matrixCanvas.height = window.innerHeight
