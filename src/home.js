@@ -87,6 +87,32 @@ return (
             <p>This is where the fun begins and why I think <strong>Front-End Carrier Path</strong> of Scrimba has amazing results.
              We are creating little fun games using JS in order to learn and understand more complex fuctions and methods of the language and since we are doing it in this fun way keeps the learing fun and 
              easy. </p>
+             <div className='display-box'>
+                 <div className='pad5'>
+                     <h3 className=''>Snake</h3>
+                     <img src='./img/snake.png' alt='' />
+                 </div>
+                 <div className='pad5'>
+                     <h3 className=''>Pac-Man</h3>
+                     <img src='./img/snake.png' alt='' />
+                 </div>
+                 <div className='pad5'>
+                     <h3>RPG</h3>
+                     <img src='./img/rpg.png' alt='' />
+                 </div>
+                 <div className='pad5'>
+                     <h3 className=''>Super-Mario</h3>
+                     <img src='./img/mario-img.png' alt='' />
+                 </div>
+                 <div className='pad5'>
+                     <h3 className=''>Cards</h3>
+                     <img src='./img/snake.png' alt='' />
+                 </div>
+                 <div className='pad5'>
+                     <h3>Quiz</h3>
+                     <img src='./img/rpg.png' alt='' />
+                 </div>
+             </div>
              <p><Link className='link-to-css' to="/games">Here</Link> is some of the projects we did in the course and more</p>
         </section>
 
