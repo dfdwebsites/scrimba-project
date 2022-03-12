@@ -1156,3 +1156,26 @@ p.game-description{
 .mario-main{
   margin-top: 90px;
 }
+/* Quiz Game */
+.quiz-game{
+  margin-top: 90px;
+  color: var(--color-white);
+}
+#question{
+  padding-inline: 2rem;
+  grid-template-columns: repeat(2,1fr);
+}
+#question h2{
+  grid-column: 1/span 2;
+}
+.quiz-answer{
+  cursor: pointer;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quiz-answer:hover{
+  background-color: lightgreen;
+  color: var(--color-dark);
+}

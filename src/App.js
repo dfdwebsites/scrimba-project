@@ -10,6 +10,7 @@ import RetroSnake from './games/snake/RetroSnake'
 import SnakePage from './games/snake/SnakePage'
 import Mario from './games/mario/Mario'
 import PacMan from './games/pacman/PacMan'
+import Quiz from './games/quiz/Quiz'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="games/snake/retro" element={<RetroSnake />}/> 
           <Route path="games/mario" element={<Mario />}/> 
           <Route path="games/pacman" element={<PacMan />}/> 
+          <Route path="games/quiz" element={<Quiz />}/> 
         
       
       </Routes>
