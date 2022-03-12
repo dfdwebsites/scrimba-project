@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/scrimba-project/static/css/main.def73785.css",
+    "main.css": "/scrimba-project/static/css/main.282f031b.css",
     "main.js": "/scrimba-project/static/js/main.381869af.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
     "static/media/games-title.png": "/scrimba-project/static/media/games-title.dea43b0e8c5cda79f866.png",
     "static/media/css-title.png": "/scrimba-project/static/media/css-title.bf00af7d9df043e69432.png",
     "index.html": "/scrimba-project/index.html",
-    "main.def73785.css.map": "/scrimba-project/static/css/main.def73785.css.map",
+    "main.282f031b.css.map": "/scrimba-project/static/css/main.282f031b.css.map",
     "main.381869af.js.map": "/scrimba-project/static/js/main.381869af.js.map"
   },
   "entrypoints": [
-    "static/css/main.def73785.css",
+    "static/css/main.282f031b.css",
     "static/js/main.381869af.js"
   ]
 }
