@@ -409,6 +409,9 @@ nav .active{
   background-color: var(--color-dark);
   color: var(--color-white);
   padding: 1rem;
+  max-width: 1150px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .long-img-container{
   position: relative;
