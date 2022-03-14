@@ -32,8 +32,12 @@ p{
 body{
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
-  background-color: var(--color-dark);
  
+}
+.ring-container{
+  width:100%;
+  height: 100vh;
+  background-color: var(--color-dark);
 }
 .ring
 {
@@ -1163,10 +1167,36 @@ p.game-description{
 .quiz-game{
   margin-top: 90px;
   color: var(--color-white);
+  background-color: var(--color-dark);
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz-page-title{
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  font-size: 35px;
+}
+.start-quiz-btn{
+  font-size: 25px;
+  font-weight: 800;
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  border-radius: 10px;
+  border: 2px solid black;
+  text-transform: uppercase;
+  padding: .5em 1.5em;
+}
+.start-quiz-btn:hover,
+.start-quiz-btn:focus{
+  color: var(--color-white);
 }
 #question{
   padding-inline: 2rem;
   grid-template-columns: repeat(2,1fr);
+  row-gap: 1rem;
+  max-width: 700px;
 }
 #question h2{
   grid-column: 1/span 2;
@@ -1181,4 +1211,27 @@ p.game-description{
 .quiz-answer:hover{
   background-color: lightgreen;
   color: var(--color-dark);
+}
+
+/* test timer */
+#timer{
+  grid-column: 2; 
+}
+.base-timer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#timerCanvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+}
+.base-timer__label {
+  font-size: 48px;
 }
