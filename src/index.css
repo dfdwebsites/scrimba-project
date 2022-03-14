@@ -286,6 +286,9 @@ nav .active{
 /*************************/
 /*******  CSS PAGE *******/
 /*************************/
+.css-main{
+  background-color: var(--color-dark);
+}
 .section-hero{
   margin-top: 90px;
   width:100%;
