@@ -81,7 +81,7 @@ return (<>
             <section className='all-game-items'>
                 <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
                 <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
-                <GameLink to="quiz" url="./img/rpg.png" name="Quiz-Game" detail={quizDetail}/>
+                <GameLink to="quiz" url="./img/quiz.png" name="Quiz-Game" detail={quizDetail}/>
                 <div className='game-item game-item-superMario'>
                     <h2 className='game-title'>  
                         <span className='super-mario-name'>S</span>

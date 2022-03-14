@@ -110,7 +110,7 @@ return (
                  </div>
                  <div className='pad5'>
                      <h3>Quiz</h3>
-                     <img src='./img/rpg.png' alt='' />
+                     <img src='./img/quiz.png' alt='' />
                  </div>
              </div>
              <p><Link className='link-to-css' to="/games">Here</Link> is some of the projects we did in the course and more</p>

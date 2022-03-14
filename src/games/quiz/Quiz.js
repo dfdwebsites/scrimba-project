@@ -7,14 +7,16 @@ function Quiz(){
     const [answersArray, setAnswersArray] = useState([])
     const [points, setPoints] = useState(0)
     const [timeLeft, setTimeLeft] = useState(20)
-    /* const [timerOn, setTimerOn] = useState(false) */
+    const [highScore,setHighScore]= useState (Number(localStorage.getItem('quizHighScore')) || 0)
     let allAnswers = []
+    
     function startQuizGame(){
         setGamesStarted(true)
         setTimeLeft(20)
         getQuestions()
       
     }
+    
     function getQuestions(){
         fetch("https://opentdb.com/api.php?amount=1&difficulty=easy")
         .then(res=>res.json())
@@ -23,8 +25,12 @@ function Quiz(){
             
         })
     }
+    
     function selectAnswer(e){
         if (e.target.innerHTML===question.correct_answer){
+            if (points === highScore) {
+                setHighScore(prev=>prev+1)   
+            }
             setPoints(prev=>prev+1)
             setTimeLeft(20)
             getQuestions()
@@ -33,13 +39,12 @@ function Quiz(){
             gameOver()
         }
     }
-
+    
     function gameOver(){
         setPoints(0)
-        /* setTimerOn(false) */
         setGamesStarted(false)
     }
-
+   
     function clear(ctx) { ctx.clearRect(0, 0, 200, 200); }
 
     function setTrack(ctx) {
@@ -70,8 +75,21 @@ function Quiz(){
       );
       ctx.stroke();
     }
+    
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
 
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
+        }
+        return `${minutes}:${seconds}`;
+     }
 
+    React.useEffect(()=>{
+        localStorage.setItem('quizHighScore', highScore)
+    },[highScore])
+    
     React.useEffect(()=>{
         const timerCanvas = document.getElementById("timerCanvas")
         const timerCtx = timerCanvas.getContext('2d')
@@ -100,19 +118,9 @@ function Quiz(){
         else clearInterval(timerInterval)
 
         return ()=>clearInterval(timerInterval)
-    },[gameStarted])
-
-     function formatTime(time) {
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-
-        if (seconds < 10) {
-            seconds = `0${seconds}`;
-        }
-        return `${minutes}:${seconds}`;
-     }
-     
-     React.useEffect(()=>{
+    },[gameStarted])    
+    
+    React.useEffect(()=>{
        
         function suffle(arr){
             let shuffled = arr
@@ -148,11 +156,12 @@ function Quiz(){
             <button className='start-quiz-btn' onClick={startQuizGame} style={{display:gameStarted?"none":"block"}}>Start Game</button>
             <div id="question" style={{display:gameStarted?"grid":"none"}}>
                 <h2 dangerouslySetInnerHTML={{__html: question.question}} />
-                <div className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[0]}}></div>
-                <div className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[1]}}></div>
-                <div className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[2]}}></div>
-                <div className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[3]}}></div> 
+                <div  className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[0]}}></div>
+                <div  className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[1]}}></div>
+                <div  className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[2]}}></div>
+                <div  className='quiz-answer' onClick={selectAnswer} dangerouslySetInnerHTML={{__html: answersArray[3]}}></div> 
                 <h3>Correct answers : {points}</h3>
+                <h3>All-Time biggest streak: {highScore}</h3>
             </div>
             <div style={{display:gameStarted?"block":"none"}} id='timer'>
                 <div className="base-timer">
