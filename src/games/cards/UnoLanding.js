@@ -34,7 +34,10 @@ const UnoLanding = () => {
                         <Link to={`./play?roomCode=${makeid(5)}`}><button className="uno-game-button orange">CREATE GAME</button></Link>
                     </div>
                 </div>
-                <a href='/scrimba-project/games/cards'><button className="uno-game-button Red">Back to Card Games</button></a>
+                <div className='uno-homepage-back'>
+
+                <a href='/scrimba-project/games/cards'><button className="uno-game-button red">Back to Card Games</button></a>
+                </div>
             </div>
         </div>
     )

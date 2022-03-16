@@ -1236,16 +1236,6 @@ const Game = (props) => {
                 <div className='topInfo'>
                     <img src={require('../../uno-img/uno-logo.png')} />
                     <h1>Game Code: {room}</h1>
-                    <span>
-                        <button className='uno-game-button green' onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> : <span className="material-icons">volume_up</span>}</button>
-                        <button className='uno-game-button green' onClick={() => {
-                            if(isMusicMuted)
-                                playBBgMusic()
-                            else
-                                pause()
-                            setMusicMuted(!isMusicMuted)
-                        }}>{isMusicMuted ? <span className="material-icons">music_off</span> : <span className="material-icons">music_note</span>}</button>
-                    </span>
                 </div>
 
                 {/* PLAYER LEFT MESSAGES */}
@@ -1301,8 +1291,8 @@ const Game = (props) => {
                                 <div className="chat-head">
                                     <h2>Chat Box</h2>
                                     {!isChatBoxHidden ?
-                                    <span onClick={toggleChatBox} class="material-icons">keyboard_arrow_down</span> :
-                                    <span onClick={toggleChatBox} class="material-icons">keyboard_arrow_up</span>}
+                                    <span onClick={toggleChatBox} className="chat-icons">&#x2193;</span> :
+                                    <span onClick={toggleChatBox} className="chat-icons">&#x2191;</span>}
                                 </div>
                                 <div className="chat-body">
                                     <div className="msg-insert">
@@ -1388,7 +1378,19 @@ const Game = (props) => {
             </> : <h1>Room full</h1> }
 
             <br />
-            <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+            <div>
+                <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                <span>
+                    <button className='uno-game-button green' onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> : <span className="material-icons">volume_up</span>}</button>
+                    <button className='uno-game-button green' onClick={() => {
+                        if(isMusicMuted)
+                            playBBgMusic()
+                        else
+                            pause()
+                        setMusicMuted(!isMusicMuted)
+                    }}>{isMusicMuted ? <span className="material-icons">music_off</span> : <span className="material-icons">music_note</span>}</button>
+                </span>
+            </div>
         </div>
     )
 }

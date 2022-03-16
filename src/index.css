@@ -1256,6 +1256,13 @@ p.game-description{
   color: rgba(255, 255, 255, 0.212);
   padding: 5rem 10rem;
 }
+.black .uno-btn{
+  background-image: url("./uno-img/uno-logo.png");
+  background-position: center;
+  background-size: cover;
+  color: rgba(255, 255, 255, 0.212);
+  padding: 5rem 10rem;
+}
 .blackJack-container{
   height: 100vh;
   background-color: green;
@@ -1269,13 +1276,16 @@ p.game-description{
 .uno-homepage {
   background-image: url('./uno-img/Uno-Landing-Page.png');
   background-size: cover;
+  background-position: center;
   margin: 0;
   height: 100vh;
 }
 
 .uno-homepage-menu {
   position: relative;
-  top: 120px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .uno-homepage-form {
@@ -1286,7 +1296,7 @@ p.game-description{
 }
 
 .uno-homepage-form>h1 {
-  margin: 0 30px;
+  margin: 0 15px;
 }
 
 .uno-homepage-join {
@@ -1299,7 +1309,14 @@ p.game-description{
   width: 150px;
   line-height: 1.5em;
 }
-
+.uno-homepage-create{
+  align-self: flex-end;
+}
+.uno-homepage-back{
+margin-top: auto;
+margin-bottom: 5rem;
+align-self: center;
+}
 /* Game.js parent div */
 .Game {
   background-size: cover;
@@ -1337,24 +1354,24 @@ p.game-description{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 60px;
+  padding: 0 30px;
   height: 100px;
+  gap:1rem
 }
 
 .topInfo>img {
-  width: 7%;
   margin: 0;
   padding: 0;
 }
 
 .topInfo>h1 {
-  margin-top: 10px;
+  align-self: center;
   font-size: 1.8rem;
-  padding-top: 2%;
+
 }
 
 .topInfoText {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 0;
 }
 
@@ -1363,10 +1380,12 @@ p.game-description{
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow-x: auto;
 }
 
 .player1Deck>img {
   transition: transform 350ms;
+  display: inline-block;
 }
 
 .player1Deck>img:hover {
@@ -1376,12 +1395,14 @@ p.game-description{
 
 .player2Deck {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
+  overflow-x: auto;
 }
 
 .player2Deck>img {
   transition: transform 350ms;
+  display: inline-block;
 }
 
 .player2Deck>img:hover {
@@ -1427,7 +1448,6 @@ p.game-description{
   padding: 8px 15px 10px;
   box-shadow: 0 6px 0 #266b91, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #12517d, 0 12px 0 5px #1a6b9a, 0 15px 0 5px #0c405e, 0 15px 1px 6px rgba(0,0,0,.3);
 }
-
 .uno-game-button:hover {
   top:2px;
   box-shadow: 0 4px 0 #266b91, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #12517d, 0 10px 0 5px #1a6b9a, 0 13px 0 5px #0c405e, 0 13px 1px 6px rgba(0,0,0,.3);

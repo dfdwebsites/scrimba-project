@@ -10,7 +10,7 @@ export default function Cards(){
         <div className="snake-page-options black">
 
             <Link className="black-btn" to="/games/cards/blackJack"> BlackJack </Link>
-            <Link to="/games/cards/uno">UNO</Link>
+            <Link className="uno-btn" to="/games/cards/uno">UNO</Link>
             <Link to="/games/cards/war"> War </Link>
         
         
