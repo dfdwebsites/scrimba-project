@@ -1381,6 +1381,7 @@ align-self: center;
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
+  padding-block:10px ;
 }
 
 .player1Deck>img {
@@ -1395,9 +1396,10 @@ align-self: center;
 
 .player2Deck {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   overflow-x: auto;
+  padding-block:10px ;
 }
 
 .player2Deck>img {
@@ -1511,7 +1513,23 @@ align-self: center;
   box-shadow: 0 4px 0 #348628, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #2a6d20, 0 10px 0 5px #39822e, 0 13px 0 5px #1d4c16, 0 13px 1px 6px rgba(0,0,0,.3);
 }
 
+
+
+.winner-hero{
+  height:70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
 /* Spinner */
+.player-with-loader{
+  position: relative;
+}
 .loader,
 .loader:before,
 .loader:after {
@@ -1527,8 +1545,7 @@ align-self: center;
   color: #ffffff;
   font-size: 5px;
   margin: 0 50px 0 50px;
-  position: relative;
-  text-indent: -9999em;
+  position: absolute;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

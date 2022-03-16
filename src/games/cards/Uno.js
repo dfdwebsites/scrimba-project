@@ -3,8 +3,6 @@ import io from 'socket.io-client'
 import queryString from 'query-string'
 import Spinner from './Spinner'
 import useSound from 'use-sound'
-
-import bgMusic from '../../uno-img/sounds/game-bg-music.mp3'
 import unoSound from '../../uno-img/sounds/uno-sound.mp3'
 import shufflingSound from '../../uno-img/sounds/shuffling-cards-1.mp3'
 import skipCardSound from '../../uno-img/sounds/skip-sound.mp3'
@@ -82,13 +80,9 @@ const Game = (props) => {
     const [currentNumber, setCurrentNumber] = useState('')
     const [playedCardsPile, setPlayedCardsPile] = useState([])
     const [drawCardPile, setDrawCardPile] = useState([])
-
     const [isChatBoxHidden, setChatBoxHidden] = useState(true)
     const [isUnoButtonPressed, setUnoButtonPressed] = useState(false)
     const [isSoundMuted, setSoundMuted] = useState(false)
-    const [isMusicMuted, setMusicMuted] = useState(true)
-
-    const [playBBgMusic, { pause }] = useSound(bgMusic, { loop: true })
     const [playUnoSound] = useSound(unoSound)
     const [playShufflingSound] = useSound(shufflingSound)
     const [playSkipCardSound] = useSound(skipCardSound)
@@ -1244,12 +1238,15 @@ const Game = (props) => {
 
                 {users.length===2 && <>
 
-                    {gameOver ? <div>{winner !== '' && <><h1>GAME OVER</h1><h2>{winner} wins!</h2></>}</div> :
+                    {gameOver ? <div className='winner-hero'>{winner !== '' && <><h1>GAME OVER</h1><h2>{winner} wins!</h2></>}</div> :
                     <div>
                         {/* PLAYER 1 VIEW */}
                         {currentUser === 'Player 1' && <>    
                         <div className='player2Deck' style={{pointerEvents: 'none'}}>
+                            <div className='player-with-loader'>
                             <p className='playerDeckText'>Player 2</p>
+                            {turn==='Player 2' && <Spinner />}
+                            </div>
                             {player2Deck.map((item, i) => (
                                 <img
                                     key={i}
@@ -1258,7 +1255,6 @@ const Game = (props) => {
                                     src={require(`../../uno-img/card-back.png`)}
                                     />
                             ))}
-                            {turn==='Player 2' && <Spinner />}
                         </div>
                         <br />
                         <div className='middleInfo' style={turn === 'Player 2' ? {pointerEvents: 'none'} : null}>
@@ -1313,7 +1309,11 @@ const Game = (props) => {
                         {/* PLAYER 2 VIEW */}
                         {currentUser === 'Player 2' && <>
                         <div className='player1Deck' style={{pointerEvents: 'none'}}>
+                            <div className='player-with-loader'>
                             <p className='playerDeckText'>Player 1</p>
+                               {turn==='Player 1' && <Spinner />}
+                            </div>
+
                             {player1Deck.map((item, i) => (
                                 <img
                                     key={i}
@@ -1322,7 +1322,6 @@ const Game = (props) => {
                                     src={require(`../../uno-img/card-back.png`)}
                                     />
                             ))}
-                            {turn==='Player 1' && <Spinner />}
                         </div>
                         <br />
                         <div className='middleInfo' style={turn === 'Player 1' ? {pointerEvents: 'none'} : null}>
@@ -1346,6 +1345,7 @@ const Game = (props) => {
                                     className='Card'
                                     onClick={() => onCardPlayedHandler(item)}
                                     src={require(`../../uno-img/cards-front/${item}.png`)}
+                                    alt={item}
                                     />
                             ))}
                         </div>
@@ -1381,14 +1381,10 @@ const Game = (props) => {
             <div>
                 <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
                 <span>
-                    <button className='uno-game-button green' onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> : <span className="material-icons">volume_up</span>}</button>
-                    <button className='uno-game-button green' onClick={() => {
-                        if(isMusicMuted)
-                            playBBgMusic()
-                        else
-                            pause()
-                        setMusicMuted(!isMusicMuted)
-                    }}>{isMusicMuted ? <span className="material-icons">music_off</span> : <span className="material-icons">music_note</span>}</button>
+                    <button className='uno-game-button green' 
+                    onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
+                    : <span className="material-icons">volume_up</span>}</button>
+
                 </span>
             </div>
         </div>
