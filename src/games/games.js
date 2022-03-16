@@ -41,6 +41,11 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
   magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
    justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
    penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
+const cardDetails = `Lorem ipsum dolor sit amet consectetur adipiscing elit duis vulputate urna, odio aliquam 
+curae gravida suscipit laoreet tempus penatibus senectus iaculis, tristique felis ultrices ullamcorper sollicitudin
+ magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
+  justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
+  penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
 return (<>
     <header className="App-header">
     <Navbar />
@@ -60,7 +65,7 @@ return (<>
                 them in details further in the page
             </p>
             <div className='games-nav'>
-                <Link className='game-item-cards' to="/games/cardgames">Card Games</Link>
+                <Link className='game-item-cards' to="/games/cards">Card Games</Link>
                 <Link className='game-item-snake' to="/games/snake">Snake</Link>
                 <Link className='game-item-rpg' to="/games/rpg">RPG</Link>
                 <Link className='game-item-pacman' to="/games/pacman">PacMan</Link>
@@ -79,8 +84,10 @@ return (<>
                 </Link>
             </div>
             <section className='all-game-items'>
-                <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
+                <GameLink to="cards" url="./img/rpg.png" name="Card-games" detail={cardDetails}/>
                 <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
+                <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
+                <GameLink to="pacman" url="./img/rpg.png" name="Pac-Man" detail={pacManDetail}/>
                 <GameLink to="quiz" url="./img/quiz.png" name="Quiz-Game" detail={quizDetail}/>
                 <div className='game-item game-item-superMario'>
                     <h2 className='game-title'>  
@@ -116,7 +123,6 @@ return (<>
                       
                     </Link>
                  </div>
-                <GameLink to="pacman" url="./img/rpg.png" name="Pac-Man" detail={pacManDetail}/>
                 
             </section>
         </div>

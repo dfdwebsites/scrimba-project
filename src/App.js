@@ -11,6 +11,11 @@ import SnakePage from './games/snake/SnakePage'
 import Mario from './games/mario/Mario'
 import PacMan from './games/pacman/PacMan'
 import Quiz from './games/quiz/Quiz'
+import Cards from './games/cards/Cards'
+import BlackJack from './games/cards/BlackJack'
+import War from './games/cards/War'
+import Uno from './games/cards/Uno'
+import UnoLanding from './games/cards/UnoLanding'
 
 
 function App() {
@@ -23,6 +28,11 @@ function App() {
         <Route path="js" element={<JavaScript />}/>
         <Route path="games" element={<Games />}/>
           <Route path="games/rpg" element={<RpgGame />}/> 
+          <Route path="games/cards" element={<Cards />}/> 
+            <Route path="games/cards/uno" element={<UnoLanding />}/> 
+            <Route path="games/cards/uno/play" element={<Uno />}/>  
+            <Route path="games/cards/blackJack" element={<BlackJack />}/> 
+            <Route path="games/cards/war" element={<War />}/> 
           <Route path="games/snake" element={<SnakePage />}/> 
             <Route path="games/snake/snake" element={<SnakeGame />}/> 
             <Route path="games/snake/retro" element={<RetroSnake />}/> 
