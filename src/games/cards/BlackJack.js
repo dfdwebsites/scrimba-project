@@ -55,7 +55,7 @@ export default function BlackJack(){
      croupierDrawOne()   
     }
     },[playerTurn])
-    
+     
     
     function getDeck(){
         fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6")
