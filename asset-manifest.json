@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/scrimba-project/static/css/main.92f4721a.css",
-    "main.js": "/scrimba-project/static/js/main.254f27b1.js",
+    "main.css": "/scrimba-project/static/css/main.96a20eca.css",
+    "main.js": "/scrimba-project/static/js/main.86998580.js",
     "static/js/845.939b8241.chunk.js": "/scrimba-project/static/js/845.939b8241.chunk.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
     "static/media/games-title.png": "/scrimba-project/static/media/games-title.dea43b0e8c5cda79f866.png",
@@ -16,7 +16,6 @@
     "static/media/wild-sound.mp3": "/scrimba-project/static/media/wild-sound.dc7f4eb100b870d7da30.mp3",
     "static/media/blakc-btn.png": "/scrimba-project/static/media/blakc-btn.2438bc5145cbb2867201.png",
     "static/media/game-over-sound.mp3": "/scrimba-project/static/media/game-over-sound.503df35aa842e1d3268b.mp3",
-    "static/media/blackJack-back.png": "/scrimba-project/static/media/blackJack-back.b5561a7b8f745fd67fe8.png",
     "static/media/draw4-sound.mp3": "/scrimba-project/static/media/draw4-sound.37381092a6d917189623.mp3",
     "static/media/draw2-sound.mp3": "/scrimba-project/static/media/draw2-sound.0f5186fc721bad398c69.mp3",
     "static/media/shuffling-cards-1.mp3": "/scrimba-project/static/media/shuffling-cards-1.30ba20ce9cbdf7cf60c5.mp3",
@@ -77,12 +76,12 @@
     "static/media/1Y.png": "/scrimba-project/static/media/1Y.4881d6f5ce9ad15ed386.png",
     "static/media/uno-sound.mp3": "/scrimba-project/static/media/uno-sound.5d88cef2860dce2fb0b3.mp3",
     "index.html": "/scrimba-project/index.html",
-    "main.92f4721a.css.map": "/scrimba-project/static/css/main.92f4721a.css.map",
-    "main.254f27b1.js.map": "/scrimba-project/static/js/main.254f27b1.js.map",
+    "main.96a20eca.css.map": "/scrimba-project/static/css/main.96a20eca.css.map",
+    "main.86998580.js.map": "/scrimba-project/static/js/main.86998580.js.map",
     "845.939b8241.chunk.js.map": "/scrimba-project/static/js/845.939b8241.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.92f4721a.css",
-    "static/js/main.254f27b1.js"
+    "static/css/main.96a20eca.css",
+    "static/js/main.86998580.js"
   ]
 }
