@@ -1322,7 +1322,17 @@ p.game-description{
 .cards-game{
   margin-top: 90px;
 }
-.black .black-btn{
+.allCards{
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:2rem;
+    background-color: var(--color-dark);
+  
+}
+.allCards .black-btn{
   background-image: url("../public/img/blakc-btn.png");
   background-position: center;
   background-size: cover;
@@ -1330,28 +1340,45 @@ p.game-description{
   width:500px;
   height: 200px;
 }
-.black .uno-btn{
+.allCards .uno-btn{
   background-image: url("./uno-img/uno-logo.png");
   background-position: center;
+  background-color: black;
   background-size: cover;
   color: rgba(255, 255, 255, 0.212);
   width:500px;
   height: 200px;
 }
-.black .war-btn{
+.allCards .war-btn{
  /*  background-image: url("./uno-img/uno-logo.png"); */
   background-position: center;
   background-size: cover;
   color: rgba(255, 255, 255, 0.212);
   width:500px;
   height: 200px;
+  background-color: black;
 }
+.black-btn,
+.uno-btn,
+.war-btn{
+  box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.432);
+}
+
+.black-btn:hover,
+.black-btn:focus,
+.uno-btn:hover,
+.uno-btn:focus,
+.war-btn:hover,
+.war-btn:focus{
+  transform: scale(1.05);
+}
+
+
+
 .blackJack-container{
   height: 100vh;
   background-color: green;
-  background-image: url("../public/img/blackJack-back.png");
-  background-position: center;
-  background-size: contain;
+  background-image: url("../public/img/b-pattern.png");
 }
 /***********************************/
 /****         UNO     **************/
