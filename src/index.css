@@ -1373,12 +1373,26 @@ p.game-description{
   transform: scale(1.05);
 }
 
-
+/* BlackJack */
 
 .blackJack-container{
   height: 100vh;
   background-color: green;
   background-image: url("../public/img/b-pattern.png");
+}
+.blackPlayerCards{
+  display: flex;
+  flex-wrap: wrap;
+}
+.blackPlayerCards img{
+  max-width: 100px;
+}
+.blackCroupierCards{
+  display: flex;
+  flex-wrap: wrap;
+}
+.blackCroupierCards img{
+  max-width: 100px;
 }
 /***********************************/
 /****         UNO     **************/
