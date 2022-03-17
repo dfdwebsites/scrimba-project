@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/scrimba-project/static/css/main.92f4721a.css",
-    "main.js": "/scrimba-project/static/js/main.d2285790.js",
+    "main.js": "/scrimba-project/static/js/main.254f27b1.js",
     "static/js/845.939b8241.chunk.js": "/scrimba-project/static/js/845.939b8241.chunk.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
     "static/media/games-title.png": "/scrimba-project/static/media/games-title.dea43b0e8c5cda79f866.png",
@@ -21,15 +21,15 @@
     "static/media/draw2-sound.mp3": "/scrimba-project/static/media/draw2-sound.0f5186fc721bad398c69.mp3",
     "static/media/shuffling-cards-1.mp3": "/scrimba-project/static/media/shuffling-cards-1.30ba20ce9cbdf7cf60c5.mp3",
     "static/media/W.png": "/scrimba-project/static/media/W.d932cc55a0756cef09ef.png",
-    "static/media/_G.png": "/scrimba-project/static/media/_G.d943518051bf9960b1fc.png",
+    "static/media/TG.png": "/scrimba-project/static/media/TG.d943518051bf9960b1fc.png",
     "static/media/skipG.png": "/scrimba-project/static/media/skipG.d0dc1da2929926ef8a56.png",
-    "static/media/_R.png": "/scrimba-project/static/media/_R.95d0dbdf2771825b2be0.png",
+    "static/media/TR.png": "/scrimba-project/static/media/TR.95d0dbdf2771825b2be0.png",
     "static/media/skipR.png": "/scrimba-project/static/media/skipR.80b52ed1776897a441fd.png",
-    "static/media/_B.png": "/scrimba-project/static/media/_B.95aa59aa86b0dad2e825.png",
+    "static/media/TB.png": "/scrimba-project/static/media/TB.95aa59aa86b0dad2e825.png",
     "static/media/skipB.png": "/scrimba-project/static/media/skipB.f083b8d7d40c5fb112fe.png",
     "static/media/D4W.png": "/scrimba-project/static/media/D4W.8ab81810e9a2d4b39ee2.png",
     "static/media/D2G.png": "/scrimba-project/static/media/D2G.cc357b81db6a6fbc4f6f.png",
-    "static/media/_Y.png": "/scrimba-project/static/media/_Y.43a5d6f0acfea1fdb6e6.png",
+    "static/media/TY.png": "/scrimba-project/static/media/TY.43a5d6f0acfea1fdb6e6.png",
     "static/media/skipY.png": "/scrimba-project/static/media/skipY.1355a1fb230a74461a7f.png",
     "static/media/D2R.png": "/scrimba-project/static/media/D2R.45d93f922736c89edc56.png",
     "static/media/D2B.png": "/scrimba-project/static/media/D2B.a1e36402686338b902f7.png",
@@ -78,11 +78,11 @@
     "static/media/uno-sound.mp3": "/scrimba-project/static/media/uno-sound.5d88cef2860dce2fb0b3.mp3",
     "index.html": "/scrimba-project/index.html",
     "main.92f4721a.css.map": "/scrimba-project/static/css/main.92f4721a.css.map",
-    "main.d2285790.js.map": "/scrimba-project/static/js/main.d2285790.js.map",
+    "main.254f27b1.js.map": "/scrimba-project/static/js/main.254f27b1.js.map",
     "845.939b8241.chunk.js.map": "/scrimba-project/static/js/845.939b8241.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.92f4721a.css",
-    "static/js/main.d2285790.js"
+    "static/js/main.254f27b1.js"
   ]
 }
