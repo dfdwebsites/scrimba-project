@@ -58,7 +58,7 @@ return (
         <main>
         <img ref={imgRef} className='logo-anim' src="./img/logo.png" alt='logo of DRD'/>
         <Matrix />
-        <h1 className='hero-title'>Welcome to,<br/>  Srimba Showcase!
+        <h1 className='hero-title'>Welcome to,<br/>  Scrimba Showcase!
         </h1>
         <section className='home-content'>
         <h2>Lets talk about web learning</h2>
