@@ -1,7 +1,7 @@
 
 import kaboom  from "kaboom"
 import React from "react"
-import Navbar from "../../Navbar"
+import Navbar from "../../components/Navbar"
 
 const Mario = () => {
 
@@ -616,9 +616,7 @@ const Mario = () => {
 	},[])
 		
 		return <>
-		<header className="App-header">
 			<Navbar />
-		</header>
 		<div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center", margin:"0", overflow:"hidden"}}>
 			<canvas className="mario-board"ref={canvasRef}></canvas>
 		</div>

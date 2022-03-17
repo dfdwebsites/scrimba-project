@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import GameLink from './GameLink'
-import Canvas from '../Canvas'
-import Navbar from '../Navbar'
+import Canvas from '../components/Canvas'
+import Navbar from '../components/Navbar'
 
 
 export default function Games(){
@@ -84,10 +84,10 @@ return (<>
                 </Link>
             </div>
             <section className='all-game-items'>
-                <GameLink to="cards" url="./img/rpg.png" name="Card-games" detail={cardDetails}/>
+                <GameLink to="cards" url="./img/cards.png" name="Card-games" detail={cardDetails}/>
                 <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
                 <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
-                <GameLink to="pacman" url="./img/rpg.png" name="Pac-Man" detail={pacManDetail}/>
+                <GameLink to="pacman" url="./img/pac-man.png" name="Pac-Man" detail={pacManDetail}/>
                 <GameLink to="quiz" url="./img/quiz.png" name="Quiz-Game" detail={quizDetail}/>
                 <div className='game-item game-item-superMario'>
                     <h2 className='game-title'>  

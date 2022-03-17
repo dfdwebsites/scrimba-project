@@ -1,5 +1,6 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Navbar from './components/Navbar'
+import MemeGenerator from './components/MemeGenerator'
 
 export default function JavaScript(){
     
@@ -118,7 +119,9 @@ return <>
             <button onClick={swipeRight} className='carousel-btn right'> {">"} </button>
         </div>
     </div>
+    <MemeGenerator />
     <div className='form-container'>
+        <br/>
         <h3>How to get data from APIs</h3>
         <form className='seriesSearchForm'id="form" action="#" method="post">
         <input name="show" id ="text" type="text" placeholder="Search for a Show" />

@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
-import Matrix from './Matrix'
+import Navbar from './components/Navbar'
+import Matrix from './components/Matrix'
 import { gsap } from "gsap"
 
 
@@ -94,7 +94,7 @@ return (
                  </div>
                  <div className='pad5'>
                      <h3 className=''>Pac-Man</h3>
-                     <img src='./img/snake.png' alt='' />
+                     <img src='./img/pac-man.png' alt='' />
                  </div>
                  <div className='pad5'>
                      <h3>RPG</h3>
@@ -106,7 +106,7 @@ return (
                  </div>
                  <div className='pad5'>
                      <h3 className=''>Cards</h3>
-                     <img src='./img/snake.png' alt='' />
+                     <img src='./img/cards.png' alt='' />
                  </div>
                  <div className='pad5'>
                      <h3>Quiz</h3>

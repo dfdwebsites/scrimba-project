@@ -593,6 +593,79 @@ nav .active{
 .carousel-btn.right{
   right:0
 }
+/* memes */
+
+.memes-form{
+  display: grid;
+  grid-template-rows: 40px 40px;
+  grid-template-columns: 1fr 1fr;
+  gap:1rem;
+  margin-bottom: 1rem;
+  
+}
+.memes-btn{
+
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Karla', sans-serif;
+  color: white;
+  background-image: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+  font-weight: 700;
+  border:none;
+  border-radius: 5px;
+  letter-spacing: -0.08em;
+  grid-column: 1/-1;
+}
+.memes-form input{
+  text-indent: 5px;
+  font-size: 12px;
+  border:1px solid #D5D4D8;
+  border-radius: 5px;
+}
+
+.meme-img{
+  max-width:600px;
+}
+.memes-img-container{
+  position: relative;
+}
+
+.meme-text{
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 15px 0;
+  padding: 0 5px;
+  font-family: impact, sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow:
+      2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      0 2px 0 #000,
+      2px 0 0 #000,
+      0 -2px 0 #000,
+      -2px 0 0 #000,
+      2px 2px 5px #000;
+}
+
+.top{
+  top:0;
+}
+.bottom{
+  bottom:0;
+}
+
+
+
+
+
 
 #series-body{
   display: flex;
@@ -1254,14 +1327,24 @@ p.game-description{
   background-position: center;
   background-size: cover;
   color: rgba(255, 255, 255, 0.212);
-  padding: 5rem 10rem;
+  width:500px;
+  height: 200px;
 }
 .black .uno-btn{
   background-image: url("./uno-img/uno-logo.png");
   background-position: center;
   background-size: cover;
   color: rgba(255, 255, 255, 0.212);
-  padding: 5rem 10rem;
+  width:500px;
+  height: 200px;
+}
+.black .war-btn{
+ /*  background-image: url("./uno-img/uno-logo.png"); */
+  background-position: center;
+  background-size: cover;
+  color: rgba(255, 255, 255, 0.212);
+  width:500px;
+  height: 200px;
 }
 .blackJack-container{
   height: 100vh;

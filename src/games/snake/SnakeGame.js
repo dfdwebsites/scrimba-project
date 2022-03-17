@@ -1,6 +1,6 @@
 import React from 'react'
 import GameOver from './gameOver'
-import Navbar from '../../Navbar'
+import Navbar from '../../components/Navbar'
 
 class SnakeGame extends React.Component {
   constructor(props) {
