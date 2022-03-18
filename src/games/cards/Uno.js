@@ -33,6 +33,7 @@ const Game = (props) => {
 
     //initialize socket state
     const [room, setRoom] = useState(data.roomCode)
+    const [username, setUsername] = useState(data.username)
     const [roomFull, setRoomFull] = useState(false)
     const [users, setUsers] = useState([])
     const [currentUser, setCurrentUser] = useState('')
@@ -57,7 +58,7 @@ const Game = (props) => {
         }
         socket = io.connect(ENDPOINT, connectionOptions)
 
-        socket.emit('join', {room: room}, (error) => {
+        socket.emit('join', {room: room, name:username}, (error) => {
             if(error)
                 setRoomFull(true)
         })
@@ -1222,6 +1223,19 @@ const Game = (props) => {
             }
         }
     }
+    const player1D = React.useRef(null)
+    const player2D = React.useRef(null)
+    React.useEffect(()=>{
+        if (player1D.current !==null && turn==="Player 1"){
+            player1D.current.classList.add('active')
+            player2D.current.classList.remove('active')
+        }
+        if (player2D.current !==null && turn==="Player 2"){
+            player1D.current.classList.remove('active')
+            player2D.current.classList.add('active')
+        }
+
+    },[turn])
     
     return (
         <div className={`Game backgroundColorR backgroundColor${currentColor}`}>
@@ -1242,9 +1256,9 @@ const Game = (props) => {
                     <div>
                         {/* PLAYER 1 VIEW */}
                         {currentUser === 'Player 1' && <>    
-                        <div className='player2Deck' style={{pointerEvents: 'none'}}>
+                        <div ref={player2D} className='player2Deck' style={{pointerEvents: 'none'}}>
                             <div className='player-with-loader'>
-                            <p className='playerDeckText'>Player 2</p>
+                            <p className='playerDeckText'>{users[1].username}</p>
                             {turn==='Player 2' && <Spinner />}
                             </div>
                             {player2Deck.map((item, i) => (
@@ -1258,7 +1272,7 @@ const Game = (props) => {
                         </div>
                         <br />
                         <div className='middleInfo' style={turn === 'Player 2' ? {pointerEvents: 'none'} : null}>
-                            <button className='uno-game-button' disabled={turn !== 'Player 1'} onClick={onCardDrawnHandler}>DRAW CARD</button>
+                            <button className='uno-game-button' disabled={turn !== 'Player 1'} onClick={onCardDrawnHandler}>DRAW</button>
                             {playedCardsPile && playedCardsPile.length>0 &&
                             <img
                                 className='Card'
@@ -1270,13 +1284,13 @@ const Game = (props) => {
                             }}>UNO</button>
                         </div>
                         <br />
-                        <div className='player1Deck' style={turn === 'Player 1' ? null : {pointerEvents: 'none'}}>
-                            <p className='playerDeckText'>Player 1</p>
+                        <div ref={player1D} className='player1Deck'>
+                            <p className='playerDeckText'>{users[0].username}</p>
                             {player1Deck.map((item, i) => (
                                 <img
                                     key={i}
                                     className='Card'
-                                    onClick={() => onCardPlayedHandler(item)}
+                                    onClick={turn === 'Player 1' ? () => onCardPlayedHandler(item) : null}
                                     src={require(`../../uno-img/cards-front/${item}.png`)}
                                     />
                             ))}
@@ -1308,9 +1322,9 @@ const Game = (props) => {
 
                         {/* PLAYER 2 VIEW */}
                         {currentUser === 'Player 2' && <>
-                        <div className='player1Deck' style={{pointerEvents: 'none'}}>
+                        <div ref={player1D} className='player1Deck' style={{pointerEvents: 'none'}}>
                             <div className='player-with-loader'>
-                            <p className='playerDeckText'>Player 1</p>
+                            <p className='playerDeckText'>{users[0].username}</p>
                                {turn==='Player 1' && <Spinner />}
                             </div>
 
@@ -1325,7 +1339,7 @@ const Game = (props) => {
                         </div>
                         <br />
                         <div className='middleInfo' style={turn === 'Player 1' ? {pointerEvents: 'none'} : null}>
-                            <button className='uno-game-button' disabled={turn !== 'Player 2'} onClick={onCardDrawnHandler}>DRAW CARD</button>
+                            <button className='uno-game-button' disabled={turn !== 'Player 2'} onClick={onCardDrawnHandler}>DRAW</button>
                             {playedCardsPile && playedCardsPile.length>0 &&
                             <img
                                 className='Card'
@@ -1337,13 +1351,13 @@ const Game = (props) => {
                             }}>UNO</button>
                         </div>
                         <br />
-                        <div className='player2Deck' style={turn === 'Player 1' ? {pointerEvents: 'none'} : null}>
-                            <p className='playerDeckText'>Player 2</p>
+                        <div ref={player2D} className='player2Deck'>
+                            <p className='playerDeckText'>{users[1].username}</p>
                             {player2Deck.map((item, i) => (
                                 <img
                                     key={i}
                                     className='Card'
-                                    onClick={() => onCardPlayedHandler(item)}
+                                    onClick={turn === 'Player 1' ? null :() => onCardPlayedHandler(item)}
                                     src={require(`../../uno-img/cards-front/${item}.png`)}
                                     alt={item}
                                     />

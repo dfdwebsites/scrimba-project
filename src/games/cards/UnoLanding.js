@@ -20,19 +20,21 @@ const UnoLanding = () => {
         return result;
     }
     const [roomCode, setRoomCode] = useState('')
+    const [username,setUserName] = useState('')
     return (
         <div className='uno-homepage'>
             <div className='uno-homepage-menu'>
                 <img src={require('../../uno-img/uno-logo.png')} width='200px' />
                 <div className='uno-homepage-form'>
                     <div className='uno-homepage-join'>
-                        <input type='text' placeholder='Game Code' onChange={(event) => setRoomCode(event.target.value)} />
-                        <Link to={`./play?roomCode=${roomCode}`}><button className="uno-game-button green">JOIN GAME</button></Link>
+                        <input type='text' placeholder='Username' onChange={(event) => setUserName(event.target.value)} />
+                        <input type='text' placeholder='Room Code' onChange={(event) => setRoomCode(event.target.value)} />
+                        <Link to={`./play?roomCode=${roomCode}&username=${username}`}><button className="uno-game-button green">JOIN GAME</button></Link>
                     </div>
-                    <h1>OR</h1>
+                   {/*  <h1>OR</h1>
                     <div className='uno-homepage-create'>
                         <Link to={`./play?roomCode=${makeid(5)}`}><button className="uno-game-button orange">CREATE GAME</button></Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='uno-homepage-back'>
 

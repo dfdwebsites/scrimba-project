@@ -1410,6 +1410,7 @@ p.game-description{
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 1rem;
 }
 
 .uno-homepage-form {
@@ -1432,6 +1433,7 @@ p.game-description{
   font-size: 15px;
   width: 150px;
   line-height: 1.5em;
+  margin-bottom: 1rem;
 }
 .uno-homepage-create{
   align-self: flex-end;
@@ -1445,7 +1447,7 @@ align-self: center;
 .Game {
   background-size: cover;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   color: var(--color-white);
 }
 
@@ -1468,7 +1470,7 @@ align-self: center;
 
 /* UNO Cards */
 .Card {
-  width: 6rem;
+  width: 4rem;
   margin: 2px;
   cursor: pointer;
 }
@@ -1490,7 +1492,7 @@ align-self: center;
 
 .topInfo>h1 {
   align-self: center;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 
 }
 
@@ -1537,7 +1539,7 @@ align-self: center;
 }
 
 .playerDeckText {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin: 0 20px;
 }
 
@@ -1714,7 +1716,7 @@ align-self: center;
 /* Chat Box */
 .chat-box{
 	position: absolute;
-	bottom: 0px;
+	bottom: 0px; 
 	background: white;
 	width: 355px;
 	border-radius: 5px 5px 0px 0px;
@@ -1737,6 +1739,7 @@ align-self: center;
 	color: white;
 	padding: 5px;
 	display: inline-block;
+  font-size: 1.3rem;
 }
 .chat-icons{
 	cursor: pointer;
@@ -1808,4 +1811,31 @@ align-self: center;
 }
 .msg-receive:hover, .msg-send:hover{
 	opacity: .9;
+}
+.active{
+  /*  box-shadow: 0px 0px 10px 5px white, 0px 0px 10px 5px white inset ; */
+  background: rgba(255, 255, 255, 0.527);
+  box-shadow: 5px 0 40px 5px #fff, 0 0 100px 15px yellow, 0 0 40px 5px #fff inset, 0 0 100px 15px yellow inset;
+  color: black;
+ }
+ 
+
+ @media (min-width:500px){
+  .Card{
+    width:5rem
+  }
+}
+@media (min-width:700px){
+  .Card{
+    width:6rem
+  }
+  .playerDeckText {
+    font-size: 1.5rem;}
+}
+@media (min-width:1000px){
+  .Card{
+    width:7rem
+  }
+  .playerDeckText {
+    font-size: 2rem;}
 }
