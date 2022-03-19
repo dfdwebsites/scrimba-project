@@ -191,7 +191,7 @@ const Game = (props) => {
     const toggleChatBox = () => {
         const chatBody = document.querySelector('.chat-body')
         if(isChatBoxHidden) {
-            chatBody.style.display = 'block'
+            chatBody.style.display = 'flex'
             setChatBoxHidden(false)
         }
         else {
@@ -808,7 +808,7 @@ const Game = (props) => {
                 //check who played the card and return new state accordingly
                 if(cardPlayedBy === 'Player 1') {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player1's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player1Deck.indexOf(played_card)
                     //then update turn, currentColor and currentNumber
@@ -853,7 +853,7 @@ const Game = (props) => {
                 }
                 else {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player2's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player2Deck.indexOf(played_card)
                     //then update turn, currentColor and currentNumber
@@ -903,7 +903,7 @@ const Game = (props) => {
                 //check who played the card and return new state accordingly
                 if(cardPlayedBy === 'Player 1') {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player1's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player1Deck.indexOf(played_card)
                     //remove 2 new cards from drawCardPile and add them to player2's deck (immutably)
@@ -955,7 +955,7 @@ const Game = (props) => {
                 }
                 else {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player2's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player2Deck.indexOf(played_card)
                     //remove 2 new cards from drawCardPile and add them to player1's deck (immutably)
@@ -1067,7 +1067,7 @@ const Game = (props) => {
             else if(drawCard === 'W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 !isSoundMuted && playWildCardSound()
                 //send new state to server
                 socket.emit('updateGameState', {
@@ -1081,7 +1081,7 @@ const Game = (props) => {
             else if(drawCard === 'D4W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 //remove 2 new cards from drawCardPile and add them to player2's deck (immutably)
                 //make a copy of drawCardPile array
                 const copiedDrawCardPileArray = [...drawCardPile]
@@ -1165,7 +1165,7 @@ const Game = (props) => {
             else if(drawCard === 'W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 !isSoundMuted && playWildCardSound()
                 //send new state to server
                 socket.emit('updateGameState', {
@@ -1179,7 +1179,7 @@ const Game = (props) => {
             else if(drawCard === 'D4W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)').toUpperCase()
+                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 //remove 2 new cards from drawCardPile and add them to player1's deck (immutably)
                 //make a copy of drawCardPile array
                 const copiedDrawCardPileArray = [...drawCardPile]
@@ -1227,12 +1227,12 @@ const Game = (props) => {
     const player2D = React.useRef(null)
     React.useEffect(()=>{
         if (player1D.current !==null && turn==="Player 1"){
-            player1D.current.classList.add('active')
-            player2D.current.classList.remove('active')
+            player1D.current.classList.add('activePlayer')
+            player2D.current.classList.remove('activePlayer')
         }
         if (player2D.current !==null && turn==="Player 2"){
-            player1D.current.classList.remove('active')
-            player2D.current.classList.add('active')
+            player1D.current.classList.remove('activePlayer')
+            player2D.current.classList.add('activePlayer')
         }
 
     },[turn])
@@ -1243,7 +1243,7 @@ const Game = (props) => {
 
                 <div className='topInfo'>
                     <img src={require('../../uno-img/uno-logo.png')} />
-                    <h1>Game Code: {room}</h1>
+                    <h1>Room Code: {room}</h1>
                 </div>
 
                 {/* PLAYER LEFT MESSAGES */}
@@ -1252,7 +1252,7 @@ const Game = (props) => {
 
                 {users.length===2 && <>
 
-                    {gameOver ? <div className='winner-hero'>{winner !== '' && <><h1>GAME OVER</h1><h2>{winner} wins!</h2></>}</div> :
+                    {gameOver ? <div className='winner-hero'>{winner !== '' && <><h1>GAME OVER</h1><h2>{winner==='Player 1'?users[0].username.toUpperCase() : users[1].username.toUpperCase()} wins!</h2></>}</div> :
                     <div>
                         {/* PLAYER 1 VIEW */}
                         {currentUser === 'Player 1' && <>    
@@ -1295,7 +1295,16 @@ const Game = (props) => {
                                     />
                             ))}
                         </div>
+                        <br />
+                        <div className='quit-mute-container'>
+                            <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                            <span>
+                                <button className='uno-game-button green' 
+                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
+                                : <span className="material-icons">volume_up</span>}</button>
 
+                            </span>
+                        </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player1">
                                 <div className="chat-head">
@@ -1363,7 +1372,16 @@ const Game = (props) => {
                                     />
                             ))}
                         </div>
+                        <br />
+                        <div className='quit-mute-container'>
+                            <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                            <span>
+                                <button className='uno-game-button green' 
+                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
+                                : <span className="material-icons">volume_up</span>}</button>
 
+                            </span>
+                        </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player2">
                                 <div className="chat-head">
@@ -1391,16 +1409,7 @@ const Game = (props) => {
                 </> }
             </> : <h1>Room full</h1> }
 
-            <br />
-            <div>
-                <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
-                <span>
-                    <button className='uno-game-button green' 
-                    onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
-                    : <span className="material-icons">volume_up</span>}</button>
-
-                </span>
-            </div>
+            
         </div>
     )
 }
