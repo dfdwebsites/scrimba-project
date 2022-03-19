@@ -8,17 +8,6 @@ import { Link } from 'react-router-dom'
 const UnoLanding = () => {
     
     
-    
-    
-    function makeid(length) {
-        let result           = '';
-        const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        for ( let i = 0; i < length; i++ ) {
-           result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
     const [roomCode, setRoomCode] = useState('')
     const [username,setUserName] = useState('')
     return (

@@ -48,6 +48,15 @@ const Game = (props) => {
         }   
         return array
     }
+    function makeid(length) {
+        let result           = '';
+        const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for ( let i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
 
     useEffect(() => {
         const connectionOptions =  {
@@ -1300,26 +1309,32 @@ const Game = (props) => {
                             <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
                             <span>
                                 <button className='uno-game-button green' 
-                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
-                                : <span className="material-icons">volume_up</span>}</button>
-
+                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons"><i className="fa-solid fa-volume-xmark"></i></span> 
+                                : <span className="material-icons"><i className="fa-solid fa-volume-high"></i></span>}</button>
                             </span>
+                                <button onClick={toggleChatBox} className='uno-game-button green'><i className="fa-brands fa-rocketchat"></i></button>
                         </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player1">
-                                <div className="chat-head">
-                                    <h2>Chat Box</h2>
-                                    {!isChatBoxHidden ?
-                                    <span onClick={toggleChatBox} className="chat-icons">&#x2193;</span> :
-                                    <span onClick={toggleChatBox} className="chat-icons">&#x2191;</span>}
-                                </div>
                                 <div className="chat-body">
+                                    <div className="chat-head">
+                                            <h2>Chat Box</h2>
+                                            {!isChatBoxHidden ?
+                                            <span onClick={toggleChatBox} className="chat-icons"><i className="fa-solid fa-x"></i></span> :
+                                            <span onClick={toggleChatBox} className="chat-icons"><i className="fa-solid fa-x"></i></span>}
+                                    </div>
                                     <div className="msg-insert">
                                         {messages.map(msg => {
                                             if(msg.user === 'Player 2')
-                                                return <div className="msg-receive">{msg.text}</div>
+                                                return <div key={makeid(15)} className="msg-receive">
+                                                        <p className="meta">{msg.user==='Player 1'? users[0].username : users[1].username}</p>
+                                                        <p className="text">{msg.text}</p>
+                                                    </div>
                                             if(msg.user === 'Player 1')
-                                                return <div className="msg-send">{msg.text}</div>
+                                                return <div key={makeid(15)} className="msg-send">
+                                                            <p className="meta">{msg.user==='Player 1'? users[0].username : users[1].username}</p>
+                                                            <p className="text">{msg.text}</p>
+                                                    </div>
                                         })}
                                     </div>
                                     <div className="chat-text">
@@ -1377,26 +1392,32 @@ const Game = (props) => {
                             <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
                             <span>
                                 <button className='uno-game-button green' 
-                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons">volume_off</span> 
-                                : <span className="material-icons">volume_up</span>}</button>
-
+                                onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons"><i className="fa-solid fa-volume-xmark"></i></span> 
+                                : <span className="material-icons"><i className="fa-solid fa-volume-high"></i></span>}</button>
                             </span>
+                            <button onClick={toggleChatBox} className='uno-game-button green'><i className="fa-brands fa-rocketchat"></i></button>
                         </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player2">
-                                <div className="chat-head">
-                                    <h2>Chat Box</h2>
-                                    {!isChatBoxHidden ?
-                                    <span onClick={toggleChatBox} className="chat-icons">&#x2193;</span> :
-                                    <span onClick={toggleChatBox} className="chat-icons">&#x2191;</span>}
-                                </div>
-                                <div className="chat-body">
+                                <div className="chat-body">  
+                                    <div className="chat-head">
+                                            <h2>Chat Box</h2>
+                                            {!isChatBoxHidden ?
+                                            <span onClick={toggleChatBox} className="chat-icons"><i className="fa-solid fa-x"></i></span> :
+                                            <span onClick={toggleChatBox} className="chat-icons"><i className="fa-solid fa-x"></i></span>}
+                                    </div>
                                     <div className="msg-insert">
                                         {messages.map(msg => {
                                             if(msg.user === 'Player 1')
-                                                return <div className="msg-receive">{msg.text}</div>
+                                                return <div key={makeid(15)} className="msg-receive">
+                                                    <p className="meta">{msg.user==='Player 1'? users[0].username : users[1].username}</p>
+                                                    <p className="text">{msg.text}</p>
+                                                     </div>
                                             if(msg.user === 'Player 2')
-                                                return <div className="msg-send">{msg.text}</div>
+                                                return <div key={makeid(15)} className="msg-send">
+                                                    <p className="meta">{msg.user==='Player 1'? users[0].username : users[1].username}</p>
+                                                    <p className="text">{msg.text}</p>
+                                                    </div>
                                         })}
                                     </div>
                                     <div className="chat-text">
