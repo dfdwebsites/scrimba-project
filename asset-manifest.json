@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/scrimba-project/static/css/main.fda30fae.css",
+    "main.css": "/scrimba-project/static/css/main.74b84706.css",
     "main.js": "/scrimba-project/static/js/main.c0350534.js",
     "static/js/845.939b8241.chunk.js": "/scrimba-project/static/js/845.939b8241.chunk.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
@@ -76,12 +76,12 @@
     "static/media/1Y.png": "/scrimba-project/static/media/1Y.4881d6f5ce9ad15ed386.png",
     "static/media/uno-sound.mp3": "/scrimba-project/static/media/uno-sound.5d88cef2860dce2fb0b3.mp3",
     "index.html": "/scrimba-project/index.html",
-    "main.fda30fae.css.map": "/scrimba-project/static/css/main.fda30fae.css.map",
+    "main.74b84706.css.map": "/scrimba-project/static/css/main.74b84706.css.map",
     "main.c0350534.js.map": "/scrimba-project/static/js/main.c0350534.js.map",
     "845.939b8241.chunk.js.map": "/scrimba-project/static/js/845.939b8241.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fda30fae.css",
+    "static/css/main.74b84706.css",
     "static/js/main.c0350534.js"
   ]
 }
