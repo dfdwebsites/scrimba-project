@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/scrimba-project/static/css/main.74b84706.css",
-    "main.js": "/scrimba-project/static/js/main.c0350534.js",
+    "main.css": "/scrimba-project/static/css/main.6158e490.css",
+    "main.js": "/scrimba-project/static/js/main.7a2fb0a4.js",
     "static/js/845.939b8241.chunk.js": "/scrimba-project/static/js/845.939b8241.chunk.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
     "static/media/games-title.png": "/scrimba-project/static/media/games-title.dea43b0e8c5cda79f866.png",
     "static/media/css-title.png": "/scrimba-project/static/media/css-title.bf00af7d9df043e69432.png",
     "static/media/bgY.png": "/scrimba-project/static/media/bgY.a6a8c435067a05df6d7e.png",
     "static/media/bgG.png": "/scrimba-project/static/media/bgG.1cabe82b84e2f6b3c632.png",
-    "static/media/bgB.png": "/scrimba-project/static/media/bgB.e00d27fa2a511284b9db.png",
+    "static/media/bgB.png": "/scrimba-project/static/media/bgB.1d9bdaa4b97eb77905e5.png",
     "static/media/bgR.png": "/scrimba-project/static/media/bgR.4b1567fa5551bd24a263.png",
     "static/media/Uno-Landing-Page.png": "/scrimba-project/static/media/Uno-Landing-Page.016d8790c0b188c0e836.png",
     "static/media/uno-logo.png": "/scrimba-project/static/media/uno-logo.2d1c62d5b4dccc76c061.png",
     "static/media/skip-sound.mp3": "/scrimba-project/static/media/skip-sound.1227f2fd889c41d19611.mp3",
     "static/media/wild-sound.mp3": "/scrimba-project/static/media/wild-sound.dc7f4eb100b870d7da30.mp3",
-    "static/media/blakc-btn.png": "/scrimba-project/static/media/blakc-btn.2438bc5145cbb2867201.png",
     "static/media/game-over-sound.mp3": "/scrimba-project/static/media/game-over-sound.503df35aa842e1d3268b.mp3",
     "static/media/draw4-sound.mp3": "/scrimba-project/static/media/draw4-sound.37381092a6d917189623.mp3",
     "static/media/draw2-sound.mp3": "/scrimba-project/static/media/draw2-sound.0f5186fc721bad398c69.mp3",
@@ -76,12 +75,12 @@
     "static/media/1Y.png": "/scrimba-project/static/media/1Y.4881d6f5ce9ad15ed386.png",
     "static/media/uno-sound.mp3": "/scrimba-project/static/media/uno-sound.5d88cef2860dce2fb0b3.mp3",
     "index.html": "/scrimba-project/index.html",
-    "main.74b84706.css.map": "/scrimba-project/static/css/main.74b84706.css.map",
-    "main.c0350534.js.map": "/scrimba-project/static/js/main.c0350534.js.map",
+    "main.6158e490.css.map": "/scrimba-project/static/css/main.6158e490.css.map",
+    "main.7a2fb0a4.js.map": "/scrimba-project/static/js/main.7a2fb0a4.js.map",
     "845.939b8241.chunk.js.map": "/scrimba-project/static/js/845.939b8241.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.74b84706.css",
-    "static/js/main.c0350534.js"
+    "static/css/main.6158e490.css",
+    "static/js/main.7a2fb0a4.js"
   ]
 }
