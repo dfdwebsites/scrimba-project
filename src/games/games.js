@@ -58,7 +58,7 @@ return (<>
         <div className='games-main'>
             <h3 className='games-main-title'>Creating mini-games with JS</h3>
             <p className='games-main-p'>In many modules through the course we were creating small games in order to 
-                learn specific commands /properties /values while creating an example. Srimba's amazing workspace made each challenge , challenging in the same time
+                learn specific commands /properties /values while creating an example. Scrimba's amazing workspace made each challenge , challenging in the same time
                 very important since all the teachers aggreed in the same principle that "You 
                 learn code by practicing".</p> 
             <p className='games-main-p second'>Here is a small list of the games we created in the course. You can navigate below or check

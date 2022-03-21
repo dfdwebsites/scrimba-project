@@ -9,14 +9,17 @@ const UnoLanding = () => {
     
     
     const [roomCode, setRoomCode] = useState('')
-    const [username,setUserName] = useState('')
+    const [username,setUserName] = useState(localStorage.getItem("storedUserName")? localStorage.getItem("storedUserName"): '')
     return (
         <div className='uno-homepage'>
             <div className='uno-homepage-menu'>
-                <img src={require('../../uno-img/uno-logo.png')} width='200px' />
+                <img src={require('../../uno-img/uno-logo.png')} width='200px' alt=''/>
                 <div className='uno-homepage-form'>
                     <div className='uno-homepage-join'>
-                        <input type='text' placeholder='Username' onChange={(event) => setUserName(event.target.value)} />
+                        <input type='text' placeholder="Username" value={localStorage.getItem("storedUserName")? localStorage.getItem("storedUserName"):""} onChange={(event) =>{
+                            localStorage.setItem("storedUserName", event.target.value)
+                            setUserName(event.target.value)
+                        }}  />
                         <input type='text' placeholder='Room Code' onChange={(event) => setRoomCode(event.target.value)} />
                         <Link to={`./play?roomCode=${roomCode}&username=${username}`}><button className="uno-game-button green">JOIN GAME</button></Link>
                     </div>

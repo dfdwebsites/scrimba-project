@@ -184,9 +184,54 @@ const Game = (props) => {
             setMessages(messages => [ ...messages, message ])
 
             const chatBody = document.querySelector('.chat-body')
+            if (chatBody.style.display==="none"){
+                document.querySelector(".newMessageAlert").style.display = "flex"
+            }
             chatBody.scrollTop = chatBody.scrollHeight
         })
     }, [])
+
+
+
+
+
+    /* function restartGame(){
+        setWinner('')
+        setPlayedCardsPile([])
+        setDrawCardPile([])
+        let newshuffledCards = shuffleArray(PACK_OF_CARDS)
+         setPlayer1Deck(newshuffledCards.splice(0, 7))
+         setPlayer2Deck(newshuffledCards.splice(0, 7))
+        let startingCardIndex
+        while(true) {
+            startingCardIndex = Math.floor(Math.random() * 94)
+            if(newshuffledCards[startingCardIndex]==='skipR' || newshuffledCards[startingCardIndex]==='TR' || newshuffledCards[startingCardIndex]==='D2R' ||
+            newshuffledCards[startingCardIndex]==='skipG' || newshuffledCards[startingCardIndex]==='TG' || newshuffledCards[startingCardIndex]==='D2G' ||
+            newshuffledCards[startingCardIndex]==='skipB' || newshuffledCards[startingCardIndex]==='TB' || newshuffledCards[startingCardIndex]==='D2B' ||
+            newshuffledCards[startingCardIndex]==='skipY' || newshuffledCards[startingCardIndex]==='TY' || newshuffledCards[startingCardIndex]==='D2Y' ||
+            newshuffledCards[startingCardIndex]==='W' || newshuffledCards[startingCardIndex]==='D4W') {
+                continue;
+            }
+            else
+                break;
+        }
+         setPlayedCardsPile(newshuffledCards.splice(startingCardIndex, 1))
+         setDrawCardPile(newshuffledCards)
+        socket.emit('initGameState', {
+            gameOver: false,
+            turn: 'Player 1',
+            player1Deck: [...player1Deck],
+            player2Deck: [...player2Deck],
+            currentColor: playedCardsPile[0].charAt(1),
+            currentNumber: playedCardsPile[0].charAt(0),
+            playedCardsPile: [...playedCardsPile],
+            drawCardPile: [...drawCardPile]
+        })
+    } */
+
+
+
+
 
     //some util functions
     const checkGameOver = (arr) => {
@@ -201,6 +246,7 @@ const Game = (props) => {
         const chatBody = document.querySelector('.chat-body')
         if(isChatBoxHidden) {
             chatBody.style.display = 'flex'
+            document.querySelector(".newMessageAlert").style.display = "none"
             setChatBoxHidden(false)
         }
         else {
@@ -817,7 +863,8 @@ const Game = (props) => {
                 //check who played the card and return new state accordingly
                 if(cardPlayedBy === 'Player 1') {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                    document.querySelector(".choosePannelWithTurn").style.display = "flex"
+                    //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player1's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player1Deck.indexOf(played_card)
                     //then update turn, currentColor and currentNumber
@@ -838,10 +885,10 @@ const Game = (props) => {
                         socket.emit('updateGameState', {
                             gameOver: checkGameOver(player1Deck),
                             winner: checkWinner(player1Deck, 'Player 1'),
-                            turn: 'Player 2',
+                            /* turn: 'Player 2', */
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player1Deck: [...updatedPlayer1Deck],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 300,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -852,17 +899,18 @@ const Game = (props) => {
                         socket.emit('updateGameState', {
                             gameOver: checkGameOver(player1Deck),
                             winner: checkWinner(player1Deck, 'Player 1'),
-                            turn: 'Player 2',
+                            /* turn: 'Player 2', */
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player1Deck: [...player1Deck.slice(0, removeIndex), ...player1Deck.slice(removeIndex + 1)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 300
                         })
                     }
                 }
                 else {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                    document.querySelector(".choosePannelWithTurn").style.display = "flex"
+                    //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player2's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player2Deck.indexOf(played_card)
                     //then update turn, currentColor and currentNumber
@@ -883,10 +931,10 @@ const Game = (props) => {
                         socket.emit('updateGameState', {
                             gameOver: checkGameOver(player2Deck),
                             winner: checkWinner(player2Deck, 'Player 2'),
-                            turn: 'Player 1',
+                           /*  turn: 'Player 1', */
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player2Deck: [...updatedPlayer2Deck],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 300,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -897,10 +945,10 @@ const Game = (props) => {
                         socket.emit('updateGameState', {
                             gameOver: checkGameOver(player2Deck),
                             winner: checkWinner(player2Deck, 'Player 2'),
-                            turn: 'Player 1',
+                            /* turn: 'Player 1', */
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player2Deck: [...player2Deck.slice(0, removeIndex), ...player2Deck.slice(removeIndex + 1)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 300
                         })
                     }
@@ -912,7 +960,8 @@ const Game = (props) => {
                 //check who played the card and return new state accordingly
                 if(cardPlayedBy === 'Player 1') {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                    document.querySelector(".choosePannel").style.display = "flex"
+                    //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player1's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player1Deck.indexOf(played_card)
                     //remove 2 new cards from drawCardPile and add them to player2's deck (immutably)
@@ -942,7 +991,7 @@ const Game = (props) => {
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player1Deck: [...updatedPlayer1Deck],
                             player2Deck: [...player2Deck.slice(0, player2Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player2Deck.slice(player2Deck.length)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 600,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -956,7 +1005,7 @@ const Game = (props) => {
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player1Deck: [...player1Deck.slice(0, removeIndex), ...player1Deck.slice(removeIndex + 1)],
                             player2Deck: [...player2Deck.slice(0, player2Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player2Deck.slice(player2Deck.length)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 600,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -964,7 +1013,8 @@ const Game = (props) => {
                 }
                 else {
                     //ask for new color
-                    const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                    document.querySelector(".choosePannel").style.display = "flex"
+                    //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                     //remove the played card from player2's deck and add it to playedCardsPile (immutably)
                     const removeIndex = player2Deck.indexOf(played_card)
                     //remove 2 new cards from drawCardPile and add them to player1's deck (immutably)
@@ -976,7 +1026,9 @@ const Game = (props) => {
                     const drawCard3 = copiedDrawCardPileArray.pop()
                     const drawCard4 = copiedDrawCardPileArray.pop()
                     //then update currentColor and currentNumber - turn will remain same
-                    !isSoundMuted && playDraw4CardSound()
+
+
+                /*     !isSoundMuted && playDraw4CardSound()
                     //send new state to server
                     socket.emit('updateGameState', {
                         gameOver: checkGameOver(player2Deck),
@@ -984,10 +1036,11 @@ const Game = (props) => {
                         playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                         player2Deck: [...player2Deck.slice(0, removeIndex), ...player2Deck.slice(removeIndex + 1)],
                         player1Deck: [...player1Deck.slice(0, player1Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player1Deck.slice(player1Deck.length)],
-                        currentColor: newColor,
+                        /* currentColor: newColor, 
                         currentNumber: 600,
                         drawCardPile: [...copiedDrawCardPileArray]
-                    })
+                    }) */
+
                     //if two cards remaining check if player pressed UNO button
                     //if not pressed add 2 cards as penalty
                     if(player2Deck.length===2 && !isUnoButtonPressed) {
@@ -1006,7 +1059,7 @@ const Game = (props) => {
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player2Deck: [...updatedPlayer2Deck],
                             player1Deck: [...player1Deck.slice(0, player1Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player1Deck.slice(player1Deck.length)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 600,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -1020,7 +1073,7 @@ const Game = (props) => {
                             playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), played_card, ...playedCardsPile.slice(playedCardsPile.length)],
                             player2Deck: [...player2Deck.slice(0, removeIndex), ...player2Deck.slice(removeIndex + 1)],
                             player1Deck: [...player1Deck.slice(0, player1Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player1Deck.slice(player1Deck.length)],
-                            currentColor: newColor,
+                            /* currentColor: newColor, */
                             currentNumber: 600,
                             drawCardPile: [...copiedDrawCardPileArray]
                         })
@@ -1076,13 +1129,14 @@ const Game = (props) => {
             else if(drawCard === 'W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                document.querySelector(".choosePannelWithTurn").style.display = "flex"
+                //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 !isSoundMuted && playWildCardSound()
                 //send new state to server
                 socket.emit('updateGameState', {
-                    turn: 'Player 2',
+                    /* turn: 'Player 2', */
                     playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), drawCard, ...playedCardsPile.slice(playedCardsPile.length)],
-                    currentColor: newColor,
+                    /* currentColor: newColor, */
                     currentNumber: 300,
                     drawCardPile: [...copiedDrawCardPileArray]
                 })
@@ -1090,7 +1144,8 @@ const Game = (props) => {
             else if(drawCard === 'D4W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                document.querySelector(".choosePannel").style.display = "flex"
+                //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 //remove 2 new cards from drawCardPile and add them to player2's deck (immutably)
                 //make a copy of drawCardPile array
                 const copiedDrawCardPileArray = [...drawCardPile]
@@ -1104,7 +1159,7 @@ const Game = (props) => {
                 socket.emit('updateGameState', {
                     playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), drawCard, ...playedCardsPile.slice(playedCardsPile.length)],
                     player2Deck: [...player2Deck.slice(0, player2Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player2Deck.slice(player2Deck.length)],
-                    currentColor: newColor,
+                    /* currentColor: newColor, */
                     currentNumber: 600,
                     drawCardPile: [...copiedDrawCardPileArray]
                 })
@@ -1174,13 +1229,14 @@ const Game = (props) => {
             else if(drawCard === 'W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                document.querySelector(".choosePannelWithTurn").style.display = "flex"
+                //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 !isSoundMuted && playWildCardSound()
                 //send new state to server
                 socket.emit('updateGameState', {
-                    turn: 'Player 1',
+                    /* turn: 'Player 1', */
                     playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), drawCard, ...playedCardsPile.slice(playedCardsPile.length)],
-                    currentColor: newColor,
+                    /* currentColor: newColor, */
                     currentNumber: 300,
                     drawCardPile: [...copiedDrawCardPileArray]
                 })
@@ -1188,7 +1244,8 @@ const Game = (props) => {
             else if(drawCard === 'D4W') {
                 alert(`You drew ${drawCard}. It was played for you.`)
                 //ask for new color
-                const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
+                document.querySelector(".choosePannel").style.display = "flex"
+                //const newColor = prompt('Enter first letter of new color (R/G/B/Y)', "R").toUpperCase()
                 //remove 2 new cards from drawCardPile and add them to player1's deck (immutably)
                 //make a copy of drawCardPile array
                 const copiedDrawCardPileArray = [...drawCardPile]
@@ -1202,7 +1259,7 @@ const Game = (props) => {
                 socket.emit('updateGameState', {
                     playedCardsPile: [...playedCardsPile.slice(0, playedCardsPile.length), drawCard, ...playedCardsPile.slice(playedCardsPile.length)],
                     player1Deck: [...player1Deck.slice(0, player1Deck.length), drawCard1, drawCard2, drawCard3, drawCard4, ...player1Deck.slice(player1Deck.length)],
-                    currentColor: newColor,
+                    /* currentColor: newColor, */
                     currentNumber: 600,
                     drawCardPile: [...copiedDrawCardPileArray]
                 })
@@ -1246,22 +1303,87 @@ const Game = (props) => {
 
     },[turn])
     
+    function chooseColorRedWithTurn(){
+        document.querySelector(".choosePannelWithTurn").style.display = "none"
+        socket.emit('updateGameState', {
+            turn: turn==="Player 1"? 'Player 2': 'Player 1',
+            currentColor: "R"
+        })
+    }
+    function chooseColorBlueWithTurn(){
+        document.querySelector(".choosePannelWithTurn").style.display = "none"
+        socket.emit('updateGameState', {
+            turn: turn==="Player 1"? 'Player 2': 'Player 1',
+            currentColor: "B"
+        })
+    }
+    function chooseColorYellowWithTurn(){
+        document.querySelector(".choosePannelWithTurn").style.display = "none"
+        socket.emit('updateGameState', {
+            turn: turn==="Player 1"? 'Player 2': 'Player 1',
+            currentColor: "Y"
+        })
+    }
+    function chooseColorGreenWithTurn(){
+        document.querySelector(".choosePannelWithTurn").style.display = "none"
+        socket.emit('updateGameState', {
+            turn: turn==="Player 1"? 'Player 2': 'Player 1',
+            currentColor: "G"
+        })
+    }
+    function chooseColorRed(){
+        document.querySelector(".choosePannel").style.display = "none"
+        socket.emit('updateGameState', {
+            currentColor: "R"
+        })
+    }
+    function chooseColorBlue(){
+        document.querySelector(".choosePannel").style.display = "none"
+        socket.emit('updateGameState', {
+            currentColor: "B"
+        })
+    }
+    function chooseColorYellow(){
+        document.querySelector(".choosePannel").style.display = "none"
+        socket.emit('updateGameState', {
+            currentColor: "Y"
+        })
+    }
+    function chooseColorGreen(){
+        document.querySelector(".choosePannel").style.display = "none"
+        socket.emit('updateGameState', {
+            currentColor: "G"
+        })
+    }
+
+
+
     return (
         <div className={`Game backgroundColorR backgroundColor${currentColor}`}>
             {(!roomFull) ? <>
 
                 <div className='topInfo'>
-                    <img src={require('../../uno-img/uno-logo.png')} />
+                    <img src={require('../../uno-img/uno-logo.png')} alt="" />
                     <h1>Room Code: {room}</h1>
                 </div>
 
                 {/* PLAYER LEFT MESSAGES */}
-                {users.length===1 && currentUser === 'Player 2' && <h1 className='topInfoText'>Player 1 has left the game.</h1> }
-                {users.length===1 && currentUser === 'Player 1' && <h1 className='topInfoText'>Waiting for Player 2 to join the game.</h1> }
+                {users.length===1 && currentUser === 'Player 2' && <div>
+                    <h1 className='topInfoText'>Player 1 has left the game.</h1>
+                    <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                    </div> }
+                {users.length===1 && currentUser === 'Player 1' && <div>
+                    <h1 className='topInfoText'>Waiting for Player 2 to join the game.</h1> 
+                    <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                    </div> }
 
                 {users.length===2 && <>
 
-                    {gameOver ? <div className='winner-hero'>{winner !== '' && <><h1>GAME OVER</h1><h2>{winner==='Player 1'?users[0].username.toUpperCase() : users[1].username.toUpperCase()} wins!</h2></>}</div> :
+                    {gameOver ? <div className='winner-hero'>
+                        {winner !== '' && <><h1>GAME OVER</h1><h2>{winner==='Player 1'?users[0].username.toUpperCase() : users[1].username.toUpperCase()} wins!</h2></>}
+                        <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
+                          {/*   <button className='uno-game-button' onClick={restartGame}>Replay</button> */}
+                        </div> :
                     <div>
                         {/* PLAYER 1 VIEW */}
                         {currentUser === 'Player 1' && <>    
@@ -1272,6 +1394,7 @@ const Game = (props) => {
                             </div>
                             {player2Deck.map((item, i) => (
                                 <img
+                                    alt=''
                                     key={i}
                                     className='Card'
                                     onClick={() => onCardPlayedHandler(item)}
@@ -1284,6 +1407,7 @@ const Game = (props) => {
                             <button className='uno-game-button' disabled={turn !== 'Player 1'} onClick={onCardDrawnHandler}>DRAW</button>
                             {playedCardsPile && playedCardsPile.length>0 &&
                             <img
+                                alt=''
                                 className='Card'
                                 src={require(`../../uno-img/cards-front/${playedCardsPile[playedCardsPile.length-1]}.png`)}
                                 /> }
@@ -1297,6 +1421,7 @@ const Game = (props) => {
                             <p className='playerDeckText'>{users[0].username}</p>
                             {player1Deck.map((item, i) => (
                                 <img
+                                    alt=''
                                     key={i}
                                     className='Card'
                                     onClick={turn === 'Player 1' ? () => onCardPlayedHandler(item) : null}
@@ -1312,11 +1437,11 @@ const Game = (props) => {
                                 onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons"><i className="fa-solid fa-volume-xmark"></i></span> 
                                 : <span className="material-icons"><i className="fa-solid fa-volume-high"></i></span>}</button>
                             </span>
-                                <button onClick={toggleChatBox} className='uno-game-button green'><i className="fa-brands fa-rocketchat"></i></button>
+                                <button onClick={toggleChatBox} className='uno-game-button green'><span className='newMessageAlert'>!</span><i className="fa-brands fa-rocketchat"></i></button>
                         </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player1">
-                                <div className="chat-body">
+                                <div className="chat-body" style={{display:"none"}}>
                                     <div className="chat-head">
                                             <h2>Chat Box</h2>
                                             {!isChatBoxHidden ?
@@ -1354,6 +1479,7 @@ const Game = (props) => {
 
                             {player1Deck.map((item, i) => (
                                 <img
+                                    alt=''
                                     key={i}
                                     className='Card'
                                     onClick={() => onCardPlayedHandler(item)}
@@ -1366,6 +1492,7 @@ const Game = (props) => {
                             <button className='uno-game-button' disabled={turn !== 'Player 2'} onClick={onCardDrawnHandler}>DRAW</button>
                             {playedCardsPile && playedCardsPile.length>0 &&
                             <img
+                                alt=''
                                 className='Card'
                                 src={require(`../../uno-img/cards-front/${playedCardsPile[playedCardsPile.length-1]}.png`)}
                                 /> }
@@ -1395,11 +1522,11 @@ const Game = (props) => {
                                 onClick={() => setSoundMuted(!isSoundMuted)}>{isSoundMuted ? <span className="material-icons"><i className="fa-solid fa-volume-xmark"></i></span> 
                                 : <span className="material-icons"><i className="fa-solid fa-volume-high"></i></span>}</button>
                             </span>
-                            <button onClick={toggleChatBox} className='uno-game-button green'><i className="fa-brands fa-rocketchat"></i></button>
+                            <button onClick={toggleChatBox} className='uno-game-button green'><span className='newMessageAlert'>!</span><i className="fa-brands fa-rocketchat"></i></button>
                         </div>
                         <div className="chatBoxWrapper">
                             <div className="chat-box chat-box-player2">
-                                <div className="chat-body">  
+                                <div className="chat-body" style={{display:"none"}}>  
                                     <div className="chat-head">
                                             <h2>Chat Box</h2>
                                             {!isChatBoxHidden ?
@@ -1430,7 +1557,25 @@ const Game = (props) => {
                 </> }
             </> : <h1>Room full</h1> }
 
-            
+            <div className='choosePannelWithTurn'>
+                <p>Choose your color</p>
+                <div className='wrapper'> 
+                <button onClick={chooseColorRedWithTurn} className='choise-btn red'></button>
+                <button onClick={chooseColorBlueWithTurn} className='choise-btn blue'></button>
+                <button onClick={chooseColorYellowWithTurn} className='choise-btn yellow'></button>
+                <button onClick={chooseColorGreenWithTurn} className='choise-btn green'></button>
+                </div>
+            </div>
+            <div className='choosePannel'>
+                <p>Choose your color</p>
+                <div className='wrapper'> 
+                <button onClick={chooseColorRed} className='choise-btn red'></button>
+                <button onClick={chooseColorBlue} className='choise-btn blue'></button>
+                <button onClick={chooseColorYellow} className='choise-btn yellow'></button>
+                <button onClick={chooseColorGreen} className='choise-btn green'></button>
+                </div>
+            </div>
+
         </div>
     )
 }
