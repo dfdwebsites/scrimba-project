@@ -3,6 +3,118 @@ import kaboom  from "kaboom"
 import React from "react"
 import Navbar from "../../components/Navbar"
 
+
+
+
+class JoystickController
+{
+	// stickID: ID of HTML element (representing joystick) that will be dragged
+	// maxDistance: maximum amount joystick can move in any direction
+	// deadzone: joystick must move at least this amount from origin to register value change
+	constructor( stickID, maxDistance, deadzone )
+	{
+		this.id = stickID;
+		let stick = document.getElementById(stickID);
+
+		// location from which drag begins, used to calculate offsets
+		this.dragStart = null;
+
+		// track touch identifier in case multiple joysticks present
+		this.touchId = null;
+		
+		this.active = false;
+		this.value = { x: 0, y: 0 }; 
+
+		let self = this;
+
+		function handleDown(event)
+		{
+		    self.active = true;
+
+			// all drag movements are instantaneous
+			stick.style.transition = '0s';
+
+			// touch event fired before mouse event; prevent redundant mouse event from firing
+			event.preventDefault();
+
+		    if (event.changedTouches)
+		    	self.dragStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+		    else
+		    	self.dragStart = { x: event.clientX, y: event.clientY };
+
+			// if this is a touch event, keep track of which one
+		    if (event.changedTouches)
+		    	self.touchId = event.changedTouches[0].identifier;
+		}
+		
+		function handleMove(event) 
+		{
+		    if ( !self.active ) return;
+
+		    // if this is a touch event, make sure it is the right one
+		    // also handle multiple simultaneous touchmove events
+		    let touchmoveId = null;
+		    if (event.changedTouches)
+		    {
+		    	for (let i = 0; i < event.changedTouches.length; i++)
+		    	{
+		    		if (self.touchId == event.changedTouches[i].identifier)
+		    		{
+		    			touchmoveId = i;
+		    			event.clientX = event.changedTouches[i].clientX;
+		    			event.clientY = event.changedTouches[i].clientY;
+		    		}
+		    	}
+
+		    	if (touchmoveId == null) return;
+		    }
+
+		    const xDiff = event.clientX - self.dragStart.x;
+		    const yDiff = event.clientY - self.dragStart.y;
+		    const angle = Math.atan2(yDiff, xDiff);
+			const distance = Math.min(maxDistance, Math.hypot(xDiff, yDiff));
+			const xPosition = distance * Math.cos(angle);
+			const yPosition = distance * Math.sin(angle);
+
+			// move stick image to new position
+		    stick.style.transform = `translate3d(${xPosition}px, ${yPosition}px, 0px)`;
+
+			// deadzone adjustment
+			const distance2 = (distance < deadzone) ? 0 : maxDistance / (maxDistance - deadzone) * (distance - deadzone);
+		    const xPosition2 = distance2 * Math.cos(angle);
+			const yPosition2 = distance2 * Math.sin(angle);
+		    const xPercent = parseFloat((xPosition2 / maxDistance).toFixed(4));
+		    const yPercent = parseFloat((yPosition2 / maxDistance).toFixed(4));
+		    
+		    self.value = { x: xPercent, y: yPercent };
+		  }
+
+		function handleUp(event) 
+		{
+		    if ( !self.active ) return;
+
+		    // if this is a touch event, make sure it is the right one
+		    if (event.changedTouches && self.touchId != event.changedTouches[0].identifier) return;
+
+		    // transition the joystick position back to center
+		    stick.style.transition = '.2s';
+		    stick.style.transform = `translate3d(0px, 0px, 0px)`;
+
+		    // reset everything
+		    self.value = { x: 0, y: 0 };
+		    self.touchId = null;
+		    self.active = false;
+		}
+
+		stick.addEventListener('mousedown', handleDown);
+		stick.addEventListener('touchstart', handleDown);
+		document.addEventListener('mousemove', handleMove, {passive: false});
+		document.addEventListener('touchmove', handleMove, {passive: false});
+		document.addEventListener('mouseup', handleUp);
+		document.addEventListener('touchend', handleUp);
+	}
+}
+
 const Mario = () => {
 
 	const canvasRef = React.useRef(null)
@@ -11,17 +123,18 @@ const Mario = () => {
 	React.useEffect(() => {
 
 		
-			
-		 
+		let joystick1 = new JoystickController("stick1", 64, 8);	
+		let w =canvasRef.current.widht = window.innerWidth
+		let h= canvasRef.current.height = window.innerHeight/3 *2
 		
 		const k = kaboom({
 			// if you don't want to import to the global namespace
 			global: false,
 			debug: true,
 			background: [134, 135, 247],
-			width: 500,
-			height: 340,
-			scale: 2,
+			width: w,
+			height: 400,
+			scale: 1,
 			fullscreen:false,
 			canvas: canvasRef.current,		
 		})
@@ -253,6 +366,8 @@ const Mario = () => {
 				'=                               ^       ^  ()     =           ',
 				'=============================================     ============',
 				'=============================================     ============',
+				'=============================================     ============',
+				'=============================================     ============',
 				'=============================================     ============'
 			]
 		]
@@ -262,8 +377,19 @@ const Mario = () => {
 		let MOVE_SPEED = 200
 		let JUMP_FORCE = 500
 		const FALL_DEATH = 2400
+		
+		
+		
+		
+		let movingLeft =false
+			document.getElementById("mmm").addEventListener("click", toggleMov)
+			function toggleMov(){
+				if(player.isGrounded()){
+					player.jump(450)
+				}
+			}
 
-			
+
 			k.onUpdate("block", (b) => {
 				
 				b.solid = b.pos.dist(player.pos) <= 64
@@ -349,6 +475,22 @@ const Mario = () => {
 			//general game rules
 			player.onUpdate(() => {
 				var currCam = k.camPos();
+			/* 	if (movingLeft){
+					player.move(MOVE_SPEED,0)
+				} */
+				if(joystick1.value.x>0.2){
+					player.flipX(false)
+					player.moving = true
+					player.move(MOVE_SPEED, 0)
+				}
+				if(joystick1.value.x<-0.2){
+					player.flipX(true)
+					player.moving = true
+					player.move(-MOVE_SPEED, 0)
+				}
+				if(joystick1.value.x > -0.2 && joystick1.value.x < 0.2){
+					player.moving = false
+				}
     			if (currCam.x < player.pos.x) {
       				k.camPos(player.pos.x, currCam.y);
    				 }
@@ -357,7 +499,7 @@ const Mario = () => {
 				}
 			  })
 
-			console.log(player.isDucking)
+			
 		  player.onHeadbutt((obj) => {
 			  if (obj.is("box")){
 				if (obj.is('coin-surpise')) {
@@ -414,6 +556,7 @@ const Mario = () => {
 				k.pos(k.width()/4,k.height()/4)
 			])
 			k.onKeyPress(() => k.go("game"))
+			document.getElementById("mmm").addEventListener("click", ()=> k.go("game"))
 		})
 
 
@@ -501,6 +644,7 @@ const Mario = () => {
 				smallStopFrame: 0,
 				bigStopFrame: 8,
 				ducking:14,
+				moving:false,
 				smallJumpFrame: 5,
 				bigJumpFrame: 13,
 				isBig: false,
@@ -512,7 +656,7 @@ const Mario = () => {
 						this.jumping()
 					}
 					else{
-						if(k.isKeyDown("left") || k.isKeyDown("right")){
+						if(k.isKeyDown("left") || k.isKeyDown("right") ||this.moving ){
 							this.running()
 						}
 						else{
@@ -572,10 +716,7 @@ const Mario = () => {
 			}
 		}
 
-
-
-
-
+		
 
 
 
@@ -614,11 +755,25 @@ const Mario = () => {
 
 
 	},[])
+
+	
+		
+
+
+
+
 		
 		return <>
 			<Navbar />
-		<div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center", margin:"0", overflow:"hidden"}}>
+		<div style={{width:"100%",display:"flex",justifyContent:"center",position:"relative",alignItems:"center", marginTop:"90px"}}>
 			<canvas className="mario-board"ref={canvasRef}></canvas>
+			<div style={{width: "128px", position: "absolute", left:"10px", bottom:"0", transform:"translateY(50%)"}}>
+				<img src="../img/joystick-base.png" alt="joystick base"/>
+				<div id="stick1" style={{position: "absolute", left:"32px", top:"32px"}}>
+				<img src="../img/joystick-red.png" alt="joystick stick"/>		
+				</div>
+			</div>
+			<button id="mmm" className="arcade-btn"></button>
 		</div>
 		</>
 

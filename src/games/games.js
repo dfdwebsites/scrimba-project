@@ -102,7 +102,9 @@ return (<>
                         <span className='super-mario-name'>i</span>
                         <span className='super-mario-name'>o</span>
                     </h2>
-                    <img className='game-img' src="./img/mario-img.png" alt="of the creation" />
+                    <Link className='img-link' to={`/games/mario`}>
+                        <img className='game-img' src="./img/mario-img.png" alt="of the creation" />
+                    </Link>
                     <p className='game-description'>{marioDetail}</p>
                     <Link className="game-btn" to={`/games/mario`}>
                         <span className='super-mario-link'>C</span>

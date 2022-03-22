@@ -123,6 +123,7 @@ return <>
     <div className='form-container'>
         <br/>
         <h3>How to get data from APIs</h3>
+        <p className='api-description'>Seach for a Tv Series below</p>
         <form className='seriesSearchForm'id="form" action="#" method="post">
         <input name="show" id ="text" type="text" placeholder="Search for a Show" />
         <button type="submit" >search</button>
