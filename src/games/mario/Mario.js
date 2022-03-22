@@ -58,7 +58,7 @@ class JoystickController
 		    {
 		    	for (let i = 0; i < event.changedTouches.length; i++)
 		    	{
-		    		if (self.touchId == event.changedTouches[i].identifier)
+		    		if (self.touchId === event.changedTouches[i].identifier)
 		    		{
 		    			touchmoveId = i;
 		    			event.clientX = event.changedTouches[i].clientX;
@@ -94,7 +94,7 @@ class JoystickController
 		    if ( !self.active ) return;
 
 		    // if this is a touch event, make sure it is the right one
-		    if (event.changedTouches && self.touchId != event.changedTouches[0].identifier) return;
+		    if (event.changedTouches && self.touchId !== event.changedTouches[0].identifier) return;
 
 		    // transition the joystick position back to center
 		    stick.style.transition = '.2s';
@@ -108,8 +108,8 @@ class JoystickController
 
 		stick.addEventListener('mousedown', handleDown);
 		stick.addEventListener('touchstart', handleDown);
-		document.addEventListener('mousemove', handleMove, {passive: false});
-		document.addEventListener('touchmove', handleMove, {passive: false});
+		document.addEventListener('mousemove', handleMove, {passive: true});
+		document.addEventListener('touchmove', handleMove, {passive: true});
 		document.addEventListener('mouseup', handleUp);
 		document.addEventListener('touchend', handleUp);
 	}
@@ -118,6 +118,7 @@ class JoystickController
 const Mario = () => {
 
 	const canvasRef = React.useRef(null)
+	const [gameOver, setGameOver ]= React.useState(false)
 
 	// just make sure this is only run once on mount so your game state is not messed up
 	React.useEffect(() => {
@@ -127,6 +128,8 @@ const Mario = () => {
 		let w =canvasRef.current.widht = window.innerWidth
 		let h= canvasRef.current.height = window.innerHeight/3 *2
 		
+
+
 		const k = kaboom({
 			// if you don't want to import to the global namespace
 			global: false,
@@ -381,13 +384,15 @@ const Mario = () => {
 		
 		
 		
-		let movingLeft =false
-			document.getElementById("mmm").addEventListener("click", toggleMov)
-			function toggleMov(){
+		
+			
+			
+			document.getElementById("mmm").addEventListener("click", ()=>{
+				
 				if(player.isGrounded()){
-					player.jump(450)
+					player.jump(JUMP_FORCE)
 				}
-			}
+			},{passive:true})
 
 
 			k.onUpdate("block", (b) => {
@@ -549,6 +554,7 @@ const Mario = () => {
 	
 
 		k.scene("lose", () =>{
+			setGameOver(true)
 			k.add([
 				k.text("GAME OVER",{
 					size:52
@@ -556,7 +562,10 @@ const Mario = () => {
 				k.pos(k.width()/4,k.height()/4)
 			])
 			k.onKeyPress(() => k.go("game"))
-			document.getElementById("mmm").addEventListener("click", ()=> k.go("game"))
+			document.getElementById("reset").addEventListener("click", ()=>{
+				setGameOver(false)
+				k.go("game")
+			})
 		})
 
 
@@ -773,7 +782,8 @@ const Mario = () => {
 				<img src="../img/joystick-red.png" alt="joystick stick"/>		
 				</div>
 			</div>
-			<button id="mmm" className="arcade-btn"></button>
+			{!gameOver &&<button id="mmm" className="arcade-btn"></button>}
+			{gameOver && <button id="reset" className="arcade-btn"> reset</button>}
 		</div>
 		</>
 
