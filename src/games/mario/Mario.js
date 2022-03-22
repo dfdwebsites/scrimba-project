@@ -788,8 +788,8 @@ const Mario = () => {
 
 		
 		return <>
-			<Navbar />
-		<div style={{width:"100%",display:"flex",justifyContent:"center",position:"relative",alignItems:"center", marginTop:"90px"}}>
+			<a href='/scrimba-project/games'>X</a>
+		<div style={{width:"100%",display:"flex",justifyContent:"center",position:"relative",alignItems:"center", marginTop:"10px"}}>
 			<canvas className="mario-board"ref={canvasRef}></canvas>
 			<div style={{width: "128px", position: "absolute", left:"10px", bottom:"0", transform:"translateY(50%)"}}>
 				<img src="../img/joystick-base.png" alt="joystick base"/>
