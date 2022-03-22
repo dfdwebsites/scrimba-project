@@ -775,10 +775,6 @@ const Mario = () => {
 
 
 		return ()=>{
-			document.removeEventListener('mousemove', handleMove, {passive: true});
-			document.removeEventListener('touchmove', handleMove, {passive: true});
-			document.removeEventListener('mouseup', handleUp);
-			document.removeEventListener('touchend', handleUp);
 		}
 
 
