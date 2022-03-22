@@ -387,12 +387,25 @@ const Mario = () => {
 		
 			
 			
-			document.getElementById("mmm").addEventListener("click", ()=>{
-				
+			document.getElementById("mmm").addEventListener("touchstart", (e)=>{
+				document.getElementById("mmm").active=true
+				e.preventDefault()
 				if(player.isGrounded()){
 					player.jump(JUMP_FORCE)
 				}
-			},{passive:true})
+			},{passive:false})
+			document.getElementById("mmm").addEventListener("touchmove", (e)=>{
+				e.preventDefault()
+				if(player.isGrounded()){
+					player.jump(JUMP_FORCE)
+				}
+			},{passive:false})
+			document.getElementById("mmm").addEventListener("touchend", (e)=>{
+				e.preventDefault()
+				if(player.isGrounded()){
+					player.jump(JUMP_FORCE)
+				}
+			},{passive:false})
 
 
 			k.onUpdate("block", (b) => {
@@ -561,7 +574,10 @@ const Mario = () => {
 				}),
 				k.pos(k.width()/4,k.height()/4)
 			])
-			k.onKeyPress(() => k.go("game"))
+			k.onKeyPress(() => {
+				setGameOver(false)
+				k.go("game")
+			})
 			document.getElementById("reset").addEventListener("click", ()=>{
 				setGameOver(false)
 				k.go("game")
