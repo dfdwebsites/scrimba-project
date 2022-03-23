@@ -133,7 +133,7 @@ export default function BlackJack(){
             }
             else if( newTotal>21){
                 setRoundOver(true)
-                setMessage("Player Wins!")
+                setMessage("Player Wins!!")
                 console.log("player WINS")
             }
             else{
@@ -173,7 +173,7 @@ export default function BlackJack(){
             setTotal(newTotal)
             if (newTotal>21){
                 setRoundOver(true)
-                setMessage("House Wins")
+                setMessage("House Wins!!")
                 console.log("House Wins")
             }
         }).catch(err=>console.log(err))      
@@ -191,42 +191,44 @@ export default function BlackJack(){
 
     function checkWinner(total, croupierTotalPoints){
          if(total>croupierTotalPoints){
-            setMessage("Player Wins!")
+            setMessage("Player Wins!!")
            return console.log("Player Wins")
         }
         else if(croupierTotalPoints===total){
-            setMessage("House Wins")
-           return console.log("House Wins")
+            setMessage("House Wins!!")
+           return console.log("House Wins!!")
         }
         else if(croupierTotalPoints>total){
-            setMessage("House Wins")
-           return console.log("House Wins")
+            setMessage("House Wins!!")
+           return console.log("House Wins!!")
         }
     }
     return (<>
     <div className="blackJack-container">
-        <button disabled={gameStarted} onClick={getDeck}>Start Game</button>
+        <button className="black-btn start" style={{display:gameStarted?"none":"block"}} onClick={getDeck}>Start Game</button>
         {gameStarted &&<div>
-           {playerTurn &&<div>
-               <button onClick={draw}>draw 1</button>
-               <button onClick={changeTurn}>stay</button>
-             </div>}
-            <div className="blackCroupierInfo">
-            <h3>Croupier</h3>
-            <div ref={croupierRef} className="blackCroupierCards"></div>
-            {!playerTurn && <p>total: {croupierTotalPoints}</p>}
-            </div>
-            <div className="blackPlayerInfo">
-            <h3>Player</h3>
-            <div ref={playerRef} className="blackPlayerCards"></div>
-            <p>total: {total}</p>
             {roundOver && <div>
                 
-                <h1>{message}</h1>
-                <button onClick={restart}>New Round</button>
+                <h1 className="anim-text"><span>{message}</span></h1>
+                <button className="black-btn player" onClick={restart}>New Round</button>
                 
                 
                 </div>}
+            <div className="blackCroupierInfo">
+            <h3 style={{color:"white"}}>Croupier:</h3>
+            <div ref={croupierRef} className="blackCroupierCards"></div>
+            {!playerTurn && <p className="black-points">total: {croupierTotalPoints}</p>}
+            </div>
+            <div style={{marginTop:"2rem"}} className="blackPlayerInfo">
+            <h3 style={{color:"white"}}>Player:</h3>
+            <div ref={playerRef} className="blackPlayerCards"></div>
+            {playerTurn &&<div>
+               <button className="black-btn player" onClick={draw}>draw 1</button>
+               <button className="black-btn player" onClick={changeTurn}>stay</button>
+             </div>}
+
+            <p className="black-points">total: {total}</p>
+            
             </div>
         </div>}
     </div>

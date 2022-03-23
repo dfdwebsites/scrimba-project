@@ -9,7 +9,7 @@ export default function Cards(){
         <Navbar />
         <div className="allCards">
 
-            <Link className="black-btn" to="/games/cards/blackJack"> BlackJack </Link>
+            <Link className="black-btn-main" to="/games/cards/blackJack"> BlackJack </Link>
             <Link className="uno-btn" to="/games/cards/uno">UNO</Link>
             <Link className="war-btn"to="/games/cards/war"> War </Link>
         

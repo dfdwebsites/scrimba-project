@@ -1340,7 +1340,7 @@ p.game-description{
   
 }
 
-.allCards .black-btn,
+.allCards .black-btn-main,
 .allCards .war-btn,
 .allCards .uno-btn{
   background-position: center;
@@ -1351,7 +1351,7 @@ p.game-description{
   height: 100px;
   box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.432);
 }
-.allCards .black-btn{
+.allCards .black-btn-main{
   background-image: url("../public/img/b-pattern.png");
   font-size: 30px;
   text-align: center;
@@ -1381,8 +1381,8 @@ p.game-description{
 }
 
 
-.black-btn:hover,
-.black-btn:focus,
+.black-btn-main:hover,
+.black-btn-main:focus,
 .uno-btn:hover,
 .uno-btn:focus,
 .war-btn:hover,
@@ -1391,7 +1391,7 @@ p.game-description{
 }
 
 @media (min-width:400px) {
-  .allCards .black-btn,
+  .allCards .black-btn-main,
   .allCards .war-btn,
   .allCards .uno-btn{
   height: 120px;
@@ -1403,7 +1403,73 @@ p.game-description{
   height: 100vh;
   background-color: green;
   background-image: url("../public/img/b-pattern.png");
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-top: 5%;
 }
+
+.black-btn{
+  background-image: linear-gradient(to right, rgb(238, 255, 0), rgb(155, 153, 47));
+  padding: 0.5em 1.5em;
+  cursor: pointer;
+ 
+}
+.black-btn.start{
+   font-size: 2rem;
+}
+.black-btn.player{
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  
+
+}
+
+.black-btn.player + .black-btn.player{
+  margin-left: 1rem;
+}
+
+
+.black-btn:focus,
+.black-btn:hover{
+  background-image: linear-gradient(to left, green, rgb(41, 223, 41));
+}
+
+.black-points{
+  font-size: 1.4rem;
+  color: white;
+}
+.anim-text span{
+  color: rgba(228, 255, 109, 0.411);
+  font-size: 2.2rem;
+  
+}
+
+.anim-text{   
+    background:#1b1b1b linear-gradient(90deg,#1b1b1b,rgb(243, 255, 140));
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: light 2s linear infinite;
+  text-align: center;
+}
+
+
+@keyframes light {
+        0%{
+            background-position: -10%;
+        }
+
+        100%{
+            background-position: 100%;
+        }
+
+}
+
 .blackPlayerCards{
   display: flex;
   flex-wrap: wrap;
@@ -2053,4 +2119,10 @@ align-self: center;
   background: linear-gradient(to top, rgba(250, 173, 158, 0.3) 0%, rgba(194, 41, 10, 0.1) 100%);
   border-radius: 40% 40% 60% 60%;
   transition: opacity 200ms;
+}
+
+@media (min-width:600px) {
+  .smallscreen{
+    display: none;
+  }
 }
