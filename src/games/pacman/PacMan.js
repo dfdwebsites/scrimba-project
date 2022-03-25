@@ -9,16 +9,14 @@ function PacMan(){
         
         const ctx = pacManCanvasRef.current.getContext("2d")
 
-        const CANVAS_WIDTH = pacManCanvasRef.current.width = 900
-        const CANVAS_HEIGHT = pacManCanvasRef.current.height  = 900
-        ctx.width = CANVAS_WIDTH
-        ctx.height = CANVAS_HEIGHT
-        const ghostSpeed=1
+        const CANVAS_WIDTH = pacManCanvasRef.current.width = ctx.width = 900
+        const CANVAS_HEIGHT = pacManCanvasRef.current.height = ctx.height  = 900
+        //const ghost.ghostSpeed = 1
         const speed = 1
         const pacImg = new Image()
         pacImg.src = "../img/pac-manAtlas.png"
-        const gameWidth =CANVAS_WIDTH/28
-        const gameHeight =CANVAS_HEIGHT/28
+        const gameWidth =CANVAS_WIDTH / 28
+        const gameHeight =CANVAS_HEIGHT / 28
         let gameFrame = 0
         const staggerFrammes = 20
         
@@ -34,11 +32,13 @@ function PacMan(){
                 }
                 redGhostFrame.push(loc)
             }    
+            redGhostFrame.push({x:336,y:145}, {x:352, y:145})
             let arr=[]
             arr["movingRight"]=[redGhostFrame[0],redGhostFrame[1]]
             arr["movingLeft"]=[redGhostFrame[2],redGhostFrame[3]]
             arr["movingUp"]=[redGhostFrame[4],redGhostFrame[5]]
             arr["movingDown"]=[redGhostFrame[6],redGhostFrame[7]]
+            arr["scared"]=[redGhostFrame[8],redGhostFrame[9]]
 
             return arr
         }
@@ -51,7 +51,7 @@ function PacMan(){
         const blueGhostAnim = createAnims(113)
         const pacmanAnimation =[]
         const states=[{
-                name:"eating",
+                name:"eatingRight",
                 frames:{
                     loc:[{
                             x:338,
@@ -126,6 +126,8 @@ function PacMan(){
     states.map((state,index)=>{
         pacmanAnimation[state.name] = state.frames
     })
+
+    //game arrays and classes
     const allfoods= []
     const allWalls =[]
     const powerUps=[]
@@ -134,12 +136,17 @@ function PacMan(){
     
 
     class Player {
-       constructor(arr){
-           this.width= gameWidth * 0.95
+       constructor(x,y,arr){
+           this.x= x + gameWidth / 2
+           this.y= y + gameWidth / 2
+           this.radius = gameWidth / 2.678571428571429
+           this.width= this.radius * 2
+           this.height= this.radius * 2
+           /* this.width= gameWidth * 0.95
            this.height= gameHeight * 0.95
            this.x=14*gameWidth+speed
            this.y=17*gameHeight+speed
-           this.radius = 10
+           this.radius = 10 */
 
            this.dir={
                x:0,
@@ -161,20 +168,25 @@ function PacMan(){
            this.draw(this.arr[this.stateFrame].loc[pos].x,this.arr[this.stateFrame].loc[pos].y)
        }
        draw(frameX, frameY){
-        ctx.drawImage(pacImg, frameX , frameY, 14, 15, this.x, this.y ,this.width, this.height)
+        //ctx.drawImage(pacImg, frameX , frameY, 14, 15, this.x, this.y ,this.width, this.height)
+        ctx.drawImage(pacImg, frameX , frameY, 14, 15, this.x-this.radius , this.y-this.radius ,this.width, this.height)
        }
     }
   
     class Ghost {
-        constructor(x,y,arr){
+        constructor(x,y,arr,speed){
             this.x= x + gameWidth / 2
             this.y= y + gameWidth / 2
-            this.radius = 12
-            this.width= 24
-            this.height= 24
+            this.starterX = x + gameWidth / 2
+            this.starterY = y + gameWidth / 2
+            this.ghostSpeed = speed
+            this.radius = gameWidth / 2.678571428571429
+            this.width= this.radius*2
+            this.scared = false
+            this.height= this.radius*2
             this.dir={
                 x:0,
-                y:-1 
+                y:-this.ghostSpeed 
              }
             this.stateFrame= "movingRight"
             this.prevCollisions = []
@@ -184,13 +196,27 @@ function PacMan(){
             this.draw(this.arr[this.stateFrame][pos].x,this.arr[this.stateFrame][pos].y)
             this.x = this.x + this.dir.x
             this.y = this.y + this.dir.y
-            if (this.x >= CANVAS_WIDTH){
-                this.x = 0
+            if (this.x > CANVAS_WIDTH){
+                this.x = gameWidth
             }
-            if (this.x < 0){
-                this.x = CANVAS_HEIGHT
+            if (this.x < gameWidth-1){
+                this.x = CANVAS_HEIGHT + 1 
+            }
+            if (this.scared){
+                this.stateFrame = "scared"
             }
             //this.draw()
+        }
+        beScared(){
+            this.scared = true
+            setTimeout(()=>{
+                this.scared = false
+                if (this.dir.x === this.ghostSpeed) this.stateFrame = "movingRight"
+                else if(this.dir.x === -this.ghostSpeed) this.stateFrame = "movingLeft"
+                else if (this.dir.y === -this.ghostSpeed) this.stateFrame = "movingUp"      
+                else if(this.dir.y === this.ghostSpeed)this.stateFrame = "movingDown"
+                else this.stateFrame = "movingUp"
+            },5000)
         }
         draw(frameX, frameY){
             //draw(){
@@ -203,13 +229,56 @@ function PacMan(){
         }
      }
 
-     const Pinky = new Ghost(gameWidth*15,gameHeight*15,pinkGhostAnim)
-     const Blinky = new Ghost(gameWidth*12,gameHeight*15,redGhostAnim)
-     const Clide = new Ghost(gameWidth*15,gameHeight*13,yellowGhostAnim)
-     const Inky = new Ghost(gameWidth*12,gameHeight*13,blueGhostAnim)
-     ghosts.push(Pinky,Blinky,Clide,Inky)
-     
-    const PacMan = new Player(pacmanAnimation)
+     class Wall {
+        constructor(x,y,image){
+            this.x = x 
+            this.y = y
+            this.width = gameWidth
+            this.height = gameHeight
+            this.image = image
+        }
+        draw(){
+                ctx.drawImage(this.image, this.x, this.y,gameWidth,gameHeight)                
+        }
+    }
+
+
+
+    class Food{
+        constructor(x,y,width,height){
+            this.x = x + (width/2)
+            this.y = y + (height/2)
+            this.radius= width/16
+            this.width= width
+            this.height= height
+        }
+        drawf(){
+            ctx.beginPath()
+            ctx.fillStyle="orange"
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2)
+            ctx.fill() 
+            ctx.closePath()         
+        }
+    }
+
+
+    class Power{
+        constructor(x,y,width,height){
+            this.x = x + (width/2)
+            this.y = y + (height/2)
+            this.radius= width/4
+            this.width= width
+            this.height= height
+        }
+        drawf(){
+            ctx.beginPath()
+            ctx.fillStyle="red"
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2)
+            ctx.fill() 
+            ctx.closePath()         
+        }
+    }
+
     const keys ={
         up:{
             pressed:false
@@ -224,7 +293,9 @@ function PacMan(){
             pressed:false
         }
     }
+
     let lastkey = ""
+
     window.addEventListener("keydown", (e)=>{
         if(e.key==="ArrowUp"){
             keys.up.pressed = true
@@ -247,6 +318,7 @@ function PacMan(){
             lastkey = "right"
         }
     })
+
     window.addEventListener("keyup", (e)=>{
         if(e.key==="ArrowUp"){
             keys.up.pressed = false
@@ -261,6 +333,7 @@ function PacMan(){
             keys.right.pressed = false
         }
     })
+
     const pacManMap=[
                 ["1","=","=","=","=","=","=","=","=","=","=","=","=","^","^","=","=","=","=","=","=","=","=","=","=","=","=","2"],//
                 ["|","!","!","!","!","!","!","!","!","!","!","!","!","[","]","!","!","!","!","!","!","!","!","!","!","!","!",'|'],//
@@ -273,7 +346,7 @@ function PacMan(){
                 ['|',"!","!","!","!","!","!","!","!","!","!","!","!","[","]","!","!","!","!","!","!","!","!","!","!","!","!",'|'],//
                 ["[","=","=","=","=","2","!","1","^","=","=","=","!","3","4","!","=","=","=","^","2","!","1","=","=","=","=","]"],//
                 ["|"," "," "," "," ","|","!","[","]"," "," "," "," "," "," "," "," "," "," ","[","]","!","|"," "," "," "," ","|"],//
-                ["|"," "," "," "," ","|","!","[","]"," ","1","+","+","+","+","+","+","2"," ","[","]","!","|"," "," "," "," ","|"],//
+                ["|"," "," "," "," ","|","!","[","]"," ","1","=","=","=","=","=","=","2"," ","[","]","!","|"," "," "," "," ","|"],//
                 ["3","=","=","=","=","4","!","3","4"," ","|","+","+","+","+","+","+","|"," ","3","4","!","3","=","=","=","=","4"],//
                 [" "," "," "," "," "," ","!","!","!"," ","|","+","+","+","+","+","+","|"," ","!","!","!"," "," "," "," "," "," "],//
                 ["1","=","=","=","=","2","!","1","2"," ","|","+","+","+","+","+","+","|"," ","1","2","!","1","=","=","=","=","2"],
@@ -293,6 +366,13 @@ function PacMan(){
         
     ]
 
+    const PacMan = new Player(gameWidth,gameHeight,pacmanAnimation)
+
+    const Pinky = new Ghost(gameWidth*15,gameHeight*15,pinkGhostAnim,1)
+    const Blinky = new Ghost(gameWidth*12,gameHeight*15,redGhostAnim,1)
+    const Clide = new Ghost(gameWidth*15,gameHeight*13,yellowGhostAnim,1)
+    const Inky = new Ghost(gameWidth*12,gameHeight*13,blueGhostAnim,1)
+    ghosts.push(Pinky,Blinky,Clide,Inky)
 
     function createImage(src){
         const image = new Image()
@@ -302,51 +382,7 @@ function PacMan(){
     }
 
 
-    class Wall {
-        constructor(x,y,image){
-            this.x = x 
-            this.y = y
-            this.width = gameWidth
-            this.height = gameHeight
-            this.image = image
-        }
-        draw(){
-                ctx.drawImage(this.image, this.x, this.y,gameWidth,gameHeight)                
-        }
-    }
 
-
-
-    class Food{
-        constructor(x,y,width,height){
-            this.x = x + (width/2)
-            this.y = y + (height/2)
-            this.width= width
-            this.height= height
-        }
-        drawf(){
-            ctx.beginPath()
-            ctx.fillStyle="orange"
-            ctx.arc(this.x, this.y, 2, 0, Math.PI*2)
-            ctx.fill() 
-            ctx.closePath()         
-        }
-    }
-    class Power{
-        constructor(x,y,width,height){
-            this.x = x + (width/2)
-            this.y = y + (height/2)
-            this.width= width
-            this.height= height
-        }
-        drawf(){
-            ctx.beginPath()
-            ctx.fillStyle="red"
-            ctx.arc(this.x, this.y, 8, 0, Math.PI*2)
-            ctx.fill() 
-            ctx.closePath()         
-        }
-    }
 
 
     pacManMap.forEach((row,i)=>{
@@ -392,8 +428,8 @@ function PacMan(){
         })
     })
     
-      
-        function detectColusion({
+        //// 
+        /* function detectColusion({
             rect1,
             rect2
         }){
@@ -402,7 +438,8 @@ function PacMan(){
                 rect1.x + rect1.dir.x + rect1.width >= rect2.x  &&
                 rect1.y + rect1.dir.y <= rect2.height + rect2.y  &&
                 rect1.y + rect1.dir.y + rect1.height >= rect2.y )
-        }
+        } */
+        
         function detectColusionwithCircle({
             circle,
             rect2
@@ -419,13 +456,14 @@ function PacMan(){
         
         let pacmanAnimId
         function animate(){
+            pacmanAnimId = requestAnimationFrame(animate)
             ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT)
             if(keys.up.pressed && lastkey === "up"){
                 for( let i =0; i<allWalls.length; i++){
                     const wall = allWalls[i]
                     if(
-                        detectColusion({
-                            rect1: {
+                        detectColusionwithCircle({
+                            circle: {
                                 ...PacMan,
                                 dir: {
                                     x:0,
@@ -446,8 +484,8 @@ function PacMan(){
                 for( let i =0; i<allWalls.length; i++){
                     const wall = allWalls[i]
                     if(
-                        detectColusion({
-                            rect1: {
+                        detectColusionwithCircle({
+                            circle: {
                                 ...PacMan,
                                 dir: {
                                     x:0,
@@ -468,8 +506,8 @@ function PacMan(){
                 for( let i =0; i<allWalls.length; i++){
                     const wall = allWalls[i]
                     if(
-                        detectColusion({
-                            rect1: {
+                        detectColusionwithCircle({
+                            circle: {
                                 ...PacMan,
                                 dir: {
                                     x:speed,
@@ -482,7 +520,7 @@ function PacMan(){
                         PacMan.dir.x = 0
                         break
                     }else{
-                        PacMan.stateFrame= "eating"
+                        PacMan.stateFrame= "eatingRight"
                         PacMan.dir.x = speed
                     }
                 }
@@ -491,8 +529,8 @@ function PacMan(){
                 for( let i =0; i<allWalls.length; i++){
                     const wall = allWalls[i]
                     if(
-                        detectColusion({
-                            rect1: {
+                        detectColusionwithCircle({
+                            circle: {
                                 ...PacMan,
                                 dir: {
                                     x:-speed,
@@ -514,29 +552,45 @@ function PacMan(){
             for ( let i = allfoods.length - 1 ; i >= 0;  i--){
                 const food = allfoods[i]
                 food.drawf()
-                if (PacMan.x <= food.x + 2 &&
+                if (
+                    Math.hypot(
+                        food.x-PacMan.x,
+                        food.y-PacMan.y)<
+                        food.radius+PacMan.radius
+                        ){
+                   allfoods.splice(i,1)  
+               }  
+               /*  if (PacMan.x <= food.x + 2 &&
                 PacMan.x + PacMan.width >= food.x - 2 &&
                 PacMan.y <= 2 + food.y + 2 &&
                 PacMan.y + PacMan.height >= food.y -2){
                    allfoods.splice(i,1)  
-               }  
+               }   */
             } 
  
             for ( let j = 0; j < powerUps.length; j++){
                 const pellet = powerUps[j]
                 pellet.drawf()
-                if (PacMan.x <= pellet.x + 2 &&
-                PacMan.x + PacMan.width >= pellet.x - 2 &&
-                PacMan.y <= 2 + pellet.y + 2 &&
-                PacMan.y + PacMan.height >= pellet.y -2){
-                   powerUps.splice(j,1)
+                if (Math.hypot(
+                    pellet.x-PacMan.x,
+                    pellet.y-PacMan.y)<
+                    pellet.radius+PacMan.radius
+                    ){
+                    powerUps.splice(j,1)
+                    ghosts.forEach(ghost=>ghost.beScared())
             }   
         } 
                
             allWalls.forEach(bountry=>{
                 bountry.draw()
-                if (detectColusion({
-                    rect1:PacMan,
+                /* if (
+                    PacMan.y - PacMan.radius <= bountry.y+bountry.height &&
+                    PacMan.x + PacMan.radius >= bountry.x &&
+                    PacMan.y + PacMan.radius >= bountry.y &&
+                    PacMan.x - PacMan.radius <= bountry.x + bountry.width
+                ) */
+                if(detectColusionwithCircle({
+                    circle:PacMan,
                     rect2:bountry
                 })){
                     PacMan.dir.x = 0
@@ -554,6 +608,20 @@ function PacMan(){
             Inky.update(ghostPosition) */
             ghosts.forEach((ghost)=>{
                 ghost.update(ghostPosition)
+                if(Math.hypot(ghost.x-PacMan.x,ghost.y-PacMan.y) < ghost.radius+PacMan.radius){
+                    if (ghost.scared){
+                        console.log("fired")
+                        ghost.x = ghost.starterX
+                        ghost.y = ghost.starterY
+                        ghost.dir.x= 0
+                        ghost.dir.y= 0
+                        ghost.prevCollisions = []
+                        setTimeout(()=>{
+                            ghost.dir.y = -ghost.ghostSpeed
+                        },1000)
+                    }
+                    else cancelAnimationFrame(pacmanAnimId)
+                }
                 const collisions = []
                 allWalls.forEach(bountry=>{
                     if(
@@ -562,7 +630,7 @@ function PacMan(){
                             circle: {
                                 ...ghost,
                                 dir: {
-                                    x:-ghostSpeed,
+                                    x:-ghost.ghostSpeed,
                                     y:0
                                 }
                             },
@@ -577,7 +645,7 @@ function PacMan(){
                             circle: {
                                 ...ghost,
                                 dir: {
-                                    x:ghostSpeed,
+                                    x:ghost.ghostSpeed,
                                     y:0
                                 }
                             },
@@ -593,7 +661,7 @@ function PacMan(){
                                 ...ghost,
                                 dir: {
                                     x:0,
-                                    y:-ghostSpeed
+                                    y:-ghost.ghostSpeed
                                 }
                             },
                             rect2: bountry
@@ -608,7 +676,7 @@ function PacMan(){
                                 ...ghost,
                                 dir: {
                                     x:0,
-                                    y:ghostSpeed
+                                    y:ghost.ghostSpeed
                                 }
                             },
                             rect2: bountry
@@ -620,14 +688,15 @@ function PacMan(){
                 if (collisions.length > ghost.prevCollisions.length){
                     ghost.prevCollisions = collisions
                 }
+
                 
                 if(JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)){
         
                     
-                    if(ghost.dir.x > 0) {ghost.prevCollisions.push("right")}
+                     if(ghost.dir.x > 0) {ghost.prevCollisions.push("right")}
                     else if(ghost.dir.x<0){ ghost.prevCollisions.push("left")}
                     else if(ghost.dir.y>0) {ghost.prevCollisions.push("down")}
-                    else if(ghost.dir.y<0) {ghost.prevCollisions.push("top")}
+                    else if(ghost.dir.y<0) {ghost.prevCollisions.push("top")} 
                     
                     const pathways = ghost.prevCollisions.filter(collision=>{
                         return !collisions.includes(collision) })
@@ -636,22 +705,22 @@ function PacMan(){
                     
                     switch (direction) {
                         case "right":
-                            ghost.dir.x= ghostSpeed
+                            ghost.dir.x= ghost.ghostSpeed
                             ghost.dir.y= 0
                             ghost.stateFrame = "movingRight"
                         break
                         case "left":
-                            ghost.dir.x= -ghostSpeed
+                            ghost.dir.x= -ghost.ghostSpeed
                             ghost.dir.y= 0
                             ghost.stateFrame = "movingLeft"
                         break
                         case "top":
-                            ghost.dir.y= -ghostSpeed
+                            ghost.dir.y= -ghost.ghostSpeed
                             ghost.dir.x= 0
                             ghost.stateFrame = "movingUp"
                         break
                         case "down":
-                            ghost.dir.y= ghostSpeed
+                            ghost.dir.y= ghost.ghostSpeed
                             ghost.dir.x= 0
                             ghost.stateFrame = "movingDown"
                         break
@@ -660,15 +729,16 @@ function PacMan(){
                 }
 
             })
-           
+
             gameFrame++
-            pacmanAnimId = requestAnimationFrame(animate)
+            
         }
         animate() 
 
         
     
-    return (pacmanAnimId)=>{
+    return ()=>{
+        
         cancelAnimationFrame(pacmanAnimId)
     }
     
