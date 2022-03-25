@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/scrimba-project/static/css/main.fef9a1e2.css",
-    "main.js": "/scrimba-project/static/js/main.5d927512.js",
+    "main.js": "/scrimba-project/static/js/main.3586a489.js",
     "static/js/845.939b8241.chunk.js": "/scrimba-project/static/js/845.939b8241.chunk.js",
     "static/media/js-title.png": "/scrimba-project/static/media/js-title.b2cb88c8c3af5dce48b9.png",
     "static/media/games-title.png": "/scrimba-project/static/media/games-title.dea43b0e8c5cda79f866.png",
@@ -76,11 +76,11 @@
     "static/media/uno-sound.mp3": "/scrimba-project/static/media/uno-sound.5d88cef2860dce2fb0b3.mp3",
     "index.html": "/scrimba-project/index.html",
     "main.fef9a1e2.css.map": "/scrimba-project/static/css/main.fef9a1e2.css.map",
-    "main.5d927512.js.map": "/scrimba-project/static/js/main.5d927512.js.map",
+    "main.3586a489.js.map": "/scrimba-project/static/js/main.3586a489.js.map",
     "845.939b8241.chunk.js.map": "/scrimba-project/static/js/845.939b8241.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fef9a1e2.css",
-    "static/js/main.5d927512.js"
+    "static/js/main.3586a489.js"
   ]
 }
