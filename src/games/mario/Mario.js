@@ -125,17 +125,19 @@ const Mario = () => {
 		
 		let joystick1 = new JoystickController("stick1", 64, 8);	
 		
-		
+			canvasRef.current.width = 600
+			canvasRef.current.height = 291.2
 
 
 		const k = kaboom({
 			// if you don't want to import to the global namespace
 			global: false,
+			width: 500,
+			height: 208,
 			debug: true,
 			background: [134, 135, 247],
-			width: 600,
-			height: 400,
-			scale: 1,
+			scale: 1.4,
+			root: document.getElementById("mario-cont"), 
 			fullscreen:false,
 			canvas: canvasRef.current,		
 		})
@@ -261,47 +263,47 @@ const Mario = () => {
 			pos: k.vec2(0, 0),
 			"=": ()=>[
 				k.sprite("floor"),
-				k.origin("bot"),
+				k.origin("top"),
 				k.area(),
 				k.solid()
 			],
 			"/": ()=>[
 				k.sprite("ladder"),
-				k.origin("bot"),
+				k.origin("top"),
 				k.area(16,8),
 				k.solid(),
 				'ladder'
 			],
 			"|": ()=>[
 				k.sprite("stone-floor"),
-				k.origin("bot"),
+				k.origin("top"),
 				k.area(),
 				k.solid()
 			],
 			"-": ()=>[
 				k.sprite("pipe", {frame:1}),
-				k.origin("bot"),
+				k.origin("top"),
 				k.scale(1),
 				k.area(),
 				k.solid(),
 			],
 			"+": ()=>[
 				k.sprite("pipe",{frame:0}),
-				k.origin("bot"),
+				k.origin("top"),
 				k.scale(1),
 				k.area(),
 				k.solid()
 			],
 			"(": ()=>[
 				k.sprite("pipe",{frame:2}),
-				k.origin("bot"),
+				k.origin("top"),
 				k.scale(1),
 				k.area(),
 				k.solid()
 			],
 			")": ()=>[
 				k.sprite("pipe",{frame:3}),
-				k.origin("bot"),
+				k.origin("top"),
 				k.scale(1),
 				k.area(),
 				k.solid()
@@ -309,7 +311,7 @@ const Mario = () => {
 			"?": ()=>[
 				k.sprite("surpise", {anim:"idle"}),
 				k.area(),
-				k.origin("bot"),
+				k.origin("top"),
 				
 				k.solid(),
 				"coin-surpise",
@@ -318,7 +320,7 @@ const Mario = () => {
 			"#": ()=>[
 				k.sprite("surpise", {anim:"idle"}),
 				k.area(),
-				k.origin("bot"),
+				k.origin("top"),
 				
 				k.solid(),
 				"mushroom-surpise",
@@ -329,7 +331,7 @@ const Mario = () => {
 				k.area(),
 				k.solid(),
 				bump(4,6),
-				k.origin("bot"),
+				k.origin("top"),
 				"unboxed"
 			],
 			"$":()=>[
@@ -338,14 +340,14 @@ const Mario = () => {
 				bump(32,8),
 				k.cleanup(),
     			k.lifespan(0.4, { fade: 0.01 }),
-				k.origin("bot"),
+				k.origin("top"),
 				"coin"
 			],
 			"@":()=>[
 				k.sprite("mushroom"),
 				k.area(),
 				k.body(),
-				k.origin("bot"),
+				k.origin("top"),
 				"mushroom"
 				
 			],
@@ -371,31 +373,19 @@ const Mario = () => {
 			], "game")
 			const LEVELS =[ 
 				[
-				'= =  = =                                                                                                                                                                                                                                                                                                                                                 ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                                                                                                                                                                                                                                                 ///                                                                                                    ',
-				'=                                                                                                                                                                                                                                                                                                                                                        ',
-				'=                     #??                                            ?                      ??????                                                                                                                                      ///                                                                                                              ',
-				'=                                                                                                       |               |                                                                 ?#?        ?                                                                                                                                                  ',
-				'=                                                                                                      ||               ||                                                                                                       ///                                                                                                                      ',
-				'=                                          +-     =                                                   |||               |||                                                                                          ///                                                                                                                                  ',
-				'=                               ^       ^  ()     =                                                  ||||         ^     ||||                  ^             |                    ^                                                                                ///                 ^     ^     ^      ^                                                     ',
-				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ==========================================                                  ',
-				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ==========================================                                   ',
-				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ==========================================                                   ',
-				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ==========================================                                    ',
-				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ==========================================                                    '
+				'=                                                                                                                                                                                                                                                                                                                            ',
+				'=                                                                                                                                                                                                                                                                                                                            ',    
+				'=                                                                                                                                                                                                                                                                                                                            ',
+				'=                                                                                                                                                                                                                                                                                                                           ',
+				'=                                                                                                                                                                                                                                                                                                                           ',
+				'=                                                                                                                                                                                                                                        ///                                                                                ',
+				'=                                                                                                                                                                                                                                                                                                                           ',
+				'=                     #??                                            ?                      ??????                                                                                                                               ///                                                                                       ',
+				'=                                                                                                       |               |                                                                 ?#?        ?                                                                                                                     ',
+				'=                                                                                                      ||               ||                                                                                                ///                                                                                               ',
+				'=                                          +-     =                                                   |||               |||                                                                                       ///                                                                                                  +-  ',
+				'=                               ^       ^  ()     =                                                  ||||         ^     ||||                  ^             |                    ^                                                                  ///      ///   ///    //           ^     ^     ^      ^            () ',
+				'=============================================     ==============    =======    ===  ===================================================================    =====    =  =  =     ===========================                                                                    ========================================== ',	
 			]
 		]
 			const level = k.addLevel(LEVELS[levelId ?? 0], levelConf)
@@ -480,38 +470,38 @@ const Mario = () => {
 			
 			  k.add([
 				k.sprite("hill"),
-				k.pos(132, 304),
+				k.pos(132, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
 			  k.add([
 				k.sprite("hill"),
-				k.pos(1132, 304),
+				k.pos(1132, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
 			  k.add([
 				k.sprite("hill"),
-				k.pos(532, 304),
+				k.pos(532, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
 			
 			  k.add([
 				k.sprite("shrubbery"),
-				k.pos(300, 304),
+				k.pos(300, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
 			  k.add([
 				k.sprite("shrubbery"),
-				k.pos(600, 304),
+				k.pos(600, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
 			  k.add([
 				k.sprite("shrubbery"),
-				k.pos(900, 304),
+				k.pos(900, 192),
 				k.layer("bg"),
 				k.origin("bot")
 			  ])
@@ -827,36 +817,6 @@ const Mario = () => {
 		
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		return ()=>{
 			
 		}
@@ -864,17 +824,12 @@ const Mario = () => {
 
 	},[])
 
-	
-		
-
-
-
 
 		
 		return <>
 			<a href='/scrimba-project/games'>X</a>
-		<div style={{width:"100%",display:"flex",justifyContent:"center",position:"relative",alignItems:"center", marginTop:"10px"}}>
-			<canvas className="mario-board"ref={canvasRef}></canvas>
+		<div id="mario-cont" style={{width:"100%",display:"flex",justifyContent:"center",position:"relative",alignItems:"center", marginTop:"10px"}}>
+			<canvas style={{width:"600px", height:"292"}} className="mario-board"ref={canvasRef}></canvas>
 			<div className="smallscreen" style={{width: "128px", position: "absolute", left:"10px", bottom:"0", transform:"translateY(50%)"}}>
 				<img src="../img/joystick-base.png" alt="joystick base"/>
 				<div id="stick1" style={{position: "absolute", left:"32px", top:"32px"}}>
