@@ -36,16 +36,15 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
  research and use diferent things on the internet, witch is the most important skill you can get.
  Since everyone teaching here on Scrimba have the same principle to search and try on your own you are getting this skill.
  In this case I am using a new library called "Kaboom.js"`
- const pacManDetail=`Lorem ipsum dolor sit amet consectetur adipiscing elit duis vulputate urna, odio aliquam 
- curae gravida suscipit laoreet tempus penatibus senectus iaculis, tristique felis ultrices ullamcorper sollicitudin
-  magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
-   justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
-   penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
-const cardDetails = `Lorem ipsum dolor sit amet consectetur adipiscing elit duis vulputate urna, odio aliquam 
-curae gravida suscipit laoreet tempus penatibus senectus iaculis, tristique felis ultrices ullamcorper sollicitudin
- magna tortor himenaeos accumsan. Sapien nisi dapibus interdum quam tellus ornare etiam cras, tortor class suspendisse in phasellus
-  justo proin, posuere viverra turpis erat vestibulum sociosqu tempus accumsan, orci feugiat a dui facilisi 
-  penatibus. Mollis condimentum eu maecenas non pulvinar posuere neque, etiam habitasse parturient facilisi iaculis.`
+ const pacManDetail=`All time classic game Pac-Man, With the creation of this game we started to understand better DOM manipulation through JS,
+ creating elements and appending them to their parent creating a grid that represents the game. A lot of "if" statments and arrays methods like map
+ forEach reduce and splice. Event listeners used to move PacMan and class manipulation to prevent going out of the grid. There are a lot of ways to 
+ create this game, I used HTML Canvas so the methods i used is a little different than the Scrimba's course but this is the magic "After you udenstand 
+ the methods you can do whatever you want"`
+const cardDetails = `We created some of Card games through the course, some using just numbers represending the cards and later we started to use 
+API calls so we can get the cards with the images. We learned a lot about functions and arrays while creating these games.  I went one step further and made 
+a Multiplayer game using Socket.io for the server communication
+and at the end of each player's turn plus the power of React server is sending the data and changing the state of the game `
 return (<>
     <header className="App-header">
     <Navbar />

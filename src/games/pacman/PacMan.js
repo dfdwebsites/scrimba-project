@@ -9,10 +9,10 @@ function PacMan(){
         
         const ctx = pacManCanvasRef.current.getContext("2d")
 
-        const CANVAS_WIDTH = pacManCanvasRef.current.width = ctx.width = 900
-        const CANVAS_HEIGHT = pacManCanvasRef.current.height = ctx.height  = 900
+        const CANVAS_WIDTH = pacManCanvasRef.current.width = ctx.width = 1120
+        const CANVAS_HEIGHT = pacManCanvasRef.current.height = ctx.height  = 1120
         //const ghost.ghostSpeed = 1
-        const speed = 1
+        const speed = 2
         const pacImg = new Image()
         pacImg.src = "../img/pac-manAtlas.png"
         const gameWidth =CANVAS_WIDTH / 28
@@ -444,7 +444,7 @@ function PacMan(){
             circle,
             rect2
         }){
-            const padding = gameWidth / 2 - circle.radius - .5
+            const padding = gameWidth / 2 - circle.radius - 1
             return (
                 circle.dir.y -circle.radius + circle.y <= rect2.y + rect2.height + padding &&
                 circle.dir.x + circle.radius + circle.x >= rect2.x - padding &&
@@ -452,7 +452,31 @@ function PacMan(){
                 circle.dir.x -circle.radius + circle.x <= rect2.x + rect2.width + padding )
         }
  
+        //frame manipulation
+        /* 
         
+        let lastTime = 0
+        const fps = 20
+        const nextFrame = 1000/fps
+        let timer = 0 
+
+
+        function animate(timeStamp){
+            const deltaTime = timeStamp - lastTime
+            lastTime = timeStamp
+            if(timer > nextFrame){
+            ....animation will run
+            }
+            else{
+                timer += deltaTime
+            }
+
+            requestAnimationFrame(animate)
+        }
+        
+        and when you call animate you need to do it like
+        animate(0)
+        */
         
         let pacmanAnimId
         function animate(){
@@ -557,15 +581,9 @@ function PacMan(){
                         food.x-PacMan.x,
                         food.y-PacMan.y)<
                         food.radius+PacMan.radius
-                        ){
+                ){
                    allfoods.splice(i,1)  
-               }  
-               /*  if (PacMan.x <= food.x + 2 &&
-                PacMan.x + PacMan.width >= food.x - 2 &&
-                PacMan.y <= 2 + food.y + 2 &&
-                PacMan.y + PacMan.height >= food.y -2){
-                   allfoods.splice(i,1)  
-               }   */
+                }  
             } 
  
             for ( let j = 0; j < powerUps.length; j++){
@@ -578,17 +596,11 @@ function PacMan(){
                     ){
                     powerUps.splice(j,1)
                     ghosts.forEach(ghost=>ghost.beScared())
-            }   
-        } 
+                }   
+            } 
                
             allWalls.forEach(bountry=>{
                 bountry.draw()
-                /* if (
-                    PacMan.y - PacMan.radius <= bountry.y+bountry.height &&
-                    PacMan.x + PacMan.radius >= bountry.x &&
-                    PacMan.y + PacMan.radius >= bountry.y &&
-                    PacMan.x - PacMan.radius <= bountry.x + bountry.width
-                ) */
                 if(detectColusionwithCircle({
                     circle:PacMan,
                     rect2:bountry
@@ -600,12 +612,7 @@ function PacMan(){
 
             let position = Math.floor(gameFrame/staggerFrammes) % pacmanAnimation[PacMan.stateFrame].loc.length
             let ghostPosition = Math.floor(gameFrame/staggerFrammes) % 2
-
             PacMan.update(position)
-          /*   Pinky.update(ghostPosition)
-            Blinky.update(ghostPosition)
-            Clide.update(ghostPosition)
-            Inky.update(ghostPosition) */
             ghosts.forEach((ghost)=>{
                 ghost.update(ghostPosition)
                 if(Math.hypot(ghost.x-PacMan.x,ghost.y-PacMan.y) < ghost.radius+PacMan.radius){
@@ -726,13 +733,13 @@ function PacMan(){
                         break
                     }
                     ghost.prevCollisions=[]
-                }
+                }// end of if coli != prev.coli
 
-            })
+            }) // end of ghost for each
 
             gameFrame++
             
-        }
+        } //end of animate
         animate() 
 
         
@@ -741,17 +748,12 @@ function PacMan(){
         
         cancelAnimationFrame(pacmanAnimId)
     }
-    
-    
-    
-    
-    
-    })
+   },[])// end of useEffect
 
     return<>
     <Navbar />
-    <div style={{marginTop:"90px", backgroundColor:"black"}}>
-     <canvas ref={pacManCanvasRef}></canvas>
+    <div style={{marginTop:"90px", backgroundColor:"black", maxHeight: "calc(100vh - 90px)", display:"flex", justifyContent:"center"}}>
+     <canvas style={{transform:"scale(0.7)",transformOrigin:"top"}} ref={pacManCanvasRef}></canvas>
     </div>
     </>
 }
