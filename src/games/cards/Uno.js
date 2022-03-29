@@ -195,39 +195,49 @@ const Game = (props) => {
 
 
 
-    /* function restartGame(){
-        setWinner('')
-        setPlayedCardsPile([])
-        setDrawCardPile([])
-        let newshuffledCards = shuffleArray(PACK_OF_CARDS)
-         setPlayer1Deck(newshuffledCards.splice(0, 7))
-         setPlayer2Deck(newshuffledCards.splice(0, 7))
-        let startingCardIndex
-        while(true) {
-            startingCardIndex = Math.floor(Math.random() * 94)
-            if(newshuffledCards[startingCardIndex]==='skipR' || newshuffledCards[startingCardIndex]==='TR' || newshuffledCards[startingCardIndex]==='D2R' ||
-            newshuffledCards[startingCardIndex]==='skipG' || newshuffledCards[startingCardIndex]==='TG' || newshuffledCards[startingCardIndex]==='D2G' ||
-            newshuffledCards[startingCardIndex]==='skipB' || newshuffledCards[startingCardIndex]==='TB' || newshuffledCards[startingCardIndex]==='D2B' ||
-            newshuffledCards[startingCardIndex]==='skipY' || newshuffledCards[startingCardIndex]==='TY' || newshuffledCards[startingCardIndex]==='D2Y' ||
-            newshuffledCards[startingCardIndex]==='W' || newshuffledCards[startingCardIndex]==='D4W') {
-                continue;
-            }
-            else
-                break;
-        }
-         setPlayedCardsPile(newshuffledCards.splice(startingCardIndex, 1))
-         setDrawCardPile(newshuffledCards)
-        socket.emit('initGameState', {
-            gameOver: false,
-            turn: 'Player 1',
-            player1Deck: [...player1Deck],
-            player2Deck: [...player2Deck],
-            currentColor: playedCardsPile[0].charAt(1),
-            currentNumber: playedCardsPile[0].charAt(0),
-            playedCardsPile: [...playedCardsPile],
-            drawCardPile: [...drawCardPile]
-        })
-    } */
+     function restartGame(){
+         //shuffle PACK_OF_CARDS array
+         const shuffledCards = shuffleArray(PACK_OF_CARDS)
+
+         //extract first 7 elements to player1Deck
+         const player1Deck = shuffledCards.splice(0, 7)
+ 
+         //extract first 7 elements to player2Deck
+         const player2Deck = shuffledCards.splice(0, 7)
+ 
+         //extract random card from shuffledCards and check if its not an action card
+         let startingCardIndex
+         while(true) {
+             startingCardIndex = Math.floor(Math.random() * 94)
+             if(shuffledCards[startingCardIndex]==='skipR' || shuffledCards[startingCardIndex]==='TR' || shuffledCards[startingCardIndex]==='D2R' ||
+             shuffledCards[startingCardIndex]==='skipG' || shuffledCards[startingCardIndex]==='TG' || shuffledCards[startingCardIndex]==='D2G' ||
+             shuffledCards[startingCardIndex]==='skipB' || shuffledCards[startingCardIndex]==='TB' || shuffledCards[startingCardIndex]==='D2B' ||
+             shuffledCards[startingCardIndex]==='skipY' || shuffledCards[startingCardIndex]==='TY' || shuffledCards[startingCardIndex]==='D2Y' ||
+             shuffledCards[startingCardIndex]==='W' || shuffledCards[startingCardIndex]==='D4W') {
+                 continue;
+             }
+             else
+                 break;
+         }
+ 
+         //extract the card from that startingCardIndex into the playedCardsPile
+         const playedCardsPile = shuffledCards.splice(startingCardIndex, 1)
+ 
+         //store all remaining cards into drawCardPile
+         const drawCardPile = shuffledCards
+ 
+         //send initial state to server
+         socket.emit('initGameState', {
+             gameOver: false,
+             turn: 'Player 1',
+             player1Deck: [...player1Deck],
+             player2Deck: [...player2Deck],
+             currentColor: playedCardsPile[0].charAt(1),
+             currentNumber: playedCardsPile[0].charAt(0),
+             playedCardsPile: [...playedCardsPile],
+             drawCardPile: [...drawCardPile]
+         })
+     }
 
 
 
@@ -1382,7 +1392,7 @@ const Game = (props) => {
                     {gameOver ? <div className='winner-hero'>
                         {winner !== '' && <><h1>GAME OVER</h1><h2>{winner==='Player 1'?users[0].username.toUpperCase() : users[1].username.toUpperCase()} wins!</h2></>}
                         <a href='/scrimba-project/games/cards/uno/'><button className="uno-game-button red">QUIT</button></a>
-                          {/*   <button className='uno-game-button' onClick={restartGame}>Replay</button> */}
+                             <button className='uno-game-button' onClick={restartGame}>Replay</button> 
                         </div> :
                     <div>
                         {/* PLAYER 1 VIEW */}

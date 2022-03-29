@@ -8,13 +8,17 @@ function PacMan(){
     useEffect(()=>{
         
         const ctx = pacManCanvasRef.current.getContext("2d")
-
-        const CANVAS_WIDTH = pacManCanvasRef.current.width = ctx.width = 1120
-        const CANVAS_HEIGHT = pacManCanvasRef.current.height = ctx.height  = 1120
+        const CANVAS_WIDTH = pacManCanvasRef.current.width  = 1120
+        const CANVAS_HEIGHT = pacManCanvasRef.current.height   = 1120
+        ctx.scale(0.7,0.7)
+        ctx.translate(168,0)
         //const ghost.ghostSpeed = 1
         const speed = 2
         const pacImg = new Image()
         pacImg.src = "../img/pac-manAtlas.png"
+        pacImg.onload=()=>{
+            animate()
+        }
         const gameWidth =CANVAS_WIDTH / 28
         const gameHeight =CANVAS_HEIGHT / 28
         let gameFrame = 0
@@ -736,11 +740,17 @@ function PacMan(){
                 }// end of if coli != prev.coli
 
             }) // end of ghost for each
+            if (allfoods.length <= 0 ){
+               setTimeout(()=>{
+                   cancelAnimationFrame(pacmanAnimId) 
+                   console.log("youwin")       
 
+               },200)
+            }
             gameFrame++
             
         } //end of animate
-        animate() 
+         
 
         
     
@@ -752,8 +762,8 @@ function PacMan(){
 
     return<>
     <Navbar />
-    <div style={{marginTop:"90px", backgroundColor:"black", maxHeight: "calc(100vh - 90px)", display:"flex", justifyContent:"center"}}>
-     <canvas style={{transform:"scale(0.7)",transformOrigin:"top"}} ref={pacManCanvasRef}></canvas>
+    <div style={{marginTop:"90px", backgroundColor:"black", maxHeight: "calc(100vh - 90px)", overflow:"hidden" /* display:"flex", justifyContent:"center" */}}>
+     <canvas style={{marginBlock:"auto"}} ref={pacManCanvasRef}></canvas>
     </div>
     </>
 }
