@@ -837,7 +837,7 @@ nav .active{
 .game-item-cards{
   --item-color:green;
 }
-.game-item-rpg{
+.game-item-space{
   --item-color:#FD2155;
 }
 .game-item-snake{
@@ -1035,91 +1035,6 @@ p.game-description{
     margin-bottom: 3rem;
     padding: 3rem 2rem;
   }
-}
-.rpg{
-  font-family: 'MedievalSharp', cursive;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height:80vh ;
-  background-color: var(--color-dark);
-  margin: 20px;
-}
-.rpg-start-btn{
-  font-family: inherit;
-  font-size: 1.5rem;
-  background-color: #fcc02a;
-  border: 2px solid #963404;
-  padding:.5em 1.5em;
-  animation: flashing 2s infinite;
-}
-@keyframes flashing {
-  0%,25%{
-    opacity: 1;
-  }
- 
-  50%{opacity: 0;}
- 
-  100%{
-    opacity: 1;
-  }
-}
-.rpg-start-btn:hover{
-  animation: none;
-  font-weight: bold;
-}
-.rpg-intro{
-  font-size: 3rem;
-  color:var(--color-white)
-}
-
-.char-box{
-  display: flex;
-  flex-direction: column;
-  background-color: darkblue;
-  color:var(--color-white)
-}
-.char-box img{
-  width: 200px;
-  margin-inline: 1rem;
-}
-.char-box h3{
-  margin-block: 1rem;
-  font-size: 2rem;
-  text-align: center;
-}
-.char-box p {
-  margin:.5rem 0 .5rem .5rem ;
-}
-.all-attacks{
-  display: flex;
-  gap:.5rem;
-  background-color: rgb(9, 9, 61);
-  width: 100%;
-  padding: 1rem;
-  justify-content: center;
-  
-  
-}
-.attack{
-  width:2.5rem;
-  height: 2.5rem;
-  background-color: #963404;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-}
-.rpg-attack-btn{
-  font-family: inherit;
-  font-size: 1.5rem;
-  background-color: #fcc02a;
-  border: 2px solid #963404;
-  padding:.5em 1.5em;
-  margin-left:3rem;
-  margin-block: 1rem ;
-  
 }
 
 /* snake-page */

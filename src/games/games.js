@@ -14,8 +14,7 @@ const rpgDetail=`A fun game the used advanced js functions to build like map(),
  for how to use a "data-base" that you get all the info from.
  As all the other games its not about creating a full animated game but learning
  functions and methods you have to use to create even this state. And as always 
- you can always push your self and make it GREAT. This module is the replace of the
- create Pac-Man game witch it was a little bit more coplicated than this `
+ you can always push your self and make it GREAT. `
  const quizDetail=`An amazing quiz game with a very nice API that you can scale it a LOT.
  By that time you had learn  the basics of the amazing React library that will open a whole new world
  to you. This game was the final challenge of the React module but with the previous lessons we learn how we can 
@@ -66,7 +65,7 @@ return (<>
             <div className='games-nav'>
                 <Link className='game-item-cards' to="/games/cards">Card Games</Link>
                 <Link className='game-item-snake' to="/games/snake">Snake</Link>
-                <Link className='game-item-rpg' to="/games/rpg">RPG</Link>
+                <Link className='game-item-space' to="/games/space">Space</Link>
                 <Link className='game-item-pacman' to="/games/pacman">PacMan</Link>
                 <Link className='game-item-quiz' to="/games/quiz">Quiz-Game</Link>
                 <Link className='game-item-mario' to="/games/mario">
@@ -85,7 +84,7 @@ return (<>
             <section className='all-game-items'>
                 <GameLink to="cards" url="./img/cards.png" name="Card-games" detail={cardDetails}/>
                 <GameLink to="snake" url="./img/snake.png" name="Snake Game" detail={snakeDetail}/>
-                <GameLink to="rpg" url="./img/rpg.png" name="RPG" detail={rpgDetail}/>
+                <GameLink to="space" url="./img/space.png" name="Space" detail={rpgDetail}/>
                 <GameLink to="pacman" url="./img/pac-man.png" name="Pac-Man" detail={pacManDetail}/>
                 <GameLink to="quiz" url="./img/quiz.png" name="Quiz-Game" detail={quizDetail}/>
                 <div className='game-item game-item-superMario'>

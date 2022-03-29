@@ -4,7 +4,7 @@ import Css from "./css"
 import JavaScript from './js'
 import Games from './games/games'
 import Home from "./home"
-import RpgGame from './games/rpg/Rpg'
+import Space from './games/rpg/Space'
 import SnakeGame from './games/snake/SnakeGame'
 /* import RetroSnake from './games/snake/RetroSnake'
 import SnakePage from './games/snake/SnakePage' */
@@ -27,7 +27,7 @@ function App() {
         <Route path="css" element={<Css />}/>
         <Route path="js" element={<JavaScript />}/>
         <Route path="games" element={<Games />}/>
-          <Route path="games/rpg" element={<RpgGame />}/> 
+          <Route path="games/space" element={<Space />}/> 
           <Route path="games/cards" element={<Cards />}/> 
             <Route path="games/cards/uno" element={<UnoLanding />}/> 
             <Route path="games/cards/uno/play" element={<Uno />}/>  
