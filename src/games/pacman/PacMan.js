@@ -10,14 +10,31 @@ function PacMan(){
         const ctx = pacManCanvasRef.current.getContext("2d")
         const CANVAS_WIDTH = pacManCanvasRef.current.width  = 1120
         const CANVAS_HEIGHT = pacManCanvasRef.current.height   = 1120
-        ctx.scale(0.7,0.7)
-        ctx.translate(168,0)
+        //let scaleParam = 0.7
+        //ctx.translate(centerDistance,0)
+        let smallerSide
+        window.innerWidth > window.innerHeight? smallerSide = window.innerHeight: smallerSide = window.innerWidth
+
+        if (smallerSide < 1120){
+        let scaleParam = (smallerSide / CANVAS_WIDTH) * 0.85
+        let centerDistance = (smallerSide - (smallerSide * (smallerSide/CANVAS_WIDTH))) / 2
+        ctx.scale(scaleParam,scaleParam)
+        ctx.translate(centerDistance,0)      
+        }
+        else{
+            ctx.scale(0.85, 0.85)
+            ctx.translate(128 , 0)
+        }
+
+
         //const ghost.ghostSpeed = 1
-        const speed = 2
+        const speed = 5
         const pacImg = new Image()
         pacImg.src = "../img/pac-manAtlas.png"
         pacImg.onload=()=>{
-            animate()
+            //animate()
+            startAnimating(40)
+
         }
         const gameWidth =CANVAS_WIDTH / 28
         const gameHeight =CANVAS_HEIGHT / 28
@@ -146,11 +163,6 @@ function PacMan(){
            this.radius = gameWidth / 2.678571428571429
            this.width= this.radius * 2
            this.height= this.radius * 2
-           /* this.width= gameWidth * 0.95
-           this.height= gameHeight * 0.95
-           this.x=14*gameWidth+speed
-           this.y=17*gameHeight+speed
-           this.radius = 10 */
 
            this.dir={
                x:0,
@@ -372,10 +384,10 @@ function PacMan(){
 
     const PacMan = new Player(gameWidth,gameHeight,pacmanAnimation)
 
-    const Pinky = new Ghost(gameWidth*15,gameHeight*15,pinkGhostAnim,1)
-    const Blinky = new Ghost(gameWidth*12,gameHeight*15,redGhostAnim,1)
-    const Clide = new Ghost(gameWidth*15,gameHeight*13,yellowGhostAnim,1)
-    const Inky = new Ghost(gameWidth*12,gameHeight*13,blueGhostAnim,1)
+    const Pinky = new Ghost(gameWidth*15,gameHeight*15,pinkGhostAnim,4)
+    const Blinky = new Ghost(gameWidth*12,gameHeight*15,redGhostAnim,4)
+    const Clide = new Ghost(gameWidth*15,gameHeight*13,yellowGhostAnim,4)
+    const Inky = new Ghost(gameWidth*12,gameHeight*13,blueGhostAnim,4)
     ghosts.push(Pinky,Blinky,Clide,Inky)
 
     function createImage(src){
@@ -448,7 +460,7 @@ function PacMan(){
             circle,
             rect2
         }){
-            const padding = gameWidth / 2 - circle.radius - 1
+            const padding = gameWidth / 2 - circle.radius - 2
             return (
                 circle.dir.y -circle.radius + circle.y <= rect2.y + rect2.height + padding &&
                 circle.dir.x + circle.radius + circle.x >= rect2.x - padding &&
@@ -482,10 +494,53 @@ function PacMan(){
         animate(0)
         */
         
+
+
         let pacmanAnimId
+
+
+        //test for frames
+        var stop = false;
+        var frameCount = 0;
+        
+        var fps, fpsInterval, startTime, now, then, elapsed;
+
+
+        // initialize the timer variables and start the animation
+
+        function startAnimating(fps) {
+            fpsInterval = 1000 / fps;
+            then = Date.now();
+            startTime = then;
+            animate();
+        }
+
+
+
         function animate(){
+           
             pacmanAnimId = requestAnimationFrame(animate)
-            ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT)
+            
+            now = Date.now();
+            elapsed = now - then;
+
+            // if enough time has elapsed, draw the next frame
+            
+            if (elapsed > fpsInterval) {
+                
+                // Get ready for next frame by setting then=now, but also adjust for your
+                // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+                then = now - (elapsed % fpsInterval);
+                
+                // Put your drawing code here
+                
+                
+                
+                
+                
+                
+                ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT)
+            
             if(keys.up.pressed && lastkey === "up"){
                 for( let i =0; i<allWalls.length; i++){
                     const wall = allWalls[i]
@@ -747,8 +802,10 @@ function PacMan(){
 
                },200)
             }
-            gameFrame++
             
+            
+        }//end of test frames
+        gameFrame++
         } //end of animate
          
 

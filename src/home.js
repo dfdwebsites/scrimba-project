@@ -97,8 +97,8 @@ return (
                      <img src='./img/pac-man.png' alt='' />
                  </div>
                  <div className='pad5'>
-                     <h3>RPG</h3>
-                     <img src='./img/rpg.png' alt='' />
+                     <h3>Space</h3>
+                     <img src='./img/space.png' alt='' />
                  </div>
                  <div className='pad5'>
                      <h3 className=''>Super-Mario</h3>
